@@ -1,0 +1,830 @@
+{
+	"_note": "workers: people needed to run it. age: minimum age. unique: only one. on: terrain it must stand on. adj: bonus per neighbouring building type. modes: choosable production (in = consumed each day, out = produced). Producers can be upgraded to level 3 (level 3 needs Age II): cost = base cost x level + 5 stone x level, output x1.5 at level 2 and x2 at level 3. on: plot terrain it must stand on (water allowed only for buildings that say so). needs: forest_adjacent | water_adjacent | stone_outpost | iron_outpost. weekly: items made each week, kept in the storehouse until the Champion is home. branches: two specialisations chosen when the building reaches level 3 (prod/weekly/adj are added on top).",
+	"hall": {
+		"name": "Town hall",
+		"does": "Houses 10 · the heart of the capital",
+		"cost": {},
+		"workers": 0,
+		"prod": {},
+		"housing": 10,
+		"buildable": false,
+		"age": 1
+	},
+	"farm": {
+		"name": "Farm",
+		"does": "Food +5 a day · 1 worker",
+		"cost": {
+			"wood": 10
+		},
+		"workers": 1,
+		"prod": {
+			"food": 5
+		},
+		"housing": 0,
+		"buildable": true,
+		"age": 1,
+		"max_level": 3,
+		"branches": [
+			{
+				"id": "orchard",
+				"name": "Orchard",
+				"does": "+2 food, wild honey every week",
+				"prod": {
+					"food": 2
+				},
+				"weekly": {
+					"honey": 1
+				}
+			},
+			{
+				"id": "pasture",
+				"name": "Pasture",
+				"does": "+1 food, a hide every week",
+				"prod": {
+					"food": 1
+				},
+				"weekly": {
+					"hide": 1
+				}
+			}
+		]
+	},
+	"house": {
+		"name": "House",
+		"does": "+2 population capacity",
+		"cost": {
+			"wood": 5,
+			"stone": 5
+		},
+		"workers": 0,
+		"prod": {},
+		"housing": 2,
+		"buildable": true,
+		"age": 1,
+		"max_level": 3,
+		"branches": [
+			{
+				"id": "manor",
+				"name": "Manor",
+				"does": "+3 more housing",
+				"housing": 3
+			},
+			{
+				"id": "artisan",
+				"name": "Artisan's house",
+				"does": "+2 gold a day",
+				"prod": {
+					"gold": 2
+				}
+			}
+		]
+	},
+	"lumber": {
+		"name": "Lumber camp",
+		"does": "Wood +3 a day · needs forest beside it · 1 worker",
+		"cost": {
+			"gold": 10
+		},
+		"workers": 1,
+		"prod": {
+			"wood": 3
+		},
+		"housing": 0,
+		"buildable": true,
+		"age": 1,
+		"needs": "forest_adjacent",
+		"max_level": 3,
+		"branches": [
+			{
+				"id": "forester",
+				"name": "Forester",
+				"does": "+2 wood a day",
+				"prod": {
+					"wood": 2
+				}
+			},
+			{
+				"id": "charcoal",
+				"name": "Charcoal burners",
+				"does": "+1 iron a day",
+				"prod": {
+					"iron": 1
+				}
+			}
+		]
+	},
+	"market": {
+		"name": "Market",
+		"does": "Gold +5 a day, or sell food/wood · shop and pawn for your Champion · 1 worker",
+		"cost": {
+			"wood": 10,
+			"stone": 5
+		},
+		"workers": 1,
+		"prod": {
+			"gold": 5
+		},
+		"housing": 0,
+		"buildable": true,
+		"age": 1,
+		"unique": true,
+		"modes": [
+			{
+				"id": "trade",
+				"name": "Trade",
+				"in": {},
+				"out": {
+					"gold": 5
+				}
+			},
+			{
+				"id": "grain",
+				"name": "Sell grain",
+				"in": {
+					"food": 4
+				},
+				"out": {
+					"gold": 8
+				}
+			},
+			{
+				"id": "timber",
+				"name": "Sell timber",
+				"in": {
+					"wood": 4
+				},
+				"out": {
+					"gold": 8
+				}
+			}
+		],
+		"max_level": 3,
+		"branches": [
+			{
+				"id": "bazaar",
+				"name": "Bazaar",
+				"does": "+3 gold a day",
+				"prod": {
+					"gold": 3
+				}
+			},
+			{
+				"id": "guild",
+				"name": "Merchant guild",
+				"does": "shop prices −20%, +1 gold",
+				"prod": {
+					"gold": 1
+				},
+				"discount": 0.2
+			}
+		]
+	},
+	"barracks": {
+		"name": "Barracks",
+		"does": "Recruit soldiers · your army trains here",
+		"cost": {
+			"wood": 20,
+			"stone": 10,
+			"gold": 10
+		},
+		"workers": 0,
+		"prod": {},
+		"housing": 0,
+		"buildable": true,
+		"age": 1,
+		"unique": true
+	},
+	"quarry": {
+		"name": "Quarry",
+		"does": "Stone +3 a day · needs a stone outpost · 1 worker",
+		"cost": {
+			"wood": 15,
+			"gold": 10
+		},
+		"workers": 1,
+		"prod": {
+			"stone": 3
+		},
+		"housing": 0,
+		"buildable": true,
+		"age": 1,
+		"needs": "stone_outpost",
+		"unique": true,
+		"max_level": 3,
+		"branches": [
+			{
+				"id": "masons",
+				"name": "Masons",
+				"does": "+2 stone a day",
+				"prod": {
+					"stone": 2
+				}
+			},
+			{
+				"id": "ironseam",
+				"name": "Iron seam",
+				"does": "+1 iron a day",
+				"prod": {
+					"iron": 1
+				}
+			}
+		]
+	},
+	"blacksmith": {
+		"name": "Blacksmith",
+		"does": "Army weapon/armour upgrades · forges swords, hammers, chain shirts · 1 worker",
+		"cost": {
+			"wood": 20,
+			"stone": 25,
+			"gold": 20
+		},
+		"workers": 1,
+		"prod": {},
+		"housing": 0,
+		"buildable": true,
+		"age": 2,
+		"unique": true
+	},
+	"drillyard": {
+		"name": "Drill yard",
+		"does": "Turns recruits into veterans · 1 worker",
+		"cost": {
+			"wood": 25,
+			"stone": 15,
+			"gold": 20
+		},
+		"workers": 1,
+		"prod": {},
+		"housing": 0,
+		"buildable": true,
+		"age": 2,
+		"unique": true
+	},
+	"mill": {
+		"name": "Mill",
+		"does": "Food +1 for every farm beside it · 1 worker",
+		"cost": {
+			"wood": 15,
+			"stone": 5
+		},
+		"workers": 1,
+		"prod": {},
+		"adj": {
+			"farm": {
+				"food": 1
+			}
+		},
+		"housing": 0,
+		"buildable": true,
+		"age": 1,
+		"max_level": 3
+	},
+	"granary": {
+		"name": "Granary",
+		"does": "Every farm makes +1 food · stores the harvest",
+		"cost": {
+			"wood": 20,
+			"stone": 10
+		},
+		"workers": 0,
+		"prod": {},
+		"housing": 0,
+		"buildable": true,
+		"age": 1,
+		"unique": true
+	},
+	"sawmill": {
+		"name": "Sawmill",
+		"does": "Wood +2, +1 for every lumber camp beside it · 1 worker",
+		"cost": {
+			"gold": 15,
+			"stone": 5
+		},
+		"workers": 1,
+		"prod": {
+			"wood": 2
+		},
+		"adj": {
+			"lumber": {
+				"wood": 1
+			}
+		},
+		"housing": 0,
+		"buildable": true,
+		"age": 1,
+		"max_level": 3
+	},
+	"mine": {
+		"name": "Mine",
+		"does": "Stone +3 and gold +1 · must stand on hills · 2 workers",
+		"cost": {
+			"wood": 20,
+			"gold": 10
+		},
+		"workers": 2,
+		"prod": {
+			"stone": 3,
+			"gold": 1
+		},
+		"housing": 0,
+		"buildable": true,
+		"age": 1,
+		"on": "hills",
+		"max_level": 3,
+		"branches": [
+			{
+				"id": "deep",
+				"name": "Deep galleries",
+				"does": "+2 stone a day",
+				"prod": {
+					"stone": 2
+				}
+			},
+			{
+				"id": "gems",
+				"name": "Gem cutters",
+				"does": "a rough gem every week",
+				"weekly": {
+					"gem": 1
+				}
+			}
+		]
+	},
+	"workshop": {
+		"name": "Workshop",
+		"does": "Turns wood or stone into gold · makes bows, cloaks, salves, smoke bombs · 1 worker",
+		"cost": {
+			"wood": 15,
+			"stone": 10
+		},
+		"workers": 1,
+		"prod": {},
+		"housing": 0,
+		"buildable": true,
+		"age": 1,
+		"unique": true,
+		"modes": [
+			{
+				"id": "carpentry",
+				"name": "Carpentry",
+				"in": {
+					"wood": 3
+				},
+				"out": {
+					"gold": 5
+				}
+			},
+			{
+				"id": "masonry",
+				"name": "Masonry",
+				"in": {
+					"stone": 3
+				},
+				"out": {
+					"gold": 6
+				}
+			},
+			{
+				"id": "idle",
+				"name": "Crafting only",
+				"in": {},
+				"out": {}
+			}
+		],
+		"max_level": 3,
+		"branches": [
+			{
+				"id": "fletcher",
+				"name": "Fletcher",
+				"does": "smoke bombs every week",
+				"weekly": {
+					"smoke_bomb": 1
+				}
+			},
+			{
+				"id": "tinker",
+				"name": "Tinker",
+				"does": "+3 gold a day",
+				"prod": {
+					"gold": 3
+				}
+			}
+		]
+	},
+	"tavern": {
+		"name": "Tavern",
+		"does": "Gold +3 a day · travellers settle: +1 person each week if there's room · 1 worker",
+		"cost": {
+			"wood": 20,
+			"gold": 10
+		},
+		"workers": 1,
+		"prod": {
+			"gold": 3
+		},
+		"housing": 0,
+		"buildable": true,
+		"age": 1,
+		"unique": true,
+		"max_level": 3,
+		"branches": [
+			{
+				"id": "bards",
+				"name": "Bards' hall",
+				"does": "+1 relation with every kingdom each week",
+				"relations": 1
+			},
+			{
+				"id": "dicing",
+				"name": "Dicing den",
+				"does": "+3 gold a day",
+				"prod": {
+					"gold": 3
+				}
+			}
+		]
+	},
+	"watchtower": {
+		"name": "Watchtower",
+		"does": "Patrols keep 3 hexes from your capital · +1 defence in fights near home · 1 worker",
+		"cost": {
+			"stone": 20,
+			"wood": 10
+		},
+		"workers": 1,
+		"prod": {},
+		"housing": 0,
+		"buildable": true,
+		"age": 1,
+		"unique": true
+	},
+	"temple": {
+		"name": "Temple",
+		"does": "+1 relation with every kingdom each week · 1 worker",
+		"cost": {
+			"stone": 25,
+			"gold": 15
+		},
+		"workers": 1,
+		"prod": {},
+		"housing": 0,
+		"buildable": true,
+		"age": 2,
+		"unique": true
+	},
+	"library": {
+		"name": "Library",
+		"does": "Your Champion gains +1 XP every day · 1 worker",
+		"cost": {
+			"wood": 15,
+			"stone": 20,
+			"gold": 20
+		},
+		"workers": 1,
+		"prod": {},
+		"housing": 0,
+		"buildable": true,
+		"age": 2,
+		"unique": true
+	},
+	"ironmine": {
+		"name": "Iron mine",
+		"does": "Iron +2 a day · needs an iron outpost on the map · 2 workers",
+		"cost": {
+			"wood": 20,
+			"stone": 15,
+			"gold": 15
+		},
+		"workers": 2,
+		"prod": {
+			"iron": 2
+		},
+		"housing": 0,
+		"buildable": true,
+		"age": 1,
+		"needs": "iron_outpost",
+		"unique": true,
+		"max_level": 3,
+		"branches": [
+			{
+				"id": "deepshaft",
+				"name": "Deep shaft",
+				"does": "+2 iron a day",
+				"prod": {
+					"iron": 2
+				}
+			},
+			{
+				"id": "gemvein",
+				"name": "Gem vein",
+				"does": "+1 iron a day, a rough gem every week",
+				"prod": {
+					"iron": 1
+				},
+				"weekly": {
+					"gem": 1
+				}
+			}
+		]
+	},
+	"foundry": {
+		"name": "Foundry",
+		"does": "Melts stone and wood into iron · 1 worker",
+		"cost": {
+			"stone": 30,
+			"wood": 15,
+			"gold": 20
+		},
+		"workers": 1,
+		"prod": {},
+		"housing": 0,
+		"buildable": true,
+		"age": 2,
+		"unique": true,
+		"max_level": 3,
+		"modes": [
+			{
+				"id": "smelt",
+				"name": "Smelt ore",
+				"in": {
+					"stone": 4,
+					"wood": 2
+				},
+				"out": {
+					"iron": 1
+				}
+			},
+			{
+				"id": "charcoal",
+				"name": "Charcoal fire",
+				"in": {
+					"wood": 5
+				},
+				"out": {
+					"iron": 1
+				}
+			}
+		]
+	},
+	"fishery": {
+		"name": "Fishing pier",
+		"does": "Food +4 a day · built on water · 1 worker",
+		"cost": {
+			"wood": 15
+		},
+		"workers": 1,
+		"prod": {
+			"food": 4
+		},
+		"housing": 0,
+		"buildable": true,
+		"age": 1,
+		"on": "water",
+		"max_level": 3,
+		"branches": [
+			{
+				"id": "smokehouse",
+				"name": "Smokehouse",
+				"does": "+2 food, fish pies every week",
+				"prod": {
+					"food": 2
+				},
+				"weekly": {
+					"fish_pie": 2
+				}
+			},
+			{
+				"id": "pearls",
+				"name": "Pearl divers",
+				"does": "+1 gold a day, a pearl every week",
+				"prod": {
+					"gold": 1
+				},
+				"weekly": {
+					"pearl": 1
+				}
+			}
+		]
+	},
+	"bakery": {
+		"name": "Bakery",
+		"does": "Food +2, +1 for every farm or mill beside it · bread every week · 1 worker",
+		"cost": {
+			"wood": 15,
+			"stone": 10
+		},
+		"workers": 1,
+		"prod": {
+			"food": 2
+		},
+		"adj": {
+			"farm": {
+				"food": 1
+			},
+			"mill": {
+				"food": 1
+			}
+		},
+		"weekly": {
+			"bread": 2
+		},
+		"housing": 0,
+		"buildable": true,
+		"age": 1,
+		"max_level": 3
+	},
+	"winery": {
+		"name": "Winery",
+		"does": "Turns food into gold · a jug of wine every week · 1 worker",
+		"cost": {
+			"wood": 20,
+			"gold": 10
+		},
+		"workers": 1,
+		"prod": {},
+		"weekly": {
+			"wine": 1
+		},
+		"housing": 0,
+		"buildable": true,
+		"age": 1,
+		"max_level": 3,
+		"modes": [
+			{
+				"id": "press",
+				"name": "Press grapes",
+				"in": {
+					"food": 3
+				},
+				"out": {
+					"gold": 6
+				}
+			},
+			{
+				"id": "cellar",
+				"name": "Age in the cellar",
+				"in": {},
+				"out": {
+					"gold": 2
+				}
+			}
+		]
+	},
+	"hunter": {
+		"name": "Hunter's lodge",
+		"does": "Food +3 · needs forest beside it · a hide every week · 1 worker",
+		"cost": {
+			"wood": 10,
+			"gold": 5
+		},
+		"workers": 1,
+		"prod": {
+			"food": 3
+		},
+		"weekly": {
+			"hide": 1
+		},
+		"housing": 0,
+		"buildable": true,
+		"age": 1,
+		"needs": "forest_adjacent",
+		"max_level": 3,
+		"branches": [
+			{
+				"id": "trappers",
+				"name": "Trappers",
+				"does": "+2 hides a week",
+				"weekly": {
+					"hide": 2
+				}
+			},
+			{
+				"id": "gamekeepers",
+				"name": "Gamekeepers",
+				"does": "+3 food a day",
+				"prod": {
+					"food": 3
+				}
+			}
+		]
+	},
+	"tannery": {
+		"name": "Tannery",
+		"does": "Gold +2 for every hunter's lodge beside it · makes leather and fur gear · 1 worker",
+		"cost": {
+			"wood": 15,
+			"stone": 10
+		},
+		"workers": 1,
+		"prod": {},
+		"adj": {
+			"hunter": {
+				"gold": 2
+			}
+		},
+		"housing": 0,
+		"buildable": true,
+		"age": 1,
+		"unique": true,
+		"max_level": 3
+	},
+	"apothecary": {
+		"name": "Apothecary",
+		"does": "Brews salves, teas and potions · a salve every week · 1 worker",
+		"cost": {
+			"wood": 10,
+			"stone": 10,
+			"gold": 15
+		},
+		"workers": 1,
+		"prod": {},
+		"weekly": {
+			"salve": 1
+		},
+		"housing": 0,
+		"buildable": true,
+		"age": 1,
+		"unique": true,
+		"max_level": 3,
+		"branches": [
+			{
+				"id": "herbarium",
+				"name": "Herb garden",
+				"does": "+2 herbal teas a week",
+				"weekly": {
+					"tea": 2
+				}
+			},
+			{
+				"id": "alchemist",
+				"name": "Alchemist",
+				"does": "a healing potion every week",
+				"weekly": {
+					"potion": 1
+				}
+			}
+		]
+	},
+	"harbor": {
+		"name": "Harbour",
+		"does": "Gold +4 · must stand beside water · trades gold for iron · 2 workers",
+		"cost": {
+			"wood": 30,
+			"stone": 20,
+			"gold": 20
+		},
+		"workers": 2,
+		"prod": {},
+		"housing": 0,
+		"buildable": true,
+		"age": 2,
+		"needs": "water_adjacent",
+		"unique": true,
+		"max_level": 3,
+		"modes": [
+			{
+				"id": "trade",
+				"name": "Sea trade",
+				"in": {},
+				"out": {
+					"gold": 4
+				}
+			},
+			{
+				"id": "import",
+				"name": "Import iron",
+				"in": {
+					"gold": 8
+				},
+				"out": {
+					"iron": 2
+				}
+			},
+			{
+				"id": "export",
+				"name": "Export timber",
+				"in": {
+					"wood": 5
+				},
+				"out": {
+					"gold": 10
+				}
+			}
+		]
+	},
+	"walls": {
+		"name": "City walls",
+		"does": "+2 defence in fights near home · patrols keep 4 hexes away",
+		"cost": {
+			"stone": 40,
+			"wood": 20,
+			"iron": 5
+		},
+		"workers": 0,
+		"prod": {},
+		"housing": 0,
+		"buildable": true,
+		"age": 2,
+		"unique": true
+	}
+}

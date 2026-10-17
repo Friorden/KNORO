@@ -1,0 +1,128 @@
+{
+	"_note": "Advancing an age needs every requirement met, then the cost is paid from the kingdom.",
+	"ages": [
+		{
+			"n": 1,
+			"name": "Settlement",
+			"text": "A hall, some fields, a banner."
+		},
+		{
+			"n": 2,
+			"name": "Town",
+			"text": "Stone walls, a forge, soldiers who know their drills.",
+			"requires": {
+				"buildings": 7,
+				"pop": 9,
+				"has": [
+					"barracks",
+					"market"
+				]
+			},
+			"cost": {
+				"food": 40,
+				"wood": 50,
+				"stone": 40,
+				"gold": 60
+			},
+			"unlocks": [
+				"Blacksmith and Drill yard",
+				"2 builds a day",
+				"Iron sword at the Market",
+				"Veteran soldiers",
+				"Weapon and armour upgrades"
+			]
+		},
+		{
+			"n": 3,
+			"name": "City",
+			"text": "Walls, a harbour, iron in every hand.",
+			"requires": {
+				"buildings": 16,
+				"pop": 20,
+				"has": [
+					"walls",
+					"temple",
+					"blacksmith"
+				]
+			},
+			"cost": {
+				"food": 80,
+				"wood": 100,
+				"stone": 100,
+				"gold": 150,
+				"iron": 30
+			},
+			"unlocks": [
+				"Claim a 5th ring of land (91 plots)",
+				"3 builds a day",
+				"Steel gear at the Blacksmith",
+				"Fill ponds to make land"
+			]
+		}
+	],
+	"upgrades": {
+		"iron_weapons": {
+			"name": "Iron weapons",
+			"at": "blacksmith",
+			"cost": {
+				"gold": 35,
+				"stone": 10,
+				"iron": 10
+			},
+			"does": "+1 damage for every soldier",
+			"effect": {
+				"dmg": 1
+			}
+		},
+		"chainmail": {
+			"name": "Chainmail",
+			"at": "blacksmith",
+			"cost": {
+				"gold": 50,
+				"stone": 15,
+				"iron": 15
+			},
+			"does": "+2 defence for every soldier",
+			"effect": {
+				"def": 2
+			}
+		},
+		"field_rations": {
+			"name": "Field rations",
+			"at": "drillyard",
+			"cost": {
+				"food": 30,
+				"gold": 20
+			},
+			"does": "+3 max HP for every soldier",
+			"effect": {
+				"hp": 3
+			}
+		},
+		"battle_drills": {
+			"name": "Battle drills",
+			"at": "drillyard",
+			"cost": {
+				"gold": 40
+			},
+			"does": "+1 speed for every soldier",
+			"effect": {
+				"spd": 1
+			}
+		},
+		"steel_edges": {
+			"name": "Steel edges",
+			"at": "blacksmith",
+			"age": 3,
+			"cost": {
+				"gold": 60,
+				"iron": 25
+			},
+			"does": "+1 damage and +1 hit chance for every soldier",
+			"effect": {
+				"dmg": 1,
+				"acc": 1
+			}
+		}
+	}
+}

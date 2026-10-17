@@ -1,0 +1,62 @@
+# KNORO — MASTER PROMPT (project handoff for an AI collaborator)
+
+You are joining an in-progress game project called **KNORO**. Read this whole document before doing anything.
+Last updated: 2026-10-14 (v1.0 "final product" build: Tiny Swords pixel look everywhere, quests, dungeons, menus, saves).
+
+---
+
+## 0. HOW TO WORK ON THIS PROJECT (rules — follow them strictly)
+
+1. **Plan first, then wait for approval** for any non-trivial task (what you understood, what you will do, files, trade-offs). One-line commands are the only exception.
+2. **Language:** Turkish for general talk, **English for technical content**. Keep technical terms in English.
+3. **Explain every symbol/abbreviation** the first time you use it (e.g. "DC = difficulty class").
+4. **Be direct**, honest critique, no flattery.
+5. **Do not commit** (no git repo). Do not delete files on the owner's machine — move them to `_to_delete/`.
+6. **Art: never draw art yourself and never generate it with AI/Canva.** Use only downloaded third-party packs whose licence is verified and recorded in `game/assets/LICENSES.md`. Credit Robert Pinero, LimeZu and Goblin's Archive in-game. Do not redistribute Tiny Swords / CraftPix / Goblin's Arsenal files (no public repo of `assets/`).
+7. Before reporting done: run the headless test, check touched screens for script errors, take screenshots of visual changes.
+8. Keep `D:\Atolye\Game\game` synced so the desktop shortcut (`Play KNORO.bat` → runs the project from source) launches the latest version. Don't sync `.import` files.
+
+---
+
+## 1. THE VISION
+
+Turn-based kingdom strategy + city-building + diplomacy + tabletop-RPG on an isometric hex world. The player is the **Champion** who physically walks the map. Pillars: BUILD A KINGDOM · LIVE INSIDE THE KINGDOM · EVERY KINGDOM HAS A STORY · GEOGRAPHY CREATES POLITICS · DIPLOMACY MATTERS · THE MAP REMEMBERS. Design guides: `gameguide.txt`, `graphguide.txt` in the project root.
+
+## 2. TECH STACK & LOCATIONS
+
+- Godot **4.7.2**, GDScript, `gl_compatibility`. Default texture filter Nearest, MSAA 2D off. 1920×1080 canvas_items/expand.
+- Owner machine: Windows 11, root `D:\Atolye\Game\` → `game\` (project), `engine\` (editor), `build\` (`KNORO.exe`, `KNORO_mac.zip` unsigned), `art_in\packs\` (original pack archives), `Play KNORO.bat`, `Open in Godot.bat`.
+- Autoloads: `Style`, `Audio`, `Game` (`Game.state`, `changed`, `quest_done` signals), `Settings` (user://settings.cfg).
+
+## 3. CODE ARCHITECTURE
+
+Rules in `sim/` (no drawing, headless-testable), screens in `ui/`, renderers in `render/`.
+- `sim/`: data.gd, hex.gd, world.gd (generation incl. dungeons), champion.gd, state.gd (all rules incl. quests + dungeon runs), battle.gd, save_game.gd (var_to_str dumps; slots auto/1/2/3 in user://saves).
+- `render/`: map_view.gd (Tiny Swords hex world, 128-px hexes), ts_city.gd (pixel city), pixel_ui.gd (nine-slice panels/buttons, res icons, `backdrop()`, `on_dark()`), art.gd (pack backdrops), champion_token.gd, atmosphere.gd, shaders.
+- `ui/` screens: title, story, select (real map preview in a SubViewport), create, world, city, dialogue, battle, dungeon, week, heir, end. Widgets: hud (incl. quest tracker), card + event_art (pack scenes), menus (pause/save/load/settings/help/credits), quest_log, inventory_panel, actor (battle sprites), item_icon, dice, fx.
+- `core/main.gd`: screen manager (start screen = title), `menu_layer` CanvasLayer for modal menus, F11 fullscreen, debug args.
+- Debug args after `--`: `--screen=title|story|world|city|dungeon:<id>|battle:<group>|dialogue:<id>|week|heir|end`, `--seed=N`, `--shot=x.png`, `--delay=s`, `--do="wait:1;key:x;click:x:y;call:fn:arg;rich;town;reveal;look:<place>;quests;pause;settings;help;saves:load;shot:path"`.
+- `tools/`: ts_prepare.py (Tiny Swords copy/repack), packs_prepare.py (all other packs → assets/bg, units, props, icons), gen_audio.py.
+
+## 4. CONTENT
+
+- **Story / quests** (`data/quests.json`): main chain m1_banner → m2_ruins → m3_cave (Crystal cave) → m4_camp → m5_town → m6_crypt (Old crypt) → m7_fort (Sunken fort) → m8_city; reaching m8 shows the end screen (keep playing allowed). Side-quest pool offered at each week end (max 3 open). Objective types: build, place, res (deliver), item, dungeon, clear, age, kill, discover, pop, army, level. Rewards go to the kingdom.
+- **Dungeons** (`data/dungeons.json`): rooms (fight/chest/trap/shrine/rest) + guardian; battle source `dungeon:<id>` returns to the dungeon screen. Groups: cave_bats, cave_rats, cave_slimes, kobold_den (boss), skeletons, zombies, crypt_lord (boss), gnoll_pack, pirates, crab_crew, troll_king (boss). Sim test: full band at Lv4 clears crystal 19/20, crypt ~12/20, fort ~6/20.
+- **Events**: ~55 road events (`data/events.json`), art keys map to pack scenes in `ui/event_art.gd`.
+- City: 29 buildings, level-3 branches, iron, storehouse items, Age III radius 5. Army 5 slots, Darkest-Dungeon battles. Boars renamed "Wild hogs" (Kings and Pigs pigs).
+
+## 5. ART (current, final direction)
+
+Tiny Swords pixel look across all screens, Pixelify Sans font. Sources: Tiny Swords (+CC0 update), Kings and Pigs, Pirate Bomb, Treasure Hunters (Pixel Frog), Robert Pinero monsters, ansimuz Mountain Dusk / Parallax Forest / Caverns, CraftPix crystal caves, LimeZu RPG Arsenal + Goblin's Arsenal icons. Full table: `game/assets/LICENSES.md`. Old placeholders (Canva paintings, self-drawn pixel benchmark) were removed.
+
+## 6. BUILD & TEST
+
+- Test: `engine\Godot_v4.7.2-stable_win64_console.exe --headless --path game --script res://tests/sim_test.gd` → `RESULT: PASS (0 failures)` (world, cargo, economy, battles, ages, items, events sweep, city, story bot, quests, dungeons, save/load).
+- Export: `--export-release "Windows" ../build/KNORO.exe` and `"macOS" ../build/KNORO_mac.zip` (templates 4.7.2 needed). Include filter covers `data/*.json, assets/tinyswords/ui/*.json, assets/units/*.json`.
+
+## 7. KNOWN GAPS / NEXT IDEAS
+
+- Only 3 of 9 kingdoms playable; diplomacy, culture/religion spread and on-map war still to come.
+- The world map still has visible hex seams where trees cross hex borders; fog area is plain lavender.
+- The macOS app is not signed/notarized.
+- A desktop shortcut "KNORO Pixel Benchmark.lnk" points to the removed benchmark and can be deleted.

@@ -1,0 +1,958 @@
+Add this after section 65 of the handoff. This captures the last graphics discussion and gives the next AI the exact visual milestone we intended to run after gameplay stabilization.
+
+⸻
+
+66. LATEST GRAPHICS FEEDBACK FROM USER
+
+The current prototype visuals are not acceptable as the intended visual direction.
+
+The user specifically reported that the current build:
+
+* looks too basic
+* feels like programmer art
+* has poor/low-resolution presentation
+* is not cartoonish enough
+* lacks strong visual personality
+* does not have enough energy in characters, terrain, or composition
+
+The previous notebook/pastel presentation should therefore NOT be interpreted as the final in-game art style.
+
+That presentation remains useful primarily for:
+
+* information architecture
+* screen hierarchy
+* UX
+* mechanics presentation
+* readability
+* interaction structure
+
+The actual game world needs a significantly stronger art direction.
+
+⸻
+
+67. UPDATED KNORO ART DIRECTION
+
+The current visual target is:
+
+Hand-painted ink fantasy + graphic animated-comic energy + expressive cartoon forms + readable isometric strategy game.
+
+Earlier references included Okami-like brush/ink qualities and MOLAKI-like stylization.
+
+The user later specifically asked for more of an Edgerunners-like graphic/cartoon energy.
+
+Do NOT interpret this as “make KNORO cyberpunk.”
+
+The useful qualities are:
+
+* strong silhouettes
+* expressive posing
+* graphic shadow shapes
+* confident outlines
+* exaggerated proportions
+* angular forms mixed with organic brush shapes
+* energetic composition
+* strong foreground/background separation
+* bold value contrast
+* selective saturated color
+* animation-like visual clarity
+
+KNORO itself remains:
+
+* fantasy
+* natural
+* kingdom-based
+* landscape-focused
+* isometric/2.5D
+* painterly
+* ink/brush influenced
+* colorful but controlled
+
+Do not copy identifiable characters, costumes, assets, UI, compositions, logos, or other protected visual elements from any reference.
+
+Develop an original KNORO visual language from the high-level characteristics.
+
+⸻
+
+68. VISUAL LAYERS SHOULD BE DIFFERENT
+
+Do not force every part of the game into exactly the same visual treatment.
+
+KNORO should have three related visual layers.
+
+STRATEGIC UI
+
+Information-first.
+
+Characteristics:
+
+* clean
+* tactile
+* editorial
+* illustrated notebook influence
+* cream/off-white surfaces
+* dark ink
+* highly readable typography
+* clear numbers
+* restrained decoration
+
+The UI exists to make complex strategy understandable.
+
+WORLD / CITY
+
+Much more illustrated.
+
+Characteristics:
+
+* cartoon silhouettes
+* ink contours
+* brush-like terrain
+* exaggerated buildings
+* irregular natural shapes
+* graphic shadows
+* atmospheric depth
+* painterly color masses
+* animated/comic energy
+
+DIALOGUE / COMBAT
+
+Most expressive layer.
+
+Characters can become larger and more dramatically illustrated.
+
+Use:
+
+* stronger poses
+* more dramatic perspective
+* bigger facial/body expression
+* stronger shadows
+* environmental framing
+* cinematic composition
+* stronger contrast
+
+This creates a natural escalation:
+
+STRATEGY
+clean and readable
+↓ zoom toward character ↓
+WORLD
+illustrated and alive
+↓ encounter ↓
+DIALOGUE / COMBAT
+dramatic and expressive
+
+⸻
+
+69. RESOLUTION / RENDERING REQUIREMENT
+
+The user specifically complained that the existing game looked low-resolution.
+
+The next presentation pass should investigate and fix rendering/scaling before assuming the problem is simply asset quality.
+
+Primary design resolution:
+
+1920 × 1080
+
+The game should also scale sensibly on different desktop window sizes.
+
+Check Godot:
+
+* viewport dimensions
+* stretch settings
+* content scale
+* texture filtering
+* font rendering
+* camera zoom
+* Control scaling
+* procedural drawing resolution
+* pixel snapping if accidentally enabled
+* whether a low-resolution internal viewport is being enlarged
+
+Desired result:
+
+* crisp UI
+* crisp typography
+* clean contours
+* deliberate brush roughness
+* no accidental blur
+* no obviously enlarged low-resolution render
+
+Important distinction:
+
+Hand-painted ≠ blurry.
+
+Rough brush edges should be intentional while the overall render remains sharp.
+
+⸻
+
+70. WORLD MAP VISUAL REDESIGN
+
+The current world map must eventually stop looking like a debug/prototype hex board.
+
+Hex mechanics should remain understandable, but the player should first perceive:
+
+a landscape
+
+and second:
+
+a hex grid.
+
+The hex system is the underlying gameplay structure.
+
+Terrain should visually soften the grid.
+
+⸻
+
+71. HEX PRESENTATION
+
+Do not draw every hex as an equally dominant outlined polygon.
+
+Instead:
+
+* terrain fills the hex
+* neighboring terrain visually connects
+* hex boundaries become more subtle
+* selection reveals stronger boundaries
+* reachable tiles can receive overlays
+* hover can reveal the exact playable cell
+* ownership can use border accents
+* terrain silhouettes may slightly overlap internal tile boundaries
+
+The player must still be able to determine legal movement.
+
+Never sacrifice gameplay readability merely to hide the grid.
+
+⸻
+
+72. PLAINS
+
+Plains should not be flat beige polygons.
+
+Use combinations of:
+
+* broad painted ground shapes
+* grass tufts
+* occasional flowers
+* brush strokes
+* subtle elevation marks
+* irregular patches
+* small environmental storytelling
+
+Keep them visually quieter than forests/hills so important locations remain readable.
+
+⸻
+
+73. FORESTS
+
+Forests should have strong cartoon silhouettes.
+
+Instead of identical tree icons:
+
+Use clusters containing:
+
+* different tree heights
+* leaning trunks
+* broad crowns
+* pointed crowns
+* graphic shadow masses
+* foreground/background overlap
+
+A forest hex should read as a miniature illustrated grove.
+
+Avoid excessive tiny detail.
+
+At world zoom, silhouette matters more than individual leaves.
+
+⸻
+
+74. HILLS / MOUNTAINOUS TERRAIN
+
+Use:
+
+* angular brush ridges
+* exaggerated slopes
+* dark underside shadows
+* overlapping shapes
+* sparse line accents
+
+The graphic-comic influence can be stronger here.
+
+Terrain should appear sculpted rather than represented by a generic mountain icon.
+
+⸻
+
+75. WATER
+
+Water should be broad and calm enough not to overwhelm the map.
+
+Possible language:
+
+* painted blue/teal mass
+* dark shoreline ink
+* sparse curved current strokes
+* occasional white/cream highlight
+* irregular banks
+
+Rivers should feel geographically meaningful.
+
+Avoid covering water with repeated wave icons.
+
+⸻
+
+76. RUINS / SPECIAL LOCATIONS
+
+Special locations need distinct silhouettes.
+
+Examples:
+
+* crooked standing stone
+* collapsed arch
+* broken shrine
+* abandoned cart
+* unusual tree
+* cairn
+* tower silhouette
+
+Discovery should produce:
+
+“What is that?”
+
+rather than merely displaying an icon with an exclamation mark.
+
+⸻
+
+77. CAPITALS / SETTLEMENTS
+
+Settlements should visually grow from the terrain.
+
+Buildings can use exaggerated cartoon construction:
+
+* oversized roof
+* compressed walls
+* crooked chimney
+* banner
+* asymmetrical windows
+* visible foundation
+* graphic cast shadow
+
+Do not use generic rectangular boxes.
+
+Kingdom identity should appear through accents.
+
+For example Red Kingdom:
+
+* red banner
+* red roof cloth
+* red painted timber accent
+
+NOT an entirely red building.
+
+⸻
+
+78. CHAMPION WORLD TOKEN
+
+Champion must not remain a circle, chess piece, or generic debug token.
+
+Even at small size, Champion should have a recognizable silhouette.
+
+Potential construction:
+
+* oversized head/hair/hat
+* compact body
+* visible cloak
+* weapon/staff silhouette
+* kingdom-colored banner/scarf
+* strong dark contour
+* simple two- or three-tone shading
+
+The Champion should feel like a tiny person physically walking through the world.
+
+Movement animation can eventually include:
+
+* short walking cycle
+* small squash/stretch
+* cloak movement
+* arrival pose
+
+Do not spend major production time on animation before core visuals work.
+
+⸻
+
+79. CHARACTER PRESENTATION
+
+Dialogue and combat characters can use much larger illustrations than world tokens.
+
+Desired character language:
+
+* exaggerated anatomy
+* expressive silhouettes
+* angular shapes
+* strong line weight
+* simplified facial detail
+* dramatic shadow masses
+* memorable clothing shapes
+* restrained texture
+
+Characters should be recognizable by silhouette before costume detail.
+
+Avoid generic “medieval fantasy NPC” design.
+
+Different cultures/kingdoms should eventually have distinct shape languages rather than merely different colors.
+
+⸻
+
+80. COMBAT VISUAL DIRECTION
+
+Combat is where KNORO can use the strongest graphic animated-comic energy.
+
+Composition:
+
+CHAMPION                    ENEMY
+       illustrated environment
+---------------------------------
+HP / combat information / actions
+
+But it should not look like two sprites standing on an empty background.
+
+Use:
+
+* dramatic foreground shapes
+* perspective
+* graphic impact shadows
+* environmental framing
+* exaggerated attack poses
+* controlled screen shake
+* impact frames/flashes
+* readable damage numbers
+
+Eventually attacks can briefly exaggerate pose/perspective rather than requiring expensive full animation.
+
+The prototype can fake energy through:
+
+* tweening
+* squash/stretch
+* position offsets
+* silhouettes
+* impact shapes
+* camera movement
+
+This can provide strong presentation without requiring hundreds of animation frames.
+
+⸻
+
+81. DIALOGUE VISUAL DIRECTION
+
+Dialogue should visually bring the player closer to the NPC.
+
+Potential composition:
+
+NPC illustration
+        environment / location
+NPC NAME
+dialogue text
+choice
+choice
+[ATTRIBUTE CHECK]
+choice
+
+Attribute checks should feel special without becoming giant casino effects.
+
+Example:
+
+◆ WISDOM · DC 12
+Something about your cargo smells off...
+
+When selected, show the D20 result clearly and dramatically.
+
+But dialogue readability remains more important than visual spectacle.
+
+⸻
+
+82. UI ART DIRECTION
+
+Keep the strongest ideas from the original presentation:
+
+* warm paper-like surfaces
+* off-white cards
+* dark ink
+* imperfect edges
+* restrained pastel accents
+* kingdom colors
+* tactile buttons
+* clear hierarchy
+
+But make the interface less like a static presentation deck.
+
+It needs to feel like a game.
+
+Add interaction feedback:
+
+* hover response
+* pressed response
+* selected response
+* disabled response
+* subtle movement
+* changing illustrations
+* contextual information
+* map interaction
+
+Avoid excessive nested rectangular panels.
+
+Use empty space and environmental framing where possible.
+
+⸻
+
+83. COLOR STRATEGY
+
+Do not make the whole game pastel and low contrast.
+
+Use a hierarchy.
+
+Base world
+
+Natural/desaturated:
+
+* warm cream
+* earth
+* muted green
+* faded teal
+* sand
+* dusty blue
+
+Ink
+
+Very dark purple/brown/charcoal rather than pure black where appropriate.
+
+Kingdom identity
+
+More saturated:
+
+* Red
+* Blue
+* Yellow
+
+Gameplay emphasis
+
+Selective stronger color for:
+
+* danger
+* CTA
+* damage
+* success
+* important discoveries
+
+The graphic-animation influence should appear partly through contrast, not simply neon saturation.
+
+⸻
+
+84. LIGHT / SHADOW
+
+Introduce stronger graphic shadows than the original presentation.
+
+Possible treatment:
+
+* one dominant directional light
+* simplified shadow shapes
+* minimal gradients
+* broad dark masses
+* occasional hard-edged shadow
+
+This should help make procedural/vector artwork feel intentionally illustrated.
+
+Avoid realistic physically based lighting for the prototype.
+
+⸻
+
+85. ANIMATION PHILOSOPHY
+
+KNORO does not initially need enormous frame-by-frame animation production.
+
+Use economical expressive animation.
+
+Examples:
+
+Button:
+
+hover → tiny shift
+click → squash
+
+Champion movement:
+
+move → small bounce
+arrive → settle
+
+Building construction:
+
+ground mark
+→ structure pops upward
+→ dust/ink marks
+
+Resource gain:
+
++5 FOOD
+brief rise/fade
+
+Attack:
+
+anticipation
+→ rapid movement
+→ impact
+→ recoil
+
+Dialogue check:
+
+die appears
+→ roll
+→ impact stop
+→ result
+
+A few strong poses/tweens are preferable to lots of weak animation.
+
+⸻
+
+86. VISUAL FEEDBACK IS GAMEPLAY
+
+Important design principle for the next AI:
+
+Do not treat visual feedback as decoration.
+
+When simulation changes:
+
+Food +5
+
+the player should understand:
+
+Farm produced +5 Food.
+
+When cargo enters:
+
++40 FOOD
+→ CARGO
+
+When returning:
+
+CARGO DELIVERED
++40 FOOD → RED KINGDOM
+
+When diplomacy changes:
+
+BLUE +5
+
+When discovering:
+
+CROSSROADS DISCOVERED
+
+Feedback should communicate causality.
+
+This is essential because KNORO is about interconnected consequences.
+
+⸻
+
+87. VISUAL REFERENCE RULE
+
+References such as Okami, MOLAKI, Cyberpunk: Edgerunners, Darkest Dungeon, Bannerlord, Mini Metro, etc. are being used only to communicate particular qualities.
+
+Do NOT tell an image generator or artist:
+
+“copy X exactly”
+
+Instead translate references into characteristics.
+
+For example:
+
+Instead of:
+
+Make it look exactly like Edgerunners.
+
+Use:
+
+Graphic animated-comic rendering,
+angular silhouettes,
+chunky cel-like shadow masses,
+expressive proportions,
+energetic posing,
+strong value contrast,
+selective saturated accents.
+
+Instead of:
+
+Make it Okami.
+
+Use:
+
+Organic ink contours,
+brush-like landscape marks,
+painted natural forms,
+expressive irregular silhouettes.
+
+Then combine those into an original KNORO language.
+
+⸻
+
+88. DO NOT DO THE ART PASS YET IF GAMEPLAY IS BROKEN
+
+The interrupted Codex vertical-slice implementation must first be inspected and stabilized.
+
+Correct order:
+
+CURRENT REPOSITORY
+↓
+inspect
+↓
+finish vertical slice
+↓
+tests
+↓
+manual playtest
+↓
+fix gameplay blockers
+↓
+lock working baseline
+↓
+GRAPHICS / PRESENTATION PASS
+
+Do not spend a large coding-agent context window redesigning the map while basic travel/cargo/day progression is broken.
+
+⸻
+
+89. EXACT GRAPHICS PROMPT WE INTENDED TO USE
+
+After the playable loop is stable, give the coding AI approximately this prompt:
+
+We are continuing KNORO.
+This is a PRESENTATION / GRAPHICS milestone.
+Do NOT add gameplay systems.
+Do NOT redesign simulation.
+Do NOT change established balance unless required to fix a
+presentation bug.
+Preserve all simulation behavior and tests.
+Before modifying anything:
+- inspect the current project
+- run existing tests
+- inspect project.godot rendering/stretch settings
+- inspect current City, World, Dialogue and Combat presentation
+- identify why the current build appears low-resolution/basic
+==================================================
+PRIMARY GOAL
+==================================================
+Transform the existing functional prototype from programmer art
+into the first recognizable KNORO visual prototype.
+Target:
+HAND-PAINTED INK FANTASY
++
+GRAPHIC ANIMATED-COMIC ENERGY
++
+EXPRESSIVE CARTOON FORMS
++
+READABLE ISOMETRIC STRATEGY GAME
+The UI/UX presentation document remains a structural/readability
+reference, but it is NOT the final game-world art style.
+==================================================
+RESOLUTION
+==================================================
+Target a 1920x1080 desktop design resolution.
+Fix inappropriate viewport/stretch/scaling behavior if present.
+The game must look crisp on desktop/Mac displays.
+Check:
+- viewport
+- stretch/content scaling
+- font rendering
+- camera zoom
+- Control scaling
+- texture filtering
+- procedural drawing resolution
+Do not confuse hand-painted roughness with blur.
+==================================================
+WORLD
+==================================================
+The world should read as an illustrated landscape first and a
+hex grid second.
+Keep exact hex gameplay readable.
+Reduce the visual dominance of default/debug hex outlines.
+Create stronger procedural/vector terrain art:
+PLAINS
+painted ground masses, grass marks, restrained detail
+FOREST
+clusters of stylized cartoon trees with varied silhouettes,
+overlap and graphic shadows
+HILLS
+angular brush ridges, layered shapes, strong underside shadows
+WATER
+painted teal/blue shapes, irregular shoreline, sparse current
+marks
+RUINS/SPECIAL LOCATIONS
+distinct illustrated silhouettes rather than generic icons
+Allow terrain artwork to visually connect neighboring tiles while
+keeping selection/movement logic exact.
+==================================================
+CITY
+==================================================
+Make the capital feel like a tiny illustrated settlement.
+Replace generic boxes with stylized buildings.
+Use:
+- exaggerated roofs
+- compressed walls
+- banners
+- chimneys
+- irregular silhouettes
+- graphic shadows
+- small environmental details
+Building construction should visibly change the settlement.
+Kingdom colors belong primarily on banners, roofs and accents,
+not across the entire building.
+==================================================
+CHAMPION
+==================================================
+Replace any debug-circle/token presentation with a recognizable
+small cartoon Champion.
+At world scale prioritize silhouette:
+- head/hair/hat shape
+- compact body
+- cloak
+- staff/weapon
+- kingdom accent
+- dark contour
+Add inexpensive movement personality if practical:
+small bounce / squash / settle.
+Do not create an expensive animation framework.
+==================================================
+GRAPHIC ENERGY
+==================================================
+Increase visual energy using broad principles from expressive
+animated-comic art:
+- bold silhouettes
+- chunky graphic shadow shapes
+- strong value contrast
+- expressive asymmetry
+- exaggerated but readable proportions
+- confident linework
+- energetic framing
+- selective saturated accents
+KNORO remains fantasy/natural.
+Do NOT turn it into cyberpunk.
+Do NOT flood the game with neon.
+Do NOT copy characters, costumes, UI, compositions, assets,
+logos, or identifiable designs from existing media.
+==================================================
+UI
+==================================================
+Preserve the useful notebook/editorial DNA:
+- warm paper
+- off-white surfaces
+- dark ink
+- imperfect edges
+- tactile buttons
+- kingdom accents
+- strong hierarchy
+But make it feel like an interactive game rather than presentation
+slides.
+Improve:
+- hover states
+- selected states
+- disabled states
+- button feedback
+- tooltips
+- spacing
+- hierarchy
+- resource feedback
+- contextual panels
+Avoid excessive rectangular panels.
+==================================================
+DIALOGUE
+==================================================
+Make dialogue more cinematic.
+Bring the NPC forward visually.
+Use stronger:
+- character silhouette
+- environment framing
+- hierarchy
+- dialogue composition
+Attribute checks must be visually distinctive and readable.
+The D20 result should have satisfying feedback without becoming
+a casino-style effect.
+==================================================
+COMBAT
+==================================================
+Make combat the most expressive presentation layer.
+Use:
+- Champion/enemy silhouettes
+- illustrated environment
+- dramatic framing
+- graphic shadows
+- stronger poses
+- impact shapes
+- controlled screen shake/tweens
+- readable HP/actions/log
+Use economical animation rather than building a large animation
+system.
+==================================================
+FEEDBACK
+==================================================
+Improve causal feedback.
+Examples:
+FARM
++5 FOOD
++40 FOOD
+→ CARGO
+CARGO DELIVERED
++40 FOOD → KINGDOM
+BLUE RELATION +5
+CROSSROADS DISCOVERED
+The player must understand WHY resources/relationships changed.
+==================================================
+AVOID
+==================================================
+Do not use:
+- low-resolution enlarged rendering
+- debug-looking flat hexes
+- generic rectangles for buildings
+- sterile SaaS UI
+- glossy mobile UI
+- photorealism
+- excessive gradients
+- generic medieval parchment ornament
+- excessive neon
+- tiny unreadable text
+- art that obscures legal hex movement
+==================================================
+ARCHITECTURE
+==================================================
+Presentation changes must not move authoritative rules into UI.
+Simulation remains independent.
+Do not break headless tests.
+Do not rewrite working gameplay systems merely to make them
+easier to draw.
+==================================================
+VALIDATION
+==================================================
+After the presentation pass:
+1. Run all existing tests.
+2. Run headless Godot validation.
+3. Run git diff --check.
+4. Verify simulation behavior is unchanged.
+5. Do NOT commit.
+Report:
+- rendering/resolution problems found
+- visual systems changed
+- files modified
+- tests/results
+- known visual issues
+- exact screens I should screenshot for visual review
+Then stop.
+
+⸻
+
+90. IMPORTANT NOTE FOR THE NEXT AI
+
+The prompt above is the planned next graphics milestone, not something confirmed completed.
+
+At the current handoff point:
+
+Gameplay stabilization comes first.
+
+Then run the graphics prompt.
+
+The desired sequence is therefore:
+
+Finish the game loop → verify it is fun/functional → make it look like KNORO.
+
+That should give another AI both the entire project history and the exact visual direction we had reached when the previous session ended.

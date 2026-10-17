@@ -1,0 +1,331 @@
+{
+	"_note": "Quests. kind main|side. objectives: type build(target) | place(target place id) | res(target, count, deliver) | item(target, count, deliver) | dungeon(target) | clear(target camp id) | age(count) | kill(target group, count) | discover(count) | pop(count) | level(count). reward: resources (to the kingdom), xp, item, relation_all. next: quest started when this one ends. side quests in 'pool' are offered at the end of each week.",
+	"start": [
+		"m1_banner"
+	],
+	"pool": [
+		"s_hogs",
+		"s_wolves",
+		"s_supplies",
+		"s_explore",
+		"s_bakers",
+		"s_crew",
+		"s_iron_road",
+		"s_people"
+	],
+	"quests": {
+		"m1_banner": {
+			"kind": "main",
+			"title": "Raise the banner",
+			"giver": "Your steward",
+			"text": "A hall and a flag do not make a kingdom. Give your people bread and trade: build a Farm and a Market.",
+			"objectives": [
+				{
+					"type": "build",
+					"target": "farm",
+					"text": "Build a Farm"
+				},
+				{
+					"type": "build",
+					"target": "market",
+					"text": "Build a Market"
+				}
+			],
+			"reward": {
+				"gold": 30,
+				"xp": 10
+			},
+			"next": "m2_ruins"
+		},
+		"m2_ruins": {
+			"kind": "main",
+			"title": "Whispers in the stones",
+			"giver": "Your steward",
+			"text": "Old songs say the Nine Crowns were forged from one. The ruins near the capital remember. Go and listen.",
+			"objectives": [
+				{
+					"type": "place",
+					"target": "ruins",
+					"text": "Visit the Old ruins"
+				}
+			],
+			"reward": {
+				"xp": 15,
+				"item": "old_map"
+			},
+			"next": "m3_cave"
+		},
+		"m3_cave": {
+			"kind": "main",
+			"title": "The shard in the crystal",
+			"giver": "The ruins",
+			"text": "The stones spoke of a shard of the first crown, carried into the Crystal cave by kobolds who love anything that shines. Delve in and take it back.",
+			"objectives": [
+				{
+					"type": "dungeon",
+					"target": "crystal_cave",
+					"text": "Clear the Crystal cave"
+				}
+			],
+			"reward": {
+				"gold": 50,
+				"xp": 25
+			},
+			"next": "m4_camp"
+		},
+		"m4_camp": {
+			"kind": "main",
+			"title": "Safe roads",
+			"giver": "Your steward",
+			"text": "Bandits bleed the roads your caravans need. Break one of their camps for good.",
+			"objectives": [
+				{
+					"type": "clear",
+					"target": "camp1",
+					"alt": "camp2",
+					"text": "Break a bandit camp"
+				}
+			],
+			"reward": {
+				"gold": 60,
+				"xp": 30,
+				"relation_all": 3
+			},
+			"next": "m5_town"
+		},
+		"m5_town": {
+			"kind": "main",
+			"title": "From settlement to town",
+			"giver": "Your steward",
+			"text": "The other kingdoms will only take you seriously behind stone walls. Raise your capital to the age of the Town.",
+			"objectives": [
+				{
+					"type": "age",
+					"count": 2,
+					"text": "Reach Age II (Town)"
+				}
+			],
+			"reward": {
+				"iron": 15,
+				"xp": 30
+			},
+			"next": "m6_crypt"
+		},
+		"m6_crypt": {
+			"kind": "main",
+			"title": "The second shard",
+			"giver": "The hermit's riddle",
+			"text": "A second shard lies with the Crypt lord, a king who refused to stay dead. Find the Old crypt and end him.",
+			"objectives": [
+				{
+					"type": "dungeon",
+					"target": "old_crypt",
+					"text": "Clear the Old crypt"
+				}
+			],
+			"reward": {
+				"gold": 80,
+				"xp": 40
+			},
+			"next": "m7_fort"
+		},
+		"m7_fort": {
+			"kind": "main",
+			"title": "The drowned crown",
+			"giver": "The second shard",
+			"text": "Both shards hum when they point west, toward the sea. The last piece sits on the head of a troll king in the Sunken fort.",
+			"objectives": [
+				{
+					"type": "dungeon",
+					"target": "sunken_fort",
+					"text": "Clear the Sunken fort"
+				}
+			],
+			"reward": {
+				"gold": 150,
+				"xp": 80
+			},
+			"next": "m8_city"
+		},
+		"m8_city": {
+			"kind": "main",
+			"title": "A crown worth wearing",
+			"giver": "Your people",
+			"text": "The crown is whole again, but a crown is only a symbol. Make your capital a City, and let the other kingdoms see what you built.",
+			"objectives": [
+				{
+					"type": "age",
+					"count": 3,
+					"text": "Reach Age III (City)"
+				},
+				{
+					"type": "pop",
+					"count": 24,
+					"text": "24 people live in the capital"
+				}
+			],
+			"reward": {
+				"gold": 200,
+				"xp": 100,
+				"relation_all": 5
+			},
+			"next": ""
+		},
+		"s_hogs": {
+			"kind": "side",
+			"title": "Hogs in the barley",
+			"giver": "Farmers",
+			"text": "Wild hogs are tearing up the fields. Drive off two herds.",
+			"objectives": [
+				{
+					"type": "kill",
+					"target": "boars",
+					"count": 2,
+					"text": "Beat 2 herds of wild hogs"
+				}
+			],
+			"reward": {
+				"food": 30,
+				"xp": 10
+			}
+		},
+		"s_wolves": {
+			"kind": "side",
+			"title": "Wolf winter",
+			"giver": "Shepherds",
+			"text": "Wolves take a sheep a night. Hunt two packs.",
+			"objectives": [
+				{
+					"type": "kill",
+					"target": "wolves",
+					"count": 2,
+					"text": "Beat 2 wolf packs"
+				}
+			],
+			"reward": {
+				"gold": 25,
+				"xp": 15,
+				"item": "wolf_tooth"
+			}
+		},
+		"s_supplies": {
+			"kind": "side",
+			"title": "Stone for the walls",
+			"giver": "The masons' guild",
+			"text": "The masons will pay well for a big order of stone and timber.",
+			"objectives": [
+				{
+					"type": "res",
+					"target": "stone",
+					"count": 40,
+					"deliver": true,
+					"text": "Deliver 40 stone"
+				},
+				{
+					"type": "res",
+					"target": "wood",
+					"count": 40,
+					"deliver": true,
+					"text": "Deliver 40 wood"
+				}
+			],
+			"reward": {
+				"gold": 90,
+				"xp": 10
+			}
+		},
+		"s_explore": {
+			"kind": "side",
+			"title": "Mapmaker",
+			"giver": "A scholar",
+			"text": "A scholar wants the land charted. Discover eight places.",
+			"objectives": [
+				{
+					"type": "discover",
+					"count": 8,
+					"text": "Discover 8 places"
+				}
+			],
+			"reward": {
+				"gold": 40,
+				"xp": 20,
+				"item": "compass"
+			}
+		},
+		"s_bakers": {
+			"kind": "side",
+			"title": "Fresh bread",
+			"giver": "The guild of bakers",
+			"text": "Every town worth the name smells of bread. Build a Bakery and a Mill.",
+			"objectives": [
+				{
+					"type": "build",
+					"target": "bakery",
+					"text": "Build a Bakery"
+				},
+				{
+					"type": "build",
+					"target": "mill",
+					"text": "Build a Mill"
+				}
+			],
+			"reward": {
+				"food": 40,
+				"xp": 10
+			}
+		},
+		"s_crew": {
+			"kind": "side",
+			"title": "A proper war band",
+			"giver": "Your captain",
+			"text": "Fill your band: the Champion and four soldiers.",
+			"objectives": [
+				{
+					"type": "army",
+					"count": 5,
+					"text": "Have 5 in your war band"
+				}
+			],
+			"reward": {
+				"iron": 10,
+				"xp": 15
+			}
+		},
+		"s_iron_road": {
+			"kind": "side",
+			"title": "Iron road",
+			"giver": "The smiths",
+			"text": "Smiths need iron. Stockpile 20 iron in the capital.",
+			"objectives": [
+				{
+					"type": "res",
+					"target": "iron",
+					"count": 20,
+					"text": "Have 20 iron"
+				}
+			],
+			"reward": {
+				"gold": 50,
+				"xp": 15,
+				"item": "iron_mace"
+			}
+		},
+		"s_people": {
+			"kind": "side",
+			"title": "Growing pains",
+			"giver": "Your steward",
+			"text": "Houses and food bring families. Reach 16 people.",
+			"objectives": [
+				{
+					"type": "pop",
+					"count": 16,
+					"text": "16 people live in the capital"
+				}
+			],
+			"reward": {
+				"gold": 40,
+				"xp": 15
+			}
+		}
+	}
+}

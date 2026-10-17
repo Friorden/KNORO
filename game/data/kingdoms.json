@@ -1,0 +1,32 @@
+{
+	"red": {
+		"name": "Red", "color": "#D46A55", "mid": "#E79B88", "tint": "#F2CFC4",
+		"land": "River plains · fertile, open, easy to reach",
+		"home": "plains_west",
+		"traits": [["+", "Fertile soil: farms yield +1 food"], ["+", "River trade: roads are safe"], ["-", "Little stone nearby"]],
+		"bonus": { "farm_food": 1 },
+		"relations": { "blue": 5, "yellow": -3 },
+		"motto": "bread before banners",
+		"cargo": "fish that won't last to market", "gift": { "food": 40 }, "gift_text": "+40 Food"
+	},
+	"blue": {
+		"name": "Blue", "color": "#5F8FC0", "mid": "#93B4D8", "tint": "#CFDDEC",
+		"land": "Lake country · wooded shores, trade routes, scattered settlements",
+		"home": "lakes_east",
+		"traits": [["+", "Abundant timber: lumber camps yield +1 wood"], ["+", "Strong merchant connections: markets +1 gold"], ["-", "Farmland less productive than Red"]],
+		"bonus": { "lumber_wood": 1, "market_gold": 1, "farm_food": -1 },
+		"relations": { "red": 5, "yellow": -6 },
+		"motto": "every road carries a story",
+		"cargo": "lake fish that won't last the road", "gift": { "food": 40 }, "gift_text": "+40 Food"
+	},
+	"yellow": {
+		"name": "Yellow", "color": "#D9B443", "mid": "#E9CC72", "tint": "#F4E6B6",
+		"land": "High grasslands · hills, exposed roads, mineral country",
+		"home": "hills_north",
+		"traits": [["+", "Stone access: starts with a quarry seam"], ["+", "Defensible approaches: +2 defence for your army at home"], ["-", "Long, unreliable trade routes"]],
+		"bonus": { "quarry_stone": 1, "home_defense": 2 },
+		"relations": { "red": -3, "blue": -6 },
+		"motto": "hold the high ground",
+		"cargo": "cracked building stone nobody will buy", "gift": { "stone": 25 }, "gift_text": "+25 Stone"
+	}
+}

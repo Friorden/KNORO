@@ -1,0 +1,199 @@
+{
+	"_note": "Story dialogues. {merchant}, {rival}, {player}, {cargo}, {gift_text} are filled in from the campaign. A check option rolls D20 + attribute against dc, then jumps to its success or fail node. 'once' hides a check after it has been tried.",
+
+	"tobbin": {
+		"npc": "Tobbin", "role": "{merchant} merchant", "portrait": "merchant", "kingdom": "merchant", "bg": "crossroads",
+		"start": "hello",
+		"nodes": {
+			"hello": {
+				"text": "Good harvest this year. Roads have been packed with carts since morning.",
+				"options": [
+					{ "label": "I'm looking for supplies.", "next": "supplies" },
+					{ "label": "How is trade with the {rival} kingdom?", "next": "rival" },
+					{ "label": "Something about your cargo smells off…", "check": { "attr": "WIS", "dc": 12 }, "success": "gift", "fail": "offended", "once": "tobbin_check" },
+					{ "label": "I should continue my journey.", "end": true }
+				]
+			},
+			"supplies": {
+				"text": "Rope, salt, lamp oil. Coin first, friend. I've {cargo} too, but I'm not selling that to you.",
+				"options": [ { "label": "Back to the other thing…", "next": "hello" }, { "label": "Safe roads.", "end": true } ]
+			},
+			"rival": {
+				"text": "{rival}? They dig stone and sell it dear. There's a grey rock in the hills between you and them that nobody has claimed yet. Won't stay that way.",
+				"effects": { "flag": "heard_deposit" },
+				"options": [ { "label": "Interesting. Something else…", "next": "hello" }, { "label": "Safe roads.", "end": true } ]
+			},
+			"gift": {
+				"text": "…Fine. You have a nose. These are {cargo}. They won't last to market. Take them before the road eats them. Your people will thank you, if you get them home.",
+				"effects": { "gift_from": "merchant", "relation": { "merchant": 5 }, "xp": 12, "flag": "tobbin_gift" },
+				"stamp": "{gift_text} → CARGO",
+				"options": [ { "label": "Thank you, Tobbin. Safe roads.", "end": true } ]
+			},
+			"offended": {
+				"text": "Smells off? My cargo? I'll have you know… well. Never mind. Ask the {rival} hills about smells. They're sitting on stone they haven't even claimed.",
+				"effects": { "relation": { "merchant": -2 }, "xp": 4, "flag": "heard_deposit" },
+				"options": [ { "label": "I didn't mean… safe roads.", "end": true } ]
+			}
+		}
+	},
+
+	"ruins": {
+		"npc": "The ruins", "role": "old stones, older words", "portrait": "ruins", "kingdom": "", "bg": "ruins",
+		"start": "arrive",
+		"nodes": {
+			"arrive": {
+				"text": "A ring of broken pillars. One stone still stands, covered in carved lines that might be letters, or a map.",
+				"options": [
+					{ "label": "Read the inscription", "check": { "attr": "INT", "dc": 13 }, "success": "map", "fail": "lost", "once": "ruins_int" },
+					{ "label": "Walk the ring and look for what doesn't fit", "check": { "attr": "WIS", "dc": 13 }, "success": "map", "fail": "nothing", "once": "ruins_wis" },
+					{ "label": "Leave it for now", "end": true }
+				]
+			},
+			"map": {
+				"text": "Under a loose slab: an oiled leather case. Inside, a surveyor's map. Three places are marked that you have never seen.",
+				"effects": { "flag": "surveyor_map", "reveal_secrets": true, "xp": 20 },
+				"stamp": "Surveyor's map: 3 places revealed",
+				"options": [ { "label": "Roll it up carefully", "end": true } ]
+			},
+			"lost": {
+				"text": "You read the lines as a path and follow it into the woods. It was not a path. By the time you are back, it is dark.",
+				"effects": { "end_day": true, "xp": 4 },
+				"options": [ { "label": "Tomorrow, then", "end": true } ]
+			},
+			"nothing": {
+				"text": "Stones, moss, a fox den. Whatever is here, it isn't showing itself to you today.",
+				"effects": { "xp": 3 },
+				"options": [ { "label": "Leave it", "end": true } ]
+			}
+		}
+	},
+
+	"envoy": {
+		"npc": "Hesk", "role": "envoy of {rival}", "portrait": "envoy", "kingdom": "rival", "bg": "hall",
+		"start": "demand",
+		"nodes": {
+			"demand": {
+				"text": "Our scouts saw your banner on the grey rock. That stone has fed {rival} walls for three generations. Take your flag down, or pay us thirty gold for the insult.",
+				"options": [
+					{ "label": "Pay the thirty gold from the treasury", "cost": { "gold": 30 }, "cost_from": "kingdom", "next": "paid" },
+					{ "label": "The rock is ours now.", "next": "refused" },
+					{ "label": "Why fight over it? Buy the stone from us.", "check": { "attr": "CHA", "dc": 14 }, "success": "deal", "fail": "refused", "once": "envoy_cha" }
+				]
+			},
+			"paid": {
+				"text": "Wise. We will tell our council you are reasonable people.",
+				"effects": { "gold": -30, "relation": { "rival": 8 }, "flag": "envoy_done" }, "to": "kingdom",
+				"options": [ { "label": "Good day, Hesk.", "end": true } ]
+			},
+			"refused": {
+				"text": "Then {rival} will remember this. Not today, not tomorrow. But we will remember.",
+				"effects": { "relation": { "rival": -10 }, "flag": "envoy_done", "flag2": "rival_grudge" },
+				"stamp": "{rival} will remember",
+				"options": [ { "label": "Let them.", "end": true } ]
+			},
+			"deal": {
+				"text": "…Buy it. Hm. Five stone a week, fifteen gold. Our masons would rather work than fight. Done.",
+				"effects": { "relation": { "rival": 10 }, "flag": "envoy_done", "flag2": "stone_trade", "xp": 15 },
+				"stamp": "Trade deal: 5 Stone → 15 Gold every week",
+				"options": [ { "label": "Done.", "end": true } ]
+			}
+		}
+	},
+
+	"harbor": {
+		"npc": "Marra", "role": "{merchant} harbour master", "portrait": "harbor", "kingdom": "merchant", "bg": "harbor",
+		"start": "hello",
+		"nodes": {
+			"hello": {
+				"text": "A {player} banner, this far from home? Ships don't wait, so talk fast.",
+				"options": [
+					{ "label": "Our wagons could meet your ships. A standing trade.", "check": { "attr": "CHA", "dc": 13 }, "success": "trade", "fail": "busy", "once": "harbor_cha" },
+					{ "label": "What news from the sea?", "next": "news" },
+					{ "label": "I'll let you work.", "end": true }
+				]
+			},
+			"news": {
+				"text": "Pirates south, storms east. And a captain swears there's iron in the cliffs up the coast. Nobody's had the nerve to dig.",
+				"effects": { "flag": "heard_iron", "xp": 3 },
+				"options": [ { "label": "Thank you.", "end": true } ]
+			},
+			"trade": {
+				"text": "You talk like a merchant's daughter. Fine. Two gold a day, every day, for grain and timber. Shake on it.",
+				"effects": { "flag": "harbor_trade", "relation": { "merchant": 8 }, "xp": 15 },
+				"stamp": "Trade route: +2 Gold a day",
+				"options": [ { "label": "Shake.", "end": true } ]
+			},
+			"busy": {
+				"text": "Come back when you have something on a cart, not in your mouth.",
+				"effects": { "xp": 3 },
+				"options": [ { "label": "Fair.", "end": true } ]
+			}
+		}
+	},
+
+	"forge": {
+		"npc": "Old Brunna", "role": "{rival} forge-master", "portrait": "smith", "kingdom": "rival", "bg": "forge",
+		"start": "hello",
+		"nodes": {
+			"hello": {
+				"text": "Another southerner looking at my swords like they're bread. These are for people who can lift them.",
+				"options": [
+					{ "label": "Arm-wrestle you for a discount.", "check": { "attr": "STR", "dc": 12 }, "success": "won", "fail": "lost", "once": "forge_str" },
+					{ "label": "Who do you sell to?", "next": "who" },
+					{ "label": "Good day.", "end": true }
+				]
+			},
+			"who": {
+				"text": "Anyone with stone or coin. Mostly stone. You southerners never have stone.",
+				"options": [ { "label": "We'll see.", "end": true } ]
+			},
+			"won": {
+				"text": "Ha! Ow. Fine. Take this one, it's yours. Tell nobody.",
+				"effects": { "item": "sword", "relation": { "rival": 5 }, "xp": 12 },
+				"stamp": "Iron sword (+2 hit, +3 dmg)",
+				"options": [ { "label": "Thank you, Brunna.", "end": true } ]
+			},
+			"lost": {
+				"text": "That's what I thought. Come back when you've eaten more bread.",
+				"effects": { "xp": 3, "hp": -1 },
+				"options": [ { "label": "Rubbing my wrist…", "end": true } ]
+			}
+		}
+	},
+
+	"hermit": {
+		"npc": "The hermit", "role": "keeper of the grove", "portrait": "hermit", "kingdom": "", "bg": "grove",
+		"start": "hello",
+		"nodes": {
+			"hello": {
+				"text": "Sit. The kettle's on. It's bitter, mind. Most people spit it out.",
+				"options": [
+					{ "label": "Drink the bitter tea", "check": { "attr": "CON", "dc": 12 }, "success": "strong", "fail": "spit", "once": "hermit_con" },
+					{ "label": "What do you see in me?", "check": { "attr": "WIS", "dc": 11 }, "success": "seen", "fail": "unseen", "once": "hermit_wis" },
+					{ "label": "Another time.", "end": true }
+				]
+			},
+			"strong": {
+				"text": "Ha. You kept it down. Good. It'll keep you up, too.",
+				"effects": { "max_hp": 2, "hp": 99, "xp": 12 },
+				"stamp": "+2 max HP · fully healed",
+				"options": [ { "label": "…Thank you?", "end": true } ]
+			},
+			"spit": {
+				"text": "They all spit. Here, wipe your chin.",
+				"effects": { "xp": 3 },
+				"options": [ { "label": "Sorry.", "end": true } ]
+			},
+			"seen": {
+				"text": "Someone who listens better than they fight. Use it. There are places on this map that only a listener finds.",
+				"effects": { "xp": 15, "reveal": 5 },
+				"options": [ { "label": "I'll remember.", "end": true } ]
+			},
+			"unseen": {
+				"text": "Mud on your boots. That's all I see today.",
+				"effects": { "xp": 2 },
+				"options": [ { "label": "Fair enough.", "end": true } ]
+			}
+		}
+	}
+}

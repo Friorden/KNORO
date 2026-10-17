@@ -1,0 +1,2199 @@
+Absolutely. Below is a handoff document you can paste into another AI so it can continue KNORO without restarting, changing established decisions, or wasting time rediscovering the project.
+
+I’m separating what is confirmed/implemented, what was designed, and what Codex was in the middle of implementing, because the next AI must not mistake planned features for completed ones.
+
+⸻
+
+KNORO — FULL PROJECT HANDOFF
+
+Status: October 13, 2026
+
+You are continuing development of an indie game called KNORO.
+
+Do not redesign the project from scratch. Read this handoff first, then inspect the actual repository before modifying anything.
+
+⸻
+
+1. HIGH-LEVEL GAME CONCEPT
+
+KNORO is a turn-based:
+
+Kingdom Strategy + City Builder + Exploration RPG + Character RPG
+
+The player does NOT control an omnipresent strategy-game cursor.
+
+Instead, the player creates a physical ruler called the Champion.
+
+The Champion physically travels around an isometric hex world, meets people, discovers locations, makes RPG checks, fights, carries resources home, affects diplomacy, and develops personally.
+
+Meanwhile, the player’s kingdom has:
+
+* a capital/city
+* buildings
+* population
+* resources
+* production
+* territory
+* diplomatic relationships
+* eventually culture/religion/trade/etc.
+
+The central design rule is:
+
+Champion → World → Kingdom → Champion
+
+Everything should connect.
+
+A small personal decision should potentially affect the kingdom.
+
+A kingdom-level decision should potentially affect what the Champion can do.
+
+The prototype’s key emotional example is:
+
+A conversation on the other side of the map can eventually feed your city.
+
+The game should create stories from interconnected mechanics rather than disconnected minigames.
+
+⸻
+
+2. CORE GAMEPLAY LOOP
+
+The intended loop is:
+
+BUILD HOME
+↓
+PREPARE
+↓
+ROLL
+↓
+LEAVE SAFETY
+↓
+TRAVEL
+↓
+DISCOVER
+↓
+EVENT / DIALOGUE / DANGER
+↓
+MAKE CHARACTER-BASED DECISION
+↓
+GAIN CARGO / XP / INFORMATION / CONSEQUENCE
+↓
+DECIDE WHETHER TO PUSH FARTHER OR RETURN
+↓
+RETURN TO CAPITAL
+↓
+DELIVER CARGO
+↓
+BUILD / DEVELOP KINGDOM
+↓
+END DAY
+↓
+PRODUCTION / WORLD CONSEQUENCES
+↓
+LEAVE AGAIN
+
+The prototype is primarily trying to answer:
+
+Does a Champion-level adventure producing kingdom-level consequences make the player want to go on another expedition?
+
+That is more important than feature quantity.
+
+⸻
+
+3. LONG-TERM PLAYER GOAL
+
+Player starts as the newly created Champion of one of eventually nine kingdoms.
+
+Kingdom color examples:
+
+* Red
+* Blue
+* Yellow
+* Green
+* five more eventually
+
+Kingdom choice is NOT purely cosmetic.
+
+Eventually kingdoms differ through:
+
+* geography
+* resources
+* relationships
+* cultural characteristics
+* statistical modifiers
+* strategic opportunities
+
+There is no mandatory victory identity.
+
+Player may become:
+
+* conqueror
+* merchant
+* diplomat
+* explorer
+* religious leader
+* cultural power
+* wealthy builder
+* some mixture
+
+⸻
+
+4. TWO INTERCONNECTED PROGRESSION SYSTEMS
+
+Champion progression
+
+Eventually includes:
+
+* attributes
+* XP
+* levels
+* HP
+* equipment
+* relationships
+* survival
+* discoveries
+
+Kingdom progression
+
+Eventually includes:
+
+* city development
+* population
+* resources
+* buildings
+* territory
+* trade
+* influence
+* culture
+* religion
+* diplomacy
+
+The two systems should feed each other.
+
+⸻
+
+5. CAMPAIGN FLOW
+
+Established campaign flow:
+
+NEW CAMPAIGN
+↓
+CHOOSE KINGDOM
+↓
+CREATE CHAMPION
+↓
+CAPITAL
+↓
+WORLD
+↓
+EVENTS / DIALOGUE / COMBAT
+↓
+CAPITAL
+↓
+...
+
+An earlier implementation had kingdom selection inside Champion creation.
+
+We deliberately changed that.
+
+Kingdom selection happens BEFORE Champion creation.
+
+The idea is:
+
+Pick where you start, not who you are.
+
+⸻
+
+6. CURRENT PROTOTYPE KINGDOMS
+
+Only THREE kingdoms are required for the prototype.
+
+Do NOT implement all nine yet.
+
+RED KINGDOM
+
+Geography:
+
+River plains · fertile, open, easy to reach
+
+Advantages:
+
+* fertile soil
+* river trade
+
+Disadvantage:
+
+* little stone nearby
+
+Starting relationships:
+
+* Blue: curious
+* Yellow: wary
+
+Motto:
+
+bread before banners
+
+⸻
+
+BLUE KINGDOM
+
+Geography:
+
+Lake country · wooded shores, trade routes, scattered settlements
+
+Advantages:
+
+* abundant timber
+* strong merchant connections
+
+Disadvantage:
+
+* farmland less productive than Red
+
+Relationships:
+
+* Red: curious
+* Yellow: competitive
+
+Motto:
+
+every road carries a story
+
+⸻
+
+YELLOW KINGDOM
+
+Geography:
+
+High grasslands · hills, exposed roads, mineral country
+
+Advantages:
+
+* stone access
+* defensible approaches
+
+Disadvantage:
+
+* longer/less reliable trade routes
+
+Relationships:
+
+* Red: wary
+* Blue: competitive
+
+Motto:
+
+hold the high ground
+
+These advantages are currently mostly descriptive prototype identity.
+
+Do not automatically implement every kingdom modifier yet.
+
+⸻
+
+7. CHAMPION CREATION
+
+Champion uses six RPG attributes.
+
+STR — Strength
+
+Used for:
+
+* melee
+* force
+* intimidation
+
+DEX — Dexterity
+
+Used for:
+
+* movement
+* agility
+* dodging
+* initiative
+* precision
+* sleight of hand
+
+CON — Constitution
+
+Used for:
+
+* HP
+* endurance
+* poison resistance
+* weather resistance
+* physical hardship
+
+INT — Intelligence
+
+Used for:
+
+* knowledge
+* investigation
+* inscriptions
+* strategy
+* mechanisms
+
+WIS — Wisdom
+
+Used for:
+
+* perception
+* intuition
+* reading people
+* discovering hidden opportunities
+
+WIS is particularly important.
+
+It should sometimes reveal things that another character doesn’t even realize are available.
+
+CHA — Charisma
+
+Used for:
+
+* persuasion
+* leadership
+* diplomacy
+* social influence
+
+⸻
+
+8. ATTRIBUTE CREATION RULES
+
+At character creation:
+
+18 total points
+
+Every attribute begins at:
+
+0
+
+Maximum during creation:
+
+5
+
+Therefore:
+
+STR 0–5
+DEX 0–5
+CON 0–5
+INT 0–5
+WIS 0–5
+CHA 0–5
+
+Exactly 18 points must be allocated.
+
+Long-term attributes may eventually reach approximately 20.
+
+The player should immediately understand that builds have consequences.
+
+Example:
+
+A WIS/CHA Champion may be excellent socially but vulnerable in combat.
+
+⸻
+
+9. HP
+
+Current prototype formula:
+
+Max HP = 10 + (2 × CON)
+
+Example:
+
+CON 3:
+
+10 + 6 = 16 HP
+
+HP persists between dangerous encounters.
+
+Capital can heal the Champion in the prototype.
+
+⸻
+
+10. TIME SYSTEM
+
+Important established decision:
+
+There is one global timeline.
+
+1 TURN = 1 DAY
+
+Do NOT create separate Champion-time and kingdom-time.
+
+UI should show something like:
+
+WEEK 2 · DAY 5
+
+Daily systems
+
+Potentially:
+
+* Champion movement
+* building production
+* events
+* construction limits
+
+Weekly systems
+
+Every 7 days:
+
+* week report
+* eventually population/world events/diplomacy updates
+
+Later:
+
+* months
+* seasons
+* years
+
+But prototype only needs day/week.
+
+Changing between City and World must never advance time.
+
+⸻
+
+11. THREE MAIN GAMEPLAY VIEWS
+
+The long-term game has three major presentation modes.
+
+CITY
+
+Closest strategic zoom.
+
+Used for:
+
+* buildings
+* resources
+* population
+* preparation
+* kingdom management
+
+This is home.
+
+WORLD
+
+Pulled-back isometric hex map.
+
+Used for:
+
+* Champion travel
+* exploration
+* locations
+* other kingdoms
+* events
+* routes
+* danger
+
+ENCOUNTER / COMBAT
+
+Dedicated dramatic presentation.
+
+Map recedes/disappears.
+
+Champion and enemy face each other in a more illustrated scene.
+
+Dialogue similarly has a more cinematic presentation.
+
+⸻
+
+12. CITY ↔ WORLD UX
+
+Desired conceptual relationship:
+
+City and World should feel like different zoom levels of the same kingdom/world, not unrelated menus.
+
+Ideal concept:
+
+CITY
+↑
+scroll/zoom out
+↓
+WORLD
+
+A clean screen transition is acceptable in the prototype if actual continuous zoom is technically expensive.
+
+Do not sacrifice gameplay stability for fancy transitions.
+
+⸻
+
+13. CITY PROTOTYPE ECONOMY
+
+Initial prototype kingdom resources:
+
+Food: 20
+Wood: 20
+Stone: 10
+Gold: 20
+Population: 5
+Capacity: 10
+
+Prototype buildings:
+
+FARM
+
+Cost:
+
+10 Wood
+
+Production:
+
++5 Food/day
+
+HOUSE
+
+Cost:
+
+5 Wood
+5 Stone
+
+Effect:
+
++2 Population Capacity
+
+MARKET
+
+Cost:
+
+10 Wood
+5 Stone
+
+Production:
+
++5 Gold/day
+
+LUMBER CAMP
+
+Cost:
+
+10 Gold
+
+Production:
+
++3 Wood/day
+
+Production happens only when day advances.
+
+Entering/leaving City must NEVER trigger production.
+
+⸻
+
+14. CHAMPION HOME BONUS
+
+Champion location should matter.
+
+Current prototype idea:
+
+When Champion is physically in capital:
+
+20% building-cost reduction
+
+When Champion is away:
+
+normal costs.
+
+However, city management is still available remotely.
+
+This was chosen over completely locking city management while away.
+
+⸻
+
+15. WORLD MAP
+
+Prototype target:
+
+Approximately:
+
+120–180 hexes
+
+An earlier idea used ~40, but later design reasoning concluded this may be too small because Champion could cross it extremely quickly.
+
+Prototype has:
+
+* Red
+* Blue
+* Yellow
+* player capital
+* other capitals
+* territories
+* exploration locations
+
+Other kingdoms are currently living scenery / scripted actors, NOT full AI civilizations.
+
+Do NOT build 9-kingdom AI yet.
+
+⸻
+
+16. WORLD COORDINATES / TECHNICAL RULE
+
+Use proper hex coordinates internally.
+
+Preferred:
+
+axial coordinates
+
+World presentation can be isometric-looking / squashed / 2.5D.
+
+Simulation must NOT depend on rendered positions.
+
+Coordinate logic and presentation conversion should remain separate.
+
+⸻
+
+17. TERRAIN
+
+Prototype terrain includes:
+
+* Plains
+* Forest
+* Hills
+* Water
+* Ruins / special locations
+
+Possible earlier version also mentioned Mountains.
+
+Current simplified vertical slice uses:
+
+Plains = 1 movement
+Forest = 2
+Hills = 2
+Water = impassable
+
+Roads, if present:
+
+1
+
+⸻
+
+18. MOVEMENT — IMPORTANT
+
+There were TWO competing formulas during design.
+
+One old session proposed:
+
+1D6 + floor(DEX / 2)
+
+BUT the later/current implementation specification deliberately returned to:
+
+DEX 0–2 = +0
+DEX 3–4 = +1
+DEX 5 = +2
+
+Therefore for the current prototype, use:
+
+Movement Points =
+1D6 + DEX movement modifier
+
+with:
+
+DEX 0–2 → +0
+DEX 3–4 → +1
+DEX 5 → +2
+
+Do not silently replace this with raw DEX.
+
+Do not silently switch to floor(DEX/2) without discussing it.
+
+This formula should eventually be playtested.
+
+⸻
+
+19. MOVEMENT UX
+
+At beginning of travel/day:
+
+Player rolls a visible D6.
+
+Example:
+
+ROLL
+4
+DEX +1
+5 MOVES
+
+Map shows reachable hexes.
+
+Terrain costs movement points.
+
+Champion physically moves between adjacent hexes.
+
+Remaining movement updates.
+
+Ideally movement is visually interpolated rather than instant teleportation, but animation must not own simulation state.
+
+Simulation moves authoritatively first; presentation visualizes it.
+
+⸻
+
+20. LOW-ROLL CAMP
+
+Prototype idea:
+
+If actual D6 roll is:
+
+1 or 2
+
+player may choose to CAMP instead.
+
+Camp options:
+
+Heal 3 HP
+
+or
+
+Scout adjacent unexplored hexes
+
+Camp ends travel for that day.
+
+⸻
+
+21. EXPLORATION / FOG
+
+Map should remember exploration.
+
+At minimum:
+
+UNEXPLORED
+DISCOVERED
+VISITED
+
+Locations discovered should remain known.
+
+This supports a major thematic rule:
+
+The map remembers.
+
+⸻
+
+22. DANGER
+
+Exact event percentages should generally remain hidden.
+
+Player sees broad danger categories:
+
+SAFE
+UNCERTAIN
+WILD
+
+Danger should be communicated subtly rather than turning the entire map into red/yellow/green traffic-light colors.
+
+⸻
+
+23. HEX EVENTS
+
+Prototype should eventually contain roughly 12–15 lightweight events.
+
+Examples:
+
+* abandoned supplies
+* logging trail
+* traveler
+* merchant clue
+* weather
+* lost path
+* shortcut
+* treasure
+* ruins
+* injured traveler
+* animal tracks
+* boars
+* healing herbs/spring
+* resource discovery
+* nothing unusual
+
+Events should preferably be data-driven.
+
+Events may interrupt movement.
+
+After event resolution, remaining movement normally remains unless event explicitly ends day.
+
+One-time rewards must persist as completed.
+
+Walking away and returning must NOT duplicate rewards.
+
+⸻
+
+24. CARGO — IMPORTANT CORE DESIGN
+
+This was added because it makes returning home meaningful.
+
+Physical expedition rewards should generally enter:
+
+CHAMPION CARGO
+
+not immediately kingdom storage.
+
+Prototype cargo:
+
+* Food
+* Wood
+* Stone
+* Gold
+
+Example:
+
+Champion discovers:
+
++10 Food
+
+Result:
+
+Champion Cargo:
+Food 10
+
+NOT:
+
+Kingdom Food +10
+
+When Champion returns to capital:
+
+DELIVER CARGO
+
+Then resources transfer to kingdom storage.
+
+Example:
+
+MIRA RETURNED HOME
+Delivered:
++40 Food
++5 Wood
+
+Cargo becomes empty.
+
+This creates:
+
+Push one more hex vs return safely?
+
+Political agreements or abstract trade income may directly affect kingdom resources.
+
+Physical loot generally should not.
+
+⸻
+
+25. FIRST EXPEDITION HOOK
+
+Early game should give player a reason to leave home.
+
+Messenger reports:
+
+A Blue merchant caravan waits at the Crossroads. It will not remain there forever.
+
+Crossroads becomes visible/marked.
+
+Should take approximately 1–3 travel days depending on rolls/path.
+
+⸻
+
+26. DIALOGUE SYSTEM
+
+Important NPC dialogue should temporarily change presentation.
+
+Desired feeling:
+
+Bannerlord-like focus on NPC, but with KNORO’s own visual identity.
+
+Player receives normal dialogue choices plus occasional attribute-based options.
+
+Example:
+
+[WISDOM CHECK · DC 12]
+Something about your cargo smells off...
+
+⸻
+
+27. CHECK SYSTEM
+
+Current RPG check formula:
+
+D20 + ATTRIBUTE >= DC
+
+Example:
+
+Roll: 9
+WIS: +5
+Total: 14
+DC: 12
+SUCCESS
+
+Framework should eventually work with all six attributes.
+
+⸻
+
+28. TOBBIN — FIRST COMPLETE DIALOGUE EXAMPLE
+
+NPC:
+
+Tobbin
+
+Blue merchant at Crossroads.
+
+Normal options approximately:
+
+I'm looking for supplies.
+How is trade with the northern kingdoms?
+I should continue my journey.
+
+Special option:
+
+[WISDOM CHECK · DC 12]
+Something about your cargo smells off...
+
+Success:
+
+Tobbin admits his fish will spoil.
+
+Approximately:
+
+Fine. You have a nose for trouble. This fish won’t last to Blue. Take it before the road eats it.
+
+Reward:
+
++40 Food CARGO
+
+Blue relation:
+
++5
+
+Failure must NOT merely say:
+
+CHECK FAILED
+
+Instead, Tobbin notices suspicion and becomes guarded.
+
+No fish reward.
+
+⸻
+
+29. ANTI-REROLL RULE
+
+Very important.
+
+Dialogue checks are persistent.
+
+Tobbin’s WIS check:
+
+ONE ATTEMPT
+
+Closing and reopening dialogue must NOT produce another roll.
+
+Simulation stores:
+
+* attempted
+* success/failure
+* reward granted
+
+No save-scumming exploit inside one encounter through UI reopening.
+
+An old presentation mockup suggested clicking again for another roll; we explicitly rejected that behavior.
+
+⸻
+
+30. FAILURE PHILOSOPHY
+
+Failure should create content.
+
+Not:
+
+CHECK FAILED
+nothing happens
+
+Instead failure might:
+
+* offend NPC
+* reveal alternate information
+* cause reputation loss
+* trigger humor
+* create danger
+* redirect quest/event
+* create future opportunity
+
+Failure should be another branch of the story.
+
+⸻
+
+31. BOAR ENCOUNTER
+
+Prototype dangerous event:
+
+WILD BOARS
+
+Two boars emerge.
+
+Player choices:
+
+FLEE
+
+DEX check
+DC 11
+
+THROW FOOD
+
+Spend:
+
+10 Food from Champion cargo
+
+Guaranteed escape.
+
+Disabled if cargo doesn’t contain enough Food.
+
+FIGHT
+
+Enter combat.
+
+This represents an important design principle:
+
+Every solution should potentially cost a different currency: luck, resources, or blood.
+
+⸻
+
+32. PROTOTYPE COMBAT
+
+Combat is deliberately small.
+
+Do NOT build Darkest Dungeon-level complexity yet.
+
+Champion alone.
+
+Enemies:
+
+1–2 boars
+
+Actions:
+
+ATTACK
+DEFEND
+FLEE
+
+Attack concept:
+
+D20 + STR vs enemy defence
+
+Damage can use a simple die such as:
+
+1D6
+
+Starting weapon:
+
+Walking Stick +0
+
+Defend:
+
+CON-based mitigation.
+
+Flee:
+
+DEX check DC 11
+
+Combat should show:
+
+* round
+* Champion HP
+* enemy HP
+* target
+* combat log
+* actions
+
+No:
+
+* companions
+* party formations
+* spells
+* ability trees
+* elaborate equipment
+* giant status system
+
+yet.
+
+⸻
+
+33. COMBAT PRESENTATION
+
+Combat should visually feel different from world navigation.
+
+Desired:
+
+* illustrated environment
+* Champion one side
+* enemies opposite
+* stronger silhouettes
+* readable tactical information
+* storybook/comic energy
+
+Not a spreadsheet.
+
+⸻
+
+34. DEATH / DYNASTY SYSTEM
+
+This is a major KNORO identity feature.
+
+Champion can die.
+
+Death is NOT:
+
+GAME OVER
+
+Instead:
+
+Mira fell. The kingdom didn’t.
+
+Kingdom persists.
+
+Things that stay:
+
+* city
+* buildings
+* resources/stores
+* population
+* territory
+* relationships
+* map knowledge
+* history
+
+Things lost with Champion:
+
+* personal XP/level
+* carried cargo/items
+* some equipment
+* travel time
+
+Prototype successor:
+
+* create new Champion
+* receives 18 creation points
+* starts at capital
+* approximately 2 days pass
+
+A cairn/grave marker remains on death hex.
+
+Again:
+
+The map remembers.
+
+Complex family trees/inheritance are later.
+
+⸻
+
+35. WEEK REPORT
+
+Every 7 days, show a report.
+
+This is not supposed to be a boring spreadsheet.
+
+It should explain:
+
+Why did my kingdom change?
+
+Possible sections:
+
+WEEK 1
+KINGDOM
+Food
+Production
+Spent
+Expedition deliveries
+Net change
+Wood
+Stone
+Gold
+Population
+
+Then:
+
+CHAMPION
+HP
+Discoveries
+Important events
+
+Then:
+
+NEIGHBOURS REMEMBER
+Blue +5
+Yellow -10
+
+Then:
+
+THE MAP REMEMBERS
+Crossroads discovered
+Ruins discovered
+Boar attack
+etc.
+
+The original design presentation contained the key example:
+
+Most of this week’s food came from one conversation.
+
+That’s the feeling we want.
+
+⸻
+
+36. POLITICS
+
+Long-term diplomatic relationships affect what Champion is allowed to do.
+
+If Red and Blue are peaceful, Champion cannot simply murder Blue civilians without consequence.
+
+However, RPG actions may push boundaries:
+
+* insult
+* steal
+* provoke
+* challenge
+* discover conspiracy
+* start fight
+
+Individual stupidity may create kingdom-level political consequences.
+
+Prototype does NOT need systemic diplomatic AI.
+
+Scripted relation changes are sufficient.
+
+⸻
+
+37. TERRITORY / OUTPOST IDEA
+
+An older design iteration introduced:
+
+OUTPOSTS
+
+Concept:
+
+Champion must physically stand on a claimable hex to claim it.
+
+Therefore Champion literally draws borders.
+
+Example story:
+
+* Champion finds Greyrock stone deposit
+* establishes outpost
+* Yellow dislikes Red claiming it
+* diplomacy/trade chain begins
+
+This idea is considered promising but was NOT necessarily completed in the interrupted Codex implementation.
+
+Do not assume it’s implemented.
+
+It can wait until core loop works.
+
+⸻
+
+38. EXAMPLE EMERGENT STORY
+
+An important design exercise produced this chain:
+
+Red lacks stone
+↓
+Champion travels north
+↓
+finds stone deposit
+↓
+claims Greyrock
+↓
+Yellow becomes angry
+↓
+Yellow envoy arrives
+↓
+Champion uses CHA
+↓
+instead of war, creates stone trade
+↓
+kingdom economy changes
+
+This demonstrates desired systemic storytelling.
+
+Not all of this must be in current prototype.
+
+⸻
+
+39. TECHNICAL STACK
+
+Current engine:
+
+Godot 4.7.2 stable
+
+Standard GDScript version.
+
+NOT Mono/.NET.
+
+Project location on user’s Mac:
+
+/Users/flewer/knoro
+
+Codex CLI:
+
+Previously:
+
+codex-cli 0.160.0
+
+Codex has been used to write project code.
+
+⸻
+
+40. CRITICAL ARCHITECTURE RULE
+
+This is permanent unless explicitly reconsidered:
+
+SIMULATION AND PRESENTATION MUST BE SEPARATE.
+
+Simulation should NOT depend on:
+
+* Node
+* Node2D
+* Control
+* scene tree
+* sprites
+* cameras
+* UI
+* rendering
+
+Simulation classes generally use:
+
+RefCounted
+
+Presentation:
+
+* reads simulation state
+* calls simulation commands
+* visualizes results
+
+Presentation must NOT own authoritative gameplay rules.
+
+Reason:
+
+Simulation must be runnable/testable headlessly.
+
+⸻
+
+41. RANDOMNESS
+
+Use deterministic seeded randomness.
+
+Use:
+
+RandomNumberGenerator
+
+through the project’s seeded RNG abstraction.
+
+Do not scatter:
+
+randi()
+randf()
+
+through gameplay systems.
+
+Same seed should produce same simulation where appropriate.
+
+This is important for:
+
+* debugging
+* tests
+* world generation
+* balancing
+
+⸻
+
+42. HEADLESS TESTING
+
+Project has headless tests.
+
+Codex has been running commands such as:
+
+sh tests/run_all.sh
+
+and Godot with:
+
+/Applications/Godot.app/Contents/MacOS/Godot --headless ...
+
+There was one macOS certificate-related failure:
+
+ERROR: Condition "ret != noErr" is true.
+get_system_ca_certificates
+
+But Codex subsequently reran validation and got:
+
+PASS: playable screen load/capture and scene-switch invariants.
+
+Do not assume the certificate warning means game simulation is broken.
+
+⸻
+
+43. GIT HISTORY / WORKFLOW
+
+Git repository:
+
+/Users/flewer/knoro/.git
+
+Branch:
+
+main
+
+Foundation milestone was committed.
+
+Known foundation commit:
+
+5385262
+
+Message:
+
+Set up KNORO simulation foundation
+
+Later Champion/Campaign/vertical-slice work was intentionally left uncommitted while being tested.
+
+Therefore:
+
+DO NOT immediately reset or clean the repository.
+
+Especially do NOT run:
+
+git reset --hard
+git clean -fd
+git checkout .
+
+without inspecting the current working tree.
+
+There is valuable uncommitted work.
+
+⸻
+
+44. MILESTONE 1 — CONFIRMED COMPLETE
+
+Foundation created approximately:
+
+scenes/main.tscn
+scripts/simulation/game_state.gd
+scripts/simulation/seeded_rng.gd
+scripts/presentation/main.gd
+tests/smoke_test.gd
+README.md
+AGENTS.md
+
+plus supporting directories.
+
+Initial screen:
+
+KNORO
+Prototype 0.1
+Simulation Ready
+
+Foundation was manually visually verified.
+
+Tests passed.
+
+Then committed as:
+
+5385262
+
+⸻
+
+45. MILESTONE 2 — CHAMPION CREATION
+
+Codex implemented Champion creation.
+
+Included:
+
+* Champion data/model
+* name
+* six attributes
+* exactly 18 points
+* min 0
+* max 5
+* simulation-owned validation
+* GameState stores Champion
+* +/- UI
+* remaining points
+* create validation
+
+At that stage Codex reported:
+
+Champion creation: 107 checks passed
+
+Then we deliberately did NOT commit because campaign UX changed.
+
+⸻
+
+46. MILESTONE 2.5 — CAMPAIGN FLOW + UI FOUNDATION
+
+We refactored:
+
+OLD:
+
+Champion Creation
+including kingdom selection
+
+NEW:
+
+Choose Kingdom
+↓
+Create Champion
+↓
+Capital Arrival
+
+Codex completed this.
+
+Its report said:
+
+Kingdom selection persists in simulation state. Existing allocation rules remain intact. Added kingdom information, temporary illustrations, allocation indicators, DEX/HP previews, and Capital Arrival. No future gameplay systems implemented.
+
+Manual checklist Codex gave:
+
+* select each kingdom
+* verify descriptions/relations/CTA
+* continue
+* verify selected kingdom appears
+* allocation limits
+* remaining points
+* name validation
+* previews
+* go back/change kingdom
+* creation
+* arrival details
+* Enter Capital placeholder
+
+Known issue:
+
+Shorter windows may require vertical scrolling.
+
+No known functional issues otherwise.
+
+⸻
+
+47. VERTICAL SLICE — CURRENT INTERRUPTED WORK
+
+After Milestone 2.5, Codex received a large playable vertical-slice specification.
+
+It was asked to implement:
+
+* playable capital
+* city economy
+* buildings
+* world map
+* seeded generation
+* movement
+* pathfinding
+* fog
+* danger bands
+* events
+* cargo
+* Crossroads
+* Tobbin dialogue
+* WIS check
+* boars
+* combat
+* week report
+* death/successor
+* extensive tests
+
+Codex worked for approximately:
+
+22m 49s+
+
+It modified substantial code.
+
+One visible diff statistic showed:
+
+scripts/simulation/game_state.gd
++402 lines
+
+and other files changed.
+
+Codex ran:
+
+git diff --check
+git status --short
+git diff --numstat
+
+It also searched for architecture violations/random calls.
+
+Then ran test suite.
+
+Initial run encountered the macOS CA certificate issue.
+
+A later run succeeded and included:
+
+PASS: playable screen load/capture and scene-switch invariants.
+
+Then Codex usage limit was exhausted before it could finish the task/report.
+
+Therefore the vertical slice is partially or mostly implemented, but its exact completeness is UNKNOWN.
+
+The next AI MUST inspect the repository.
+
+Do NOT assume everything above is complete.
+
+⸻
+
+48. WHAT NEXT AI SHOULD DO FIRST
+
+Before writing code:
+
+Run:
+
+cd /Users/flewer/knoro
+git status
+git diff --stat
+git diff --check
+
+Inspect:
+
+AGENTS.md
+README.md
+project.godot
+scripts/
+scenes/
+tests/
+data/
+ui/
+
+Determine exactly which vertical-slice systems currently exist.
+
+Then run existing tests.
+
+Do NOT restart implementation from the large spec.
+
+Continue only missing/broken connections.
+
+⸻
+
+49. REQUIRED PLAYABLE FLOW TO VERIFY
+
+The desired current vertical slice is:
+
+Kingdom Selection
+↓
+Champion Creation
+↓
+Capital
+↓
+Build
+↓
+End Day
+↓
+World
+↓
+Roll
+↓
+Move
+↓
+Event
+↓
+Tobbin
+↓
+WIS Check
+↓
+Cargo
+↓
+World
+↓
+Return Capital
+↓
+Deliver Cargo
+↓
+Build with changed economy
+↓
+End Day
+
+Combat/boars should also be naturally reachable if already implemented.
+
+This should be verified before adding more systems.
+
+⸻
+
+50. VISUAL PROBLEM DISCOVERED
+
+Current visuals were reported by the user as:
+
+* too basic
+* low quality
+* poor resolution
+* too much programmer art
+* insufficient personality
+
+The user specifically wants the game to become substantially more cartoonish / illustrated / graphic.
+
+Do NOT treat current procedural visuals as final art.
+
+⸻
+
+51. NEW VISUAL DIRECTION
+
+There are TWO layers.
+
+UI / UX
+
+The existing design presentation remains a strong structural reference.
+
+Characteristics:
+
+* editorial/notebook clarity
+* readable hierarchy
+* tactile feel
+* imperfect shapes
+* strong information design
+* cards/panels when useful
+* restrained kingdom colors
+
+GAME WORLD
+
+Needs much more expressive visual identity.
+
+Current target:
+
+hand-painted ink fantasy + graphic animated-comic energy + tactile indie strategy game
+
+The user specifically referenced an Edgerunners-like vibe for energy/cartoon character.
+
+Interpret this through high-level visual properties only:
+
+* bold silhouettes
+* chunky graphic shadows
+* strong value contrast
+* expressive asymmetry
+* confident outlines
+* exaggerated readable shapes
+* energetic compositions
+* more characterful poses
+* occasional saturated accents
+
+But KNORO should NOT become cyberpunk.
+
+Keep:
+
+* fantasy/natural setting
+* kingdoms
+* forests
+* hills
+* rivers
+* brush/ink quality
+* isometric world
+* natural colors
+
+Avoid copying identifiable characters/assets/UI/compositions from existing works.
+
+⸻
+
+52. OTHER ART INFLUENCE DISCUSSION
+
+Earlier the user described wanting something approximately between:
+
+* Okami-like expressive brush/ink qualities
+* MOLAKI-like stylization
+* later, stronger cartoon/graphic energy similar in spirit to Edgerunners
+
+These are references for traits, not things to clone.
+
+Desired original KNORO language:
+
+expressive ink/brush fantasy
++
+graphic animation silhouettes
++
+cartoon exaggeration
++
+readable isometric strategy geography
+
+⸻
+
+53. RESOLUTION
+
+The user specifically complained about resolution.
+
+Next visual pass should target desktop presentation around:
+
+1920 × 1080
+
+with proper Godot stretch/scaling behavior.
+
+Need:
+
+* crisp text
+* crisp UI
+* no tiny low-resolution viewport being enlarged badly
+* appropriate scaling on Mac displays
+* responsive enough for desktop aspect changes
+
+Do not confuse deliberate hand-drawn roughness with blurry rendering.
+
+⸻
+
+54. WORLD VISUAL TARGET
+
+World should NOT look like:
+
+* debug hexes
+* colored flat polygons only
+* programmer map
+* generic board prototype
+
+Hexes should remain mechanically readable but terrain should have personality.
+
+Examples:
+
+Forest:
+
+* clusters of stylized tree silhouettes
+* varied height/shape
+* graphic shadow masses
+
+Hills:
+
+* brush-like ridges
+* layered silhouettes
+
+Water:
+
+* broad painted shapes
+* sparse current lines
+
+Settlements:
+
+* exaggerated roofs
+* banners
+* readable silhouettes
+
+Champion:
+
+* recognizable small cartoon character/token
+* not merely a circle
+
+Kingdom color:
+
+Use on:
+
+* roofs
+* banners
+* flags
+* borders
+* accents
+
+Do NOT paint every object entirely red/blue/yellow.
+
+⸻
+
+55. UI VISUAL REFERENCE FROM DESIGN PRESENTATION
+
+Original presentation suggested:
+
+Paper:
+
+#F5EEDF
+
+Card:
+
+#FBF7EE
+
+Ink:
+
+#2F2A35
+
+Pencil:
+
+#6E6573
+
+Kingdom colors:
+
+Red:
+
+#D46A55
+
+Blue:
+
+#5F8FC0
+
+Yellow:
+
+#D9B443
+
+It also referenced:
+
+* coral CTA
+* sage
+* faded teal
+* powder blue
+* lavender
+* hill sand
+
+These are references, not immutable final colors.
+
+⸻
+
+56. OLD UI STYLE PRINCIPLES
+
+Presentation used:
+
+* approximately 2px ink panel borders
+* imperfect corners
+* not perfectly sterile rectangles
+* hard ink shadow on major CTA
+* squashed hexes
+* slightly mismatched secondary pencil lines
+* simple character forms
+* kingdom colors on roof/flag rather than whole object
+* minimal doodles
+* crown scribble for death/legacy
+
+Typography references included:
+
+* Patrick Hand
+* Nunito
+
+Do NOT automatically download fonts/assets unless licensing/workflow is explicitly handled.
+
+Built-in fonts are acceptable during prototype.
+
+⸻
+
+57. IMPORTANT ART WORKFLOW DECISION
+
+Do NOT mix gameplay repair and giant art overhaul into one expensive AI task.
+
+Sequence should be:
+
+1. Inspect interrupted vertical slice
+2. Finish broken gameplay connections
+3. Run tests
+4. Manually play complete loop
+5. Fix gameplay/UX blockers
+6. THEN perform focused visual overhaul
+
+Reason:
+
+Otherwise art will repeatedly be rebuilt while gameplay changes.
+
+⸻
+
+58. WHAT NOT TO IMPLEMENT YET
+
+Do NOT expand into:
+
+* all nine kingdoms
+* full AI
+* army warfare
+* religion system
+* culture simulation
+* marriages
+* family trees
+* advanced diplomacy AI
+* giant quest system
+* crafting
+* complex inventory
+* companions
+* skill trees
+* magic/spells
+* naval systems
+* seasons
+* advanced economy
+* multiplayer
+* final save system
+
+The prototype exists to validate the central loop.
+
+⸻
+
+59. DEVELOPMENT WORKFLOW
+
+Division of labor used so far:
+
+Design AI / conversation
+
+Responsible for:
+
+* game design
+* mechanics
+* UX
+* balancing decisions
+* dialogue/event concepts
+* art direction
+* reviewing screenshots
+* preparing implementation prompts
+
+Coding agent
+
+Codex/Claude Code/etc.:
+
+* GDScript
+* scenes
+* simulation
+* tests
+* project files
+* Git operations when explicitly requested
+
+User
+
+* runs game
+* plays
+* reports feel
+* sends screenshots/errors
+* makes creative decisions
+
+⸻
+
+60. GIT RULE
+
+Do not commit merely because code compiles.
+
+Workflow:
+
+AI implements
+↓
+headless tests
+↓
+user plays
+↓
+screenshots / bugs
+↓
+fix
+↓
+user approves milestone
+↓
+commit
+
+Current vertical slice should therefore remain uncommitted until inspected/playtested.
+
+⸻
+
+61. DEBUGGING PHILOSOPHY
+
+If something is broken:
+
+* inspect existing implementation
+* find root cause
+* modify affected systems only
+* preserve gameplay behavior
+* don’t rewrite entire project
+* rerun relevant tests
+
+Avoid giant rewrites.
+
+⸻
+
+62. CURRENT IMMEDIATE TASK
+
+The next AI’s first job is NOT to design more features.
+
+It is:
+
+Determine exactly how much of the interrupted playable vertical slice Codex completed, then finish only the missing/broken parts.
+
+The AI should be told:
+
+Continue the unfinished KNORO playable vertical-slice task from
+the current repository state.
+Do not restart the implementation.
+Do not revert existing work.
+Do not rebuild systems already working.
+Do not commit.
+Inspect current git diff/status, existing files and tests first.
+The previous coding run was interrupted by usage limits after
+substantial implementation.
+Its last successful validation included:
+"PASS: playable screen load/capture and scene-switch invariants."
+Determine what remains incomplete.
+Priority is the continuous playable loop:
+Kingdom Selection
+→ Champion Creation
+→ Capital
+→ Build
+→ World
+→ Roll / Move
+→ Event
+→ Tobbin / WIS check
+→ Cargo
+→ Return
+→ Cargo delivery
+→ Build / production
+→ End Day / Week progression.
+Combat/boars should be verified if already implemented.
+Do not perform the major art redesign yet.
+Run all existing tests and headless Godot validation.
+Report exactly what was already complete, what you changed,
+what remains, and the manual playtest path.
+Then stop.
+
+⸻
+
+63. AFTER THE PLAYABLE LOOP WORKS
+
+Then do a dedicated art/presentation milestone.
+
+Goals:
+
+1920×1080-quality presentation
+
+and:
+
+Hand-painted ink fantasy + graphic cartoon/comic energy
+
+The art pass should preserve simulation completely.
+
+No new gameplay.
+
+It should improve:
+
+* world terrain
+* hex readability
+* Champion silhouette
+* city buildings
+* combat presentation
+* UI hierarchy
+* animation/feedback
+* rendering sharpness
+* camera framing
+* visual personality
+
+⸻
+
+64. MOST IMPORTANT DESIGN TEST
+
+Whenever unsure about adding something, ask:
+
+Does this make the Champion → World → Kingdom → Champion loop more interesting?
+
+If not, it probably does not belong in the prototype.
+
+A successful KNORO session should produce something like:
+
+“I left because I needed stone. On the way I met a merchant. My Wisdom got me food. I pushed farther instead of returning, got attacked, barely survived, discovered a ruin, came home with supplies, built another farm, and now Yellow is angry because of something I did three days ago.”
+
+That interconnected chain is more important than having 100 buildings or 500 events.
+
+⸻
+
+65. ONE IMPORTANT WARNING FOR THE NEXT AI
+
+There are design ideas in this handoff that are planned, and code that is confirmed implemented.
+
+Do not confuse them.
+
+Confirmed before the interrupted vertical-slice run:
+
+* project foundation
+* seeded RNG architecture
+* simulation/presentation principle
+* kingdom selection
+* Red/Blue/Yellow kingdom data
+* Champion creation
+* 18-point allocation
+* campaign flow
+* Capital Arrival placeholder
+* tests around these systems
+
+Partially/unknown because the coding run was interrupted:
+
+* playable city
+* economy
+* world generation
+* movement
+* events
+* cargo
+* dialogue
+* combat
+* week report
+* succession
+
+Inspect the repository to determine their actual state.
+
+Do not claim completion based solely on this handoff.
+
+⸻
+
+That is the handoff I would give another AI. The single most important thing to tell it is “inspect /Users/flewer/knoro before coding.” The interrupted Codex run wrote real uncommitted work there, and we don’t want another agent replacing 20+ minutes of implementation because it assumes it’s starting from Milestone 2.5.

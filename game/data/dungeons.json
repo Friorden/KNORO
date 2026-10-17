@@ -1,0 +1,67 @@
+{
+	"_note": "Caves and dungeons. rooms = rooms before the guardian. monsters = groups for fight rooms; boss = the guardian's group. dc = difficulty class of trap/chest/shrine checks. reward goes to cargo when the guardian falls; flag dungeon_done_<id> is set.",
+	"crystal_cave": {
+		"name": "Crystal cave",
+		"place_name": "Crystal cave",
+		"bg": [
+			"cave1",
+			"cave2"
+		],
+		"rooms": 5,
+		"dc": 11,
+		"monsters": [
+			"cave_bats",
+			"cave_rats",
+			"cave_slimes"
+		],
+		"boss": "kobold_den",
+		"reward": {
+			"gold": 40,
+			"xp": 30
+		},
+		"intro": "Light glints off a thousand crystals. Something skitters further in, and kobold paint marks the walls: KEEP OUT."
+	},
+	"old_crypt": {
+		"name": "Old crypt",
+		"place_name": "Old crypt",
+		"bg": [
+			"crypt",
+			"cave3"
+		],
+		"rooms": 6,
+		"dc": 12,
+		"monsters": [
+			"skeletons",
+			"zombies",
+			"cave_bats"
+		],
+		"boss": "crypt_lord",
+		"reward": {
+			"gold": 60,
+			"xp": 45
+		},
+		"intro": "Stone steps under a broken chapel lead down into cold air. The dead here were buried with their swords. Not all of them stayed buried."
+	},
+	"sunken_fort": {
+		"name": "Sunken fort",
+		"place_name": "Sunken fort",
+		"bg": [
+			"cave4",
+			"cave2"
+		],
+		"rooms": 7,
+		"dc": 13,
+		"monsters": [
+			"gnoll_pack",
+			"pirates",
+			"crab_crew"
+		],
+		"boss": "troll_king",
+		"reward": {
+			"gold": 100,
+			"xp": 70,
+			"iron": 20
+		},
+		"intro": "A fortress half swallowed by the sea. Pirates, gnolls and worse share its flooded halls, and the drums of a troll king echo below."
+	}
+}

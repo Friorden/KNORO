@@ -1,0 +1,50 @@
+{
+ "ui/nine_paper.png": [
+  52,
+  44,
+  52,
+  45
+ ],
+ "ui/nine_special.png": [
+  55,
+  44,
+  55,
+  43
+ ],
+ "ui/nine_blue.png": [
+  45,
+  47,
+  45,
+  47
+ ],
+ "ui/nine_blue_pressed.png": [
+  50,
+  36,
+  50,
+  49
+ ],
+ "ui/nine_red.png": [
+  45,
+  47,
+  45,
+  47
+ ],
+ "ui/nine_red_pressed.png": [
+  50,
+  36,
+  50,
+  49
+ ],
+ "ui/nine_wood.png": [
+  84,
+  85,
+  84,
+  103
+ ],
+ "ui/nine_banner.png": [
+  100,
+  68,
+  84,
+  111
+ ]
+}

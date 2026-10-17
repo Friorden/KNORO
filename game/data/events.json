@@ -1,0 +1,2186 @@
+{
+	"_note": "Hex events. Gains and costs of food/wood/stone/gold use the Champion's CARGO, delivered when you get home. terrain: which terrains can roll it. band: minimum danger band (0 safe, 1 uncertain, 2 wild). weight: relative odds. Effects: food/wood/stone/gold go to the kingdom; hp/xp/moves to the Champion; end_day stops the day.",
+	"trail": {
+		"title": "An old logging trail",
+		"art": "trail",
+		"text": "Half-hidden under ferns, a cart track runs the way you are going.",
+		"terrain": [
+			"forest",
+			"hills"
+		],
+		"band": 0,
+		"weight": 6,
+		"options": [
+			{
+				"label": "Follow it",
+				"effects": {
+					"moves": 2,
+					"xp": 3
+				},
+				"text": "The going is easy. +2 moves."
+			}
+		]
+	},
+	"lost": {
+		"title": "The path forks, then forks again",
+		"art": "fog",
+		"text": "Mist sits in the hollows. Every tree looks like the last one.",
+		"terrain": [
+			"forest",
+			"hills"
+		],
+		"band": 1,
+		"weight": 5,
+		"options": [
+			{
+				"label": "Read the land",
+				"check": {
+					"attr": "WIS",
+					"dc": 11
+				},
+				"success": {
+					"effects": {
+						"xp": 6
+					},
+					"text": "Moss on the north side, water downhill. You keep your bearings."
+				},
+				"fail": {
+					"effects": {
+						"end_day": true,
+						"xp": 2
+					},
+					"text": "You walk in a wide circle until dusk. The day is spent."
+				}
+			},
+			{
+				"label": "Make camp and wait it out",
+				"effects": {
+					"end_day": true,
+					"hp": 2
+				},
+				"text": "You rest. The mist lifts by morning."
+			}
+		],
+		"skip_if_item": "compass"
+	},
+	"boars": {
+		"title": "Wild hogs!",
+		"art": "boars",
+		"text": "Two wild hogs and their bristling king burst out of the gorse. They do not want to share the path.",
+		"terrain": [
+			"forest",
+			"hills"
+		],
+		"band": 1,
+		"weight": 5,
+		"options": [
+			{
+				"label": "Flee up the slope",
+				"check": {
+					"attr": "DEX",
+					"dc": 11
+				},
+				"success": {
+					"effects": {
+						"end_day": true,
+						"xp": 4
+					},
+					"text": "You scramble up the scree. Safe, but the day is spent."
+				},
+				"fail": {
+					"effects": {
+						"hp": -3
+					},
+					"text": "A tusk catches your leg. -3 HP, and they still block the path.",
+					"then": "combat:boars"
+				}
+			},
+			{
+				"label": "Throw them food",
+				"cost": {
+					"food": 10
+				},
+				"effects": {
+					"food": -10
+				},
+				"text": "The hogs forget you exist. The path is clear."
+			},
+			{
+				"label": "Fight",
+				"combat": "boars"
+			}
+		]
+	},
+	"wolves": {
+		"title": "Eyes in the dark",
+		"art": "wolves",
+		"text": "A wolf pack has been pacing you for an hour. Now they close in.",
+		"terrain": [
+			"forest",
+			"hills",
+			"plains"
+		],
+		"band": 2,
+		"weight": 4,
+		"options": [
+			{
+				"label": "Stand tall and shout",
+				"check": {
+					"attr": "STR",
+					"dc": 13
+				},
+				"success": {
+					"effects": {
+						"xp": 8
+					},
+					"text": "They think better of it and melt into the trees."
+				},
+				"fail": {
+					"effects": {},
+					"text": "They are not impressed.",
+					"then": "combat:wolves"
+				}
+			},
+			{
+				"label": "Fight",
+				"combat": "wolves"
+			}
+		]
+	},
+	"bandits": {
+		"title": "A toll nobody voted for",
+		"art": "bandits",
+		"text": "Three people with cudgels and a rope across the road. 'Fifteen gold, friend.'",
+		"terrain": [
+			"plains",
+			"forest",
+			"hills"
+		],
+		"band": 1,
+		"weight": 4,
+		"options": [
+			{
+				"label": "Pay them",
+				"cost": {
+					"gold": 15
+				},
+				"effects": {
+					"gold": -15
+				},
+				"text": "They wave you through, almost politely."
+			},
+			{
+				"label": "Talk them down",
+				"check": {
+					"attr": "CHA",
+					"dc": 13
+				},
+				"success": {
+					"effects": {
+						"xp": 10
+					},
+					"text": "By the end they are asking you for work. You promise to remember them."
+				},
+				"fail": {
+					"effects": {},
+					"text": "'Nice speech.' They raise the cudgels.",
+					"then": "combat:bandits"
+				}
+			},
+			{
+				"label": "Fight",
+				"combat": "bandits"
+			}
+		]
+	},
+	"berries": {
+		"title": "A slope heavy with berries",
+		"art": "berries",
+		"text": "Someone should pick these before the birds do.",
+		"terrain": [
+			"plains",
+			"forest"
+		],
+		"band": 0,
+		"weight": 5,
+		"options": [
+			{
+				"label": "Fill your pack",
+				"effects": {
+					"food": 12,
+					"xp": 2
+				},
+				"text": "+12 Food into your cargo. Now get it home."
+			}
+		]
+	},
+	"cache": {
+		"title": "A cairn that isn't a cairn",
+		"art": "chest",
+		"text": "The stones are stacked too neatly. Something is underneath.",
+		"terrain": [
+			"hills",
+			"forest",
+			"plains"
+		],
+		"band": 2,
+		"weight": 3,
+		"options": [
+			{
+				"label": "Dig",
+				"effects": {
+					"gold": 25,
+					"xp": 6
+				},
+				"text": "An old smuggler's purse. +25 Gold into your cargo."
+			},
+			{
+				"label": "Leave the dead their money",
+				"effects": {
+					"xp": 4
+				},
+				"text": "You walk on. It feels right, somehow."
+			}
+		]
+	},
+	"traveler": {
+		"title": "A traveler going the other way",
+		"art": "traveler",
+		"text": "A tired woman with a mule. She looks like she has seen the road ahead.",
+		"terrain": [
+			"plains",
+			"forest",
+			"hills"
+		],
+		"band": 0,
+		"weight": 5,
+		"options": [
+			{
+				"label": "Share a meal and listen",
+				"check": {
+					"attr": "WIS",
+					"dc": 10
+				},
+				"success": {
+					"effects": {
+						"reveal": 4,
+						"xp": 6
+					},
+					"text": "She describes the land ahead in detail. The map fills in around you."
+				},
+				"fail": {
+					"effects": {
+						"xp": 2
+					},
+					"text": "She talks mostly about her mule."
+				}
+			},
+			{
+				"label": "Nod and walk on",
+				"effects": {},
+				"text": ""
+			}
+		]
+	},
+	"spring": {
+		"title": "A warm spring",
+		"art": "spring",
+		"text": "Steam rises off a pool between the rocks. It smells of iron.",
+		"terrain": [
+			"hills",
+			"forest"
+		],
+		"band": 0,
+		"weight": 3,
+		"options": [
+			{
+				"label": "Soak your wounds",
+				"effects": {
+					"hp": 6,
+					"xp": 2
+				},
+				"text": "+6 HP. You feel almost new."
+			}
+		]
+	},
+	"rain": {
+		"title": "The sky opens",
+		"art": "rain",
+		"text": "Cold, sideways rain. The ground turns to soup.",
+		"terrain": [
+			"plains",
+			"forest",
+			"hills"
+		],
+		"band": 0,
+		"weight": 4,
+		"options": [
+			{
+				"label": "Push on",
+				"check": {
+					"attr": "CON",
+					"dc": 10
+				},
+				"success": {
+					"effects": {
+						"xp": 3
+					},
+					"text": "Wet, but unbothered."
+				},
+				"fail": {
+					"effects": {
+						"moves": -2
+					},
+					"text": "Every step is a fight. -2 moves."
+				}
+			},
+			{
+				"label": "Shelter under a ledge",
+				"effects": {
+					"moves": -99
+				},
+				"text": "You wait it out. No more walking today, but you stay dry."
+			}
+		]
+	},
+	"rockslide": {
+		"title": "Loose scree",
+		"art": "rocks",
+		"text": "The slope shifts under your boots.",
+		"terrain": [
+			"hills"
+		],
+		"band": 1,
+		"weight": 4,
+		"options": [
+			{
+				"label": "Jump clear",
+				"check": {
+					"attr": "DEX",
+					"dc": 11
+				},
+				"success": {
+					"effects": {
+						"xp": 4
+					},
+					"text": "You land badly, but you land."
+				},
+				"fail": {
+					"effects": {
+						"hp": -3
+					},
+					"text": "A rock catches your shoulder. -3 HP."
+				}
+			},
+			{
+				"label": "Brace and ride it",
+				"check": {
+					"attr": "CON",
+					"dc": 12
+				},
+				"success": {
+					"effects": {
+						"xp": 4
+					},
+					"text": "Bruised, standing."
+				},
+				"fail": {
+					"effects": {
+						"hp": -4
+					},
+					"text": "-4 HP."
+				}
+			}
+		]
+	},
+	"woodpile": {
+		"title": "Abandoned woodcutters' camp",
+		"art": "woodpile",
+		"text": "Neat stacks of seasoned logs, and nobody around to claim them.",
+		"terrain": [
+			"forest"
+		],
+		"band": 0,
+		"weight": 4,
+		"options": [
+			{
+				"label": "Load what you can carry",
+				"effects": {
+					"wood": 12,
+					"xp": 2
+				},
+				"text": "+12 Wood into your cargo."
+			}
+		]
+	},
+	"pilgrim": {
+		"title": "A pilgrim with nowhere to go",
+		"art": "pilgrim",
+		"text": "His village burned last winter. He asks where a man can start again.",
+		"terrain": [
+			"plains"
+		],
+		"band": 0,
+		"weight": 3,
+		"options": [
+			{
+				"label": "Invite him to your capital",
+				"check": {
+					"attr": "CHA",
+					"dc": 9
+				},
+				"success": {
+					"effects": {
+						"pop": 1,
+						"xp": 6
+					},
+					"text": "He walks toward your banners with his family. +1 person."
+				},
+				"fail": {
+					"effects": {
+						"xp": 2
+					},
+					"text": "He thanks you and keeps walking."
+				}
+			},
+			{
+				"label": "Give him bread",
+				"cost": {
+					"food": 5
+				},
+				"effects": {
+					"food": -5,
+					"xp": 4
+				},
+				"text": "He blesses your name. It costs you nothing you will miss."
+			}
+		]
+	},
+	"peddler": {
+		"title": "A peddler's cart",
+		"art": "peddler",
+		"text": "Pots, ribbon, and a jar of something green. 'Good for cuts, very good.'",
+		"terrain": [
+			"plains",
+			"forest"
+		],
+		"band": 0,
+		"weight": 3,
+		"options": [
+			{
+				"label": "Buy the salve (10 gold)",
+				"cost": {
+					"gold": 10
+				},
+				"effects": {
+					"gold": -10,
+					"item": "salve"
+				},
+				"text": "One healing salve, slightly sticky."
+			},
+			{
+				"label": "Haggle",
+				"check": {
+					"attr": "CHA",
+					"dc": 12
+				},
+				"success": {
+					"effects": {
+						"item": "salve",
+						"xp": 4
+					},
+					"text": "He gives it to you for a story. One healing salve."
+				},
+				"fail": {
+					"effects": {},
+					"text": "He laughs and closes the jar."
+				}
+			},
+			{
+				"label": "Walk on",
+				"effects": {},
+				"text": ""
+			}
+		]
+	},
+	"supplies": {
+		"title": "Abandoned supplies",
+		"art": "merchant",
+		"text": "A broken cart, a dead mule, and crates nobody came back for.",
+		"terrain": [
+			"plains",
+			"forest",
+			"hills"
+		],
+		"band": 1,
+		"weight": 4,
+		"options": [
+			{
+				"label": "Take what's useful",
+				"effects": {
+					"wood": 6,
+					"stone": 6,
+					"xp": 3
+				},
+				"text": "+6 Wood, +6 Stone into your cargo."
+			},
+			{
+				"label": "Search it properly",
+				"check": {
+					"attr": "INT",
+					"dc": 11
+				},
+				"success": {
+					"effects": {
+						"gold": 18,
+						"wood": 6,
+						"xp": 6
+					},
+					"text": "A false bottom. +18 Gold and some timber."
+				},
+				"fail": {
+					"effects": {
+						"wood": 4,
+						"end_day": true
+					},
+					"text": "Hours of prying boards. +4 Wood, and the day is gone."
+				}
+			}
+		]
+	},
+	"shrine": {
+		"title": "A shrine to a forgotten saint",
+		"art": "shrine",
+		"text": "Carvings, half worn away. Fresh flowers at the base.",
+		"terrain": [
+			"plains",
+			"forest",
+			"hills"
+		],
+		"band": 1,
+		"weight": 3,
+		"options": [
+			{
+				"label": "Study the carvings",
+				"check": {
+					"attr": "INT",
+					"dc": 12
+				},
+				"success": {
+					"effects": {
+						"xp": 15
+					},
+					"text": "A saint of roads and travelers. You feel lighter. +15 XP."
+				},
+				"fail": {
+					"effects": {
+						"xp": 3
+					},
+					"text": "Pretty, whatever it means."
+				}
+			},
+			{
+				"label": "Leave an offering",
+				"cost": {
+					"gold": 5
+				},
+				"effects": {
+					"gold": -5,
+					"hp": 4,
+					"xp": 4
+				},
+				"text": "+4 HP. Maybe it's the quiet."
+			}
+		]
+	},
+	"smith": {
+		"title": "A wandering smith",
+		"art": "knight",
+		"text": "An anvil on a handcart and arms like tree roots. 'Something sharp? Something sturdy?'",
+		"terrain": [
+			"plains",
+			"hills"
+		],
+		"band": 0,
+		"weight": 3,
+		"options": [
+			{
+				"label": "Buy a padded vest (15 gold)",
+				"cost": {
+					"gold": 15
+				},
+				"effects": {
+					"gold": -15,
+					"item": "padded_vest"
+				},
+				"text": "It smells of sheep, but it'll turn a blade."
+			},
+			{
+				"label": "Help at the bellows",
+				"check": {
+					"attr": "STR",
+					"dc": 12
+				},
+				"success": {
+					"effects": {
+						"xp": 6,
+						"gold": 5
+					},
+					"text": "You work till dusk. He pays you, and calls you a natural."
+				},
+				"fail": {
+					"effects": {
+						"hp": -2
+					},
+					"text": "A spark finds your sleeve. He laughs, not unkindly."
+				}
+			},
+			{
+				"label": "Walk on",
+				"effects": {},
+				"text": ""
+			}
+		]
+	},
+	"wounded_soldier": {
+		"title": "A soldier by the road",
+		"art": "knight",
+		"text": "No banner, a bad leg, and nothing to eat for two days.",
+		"terrain": [
+			"plains",
+			"forest"
+		],
+		"band": 1,
+		"weight": 2,
+		"forbids_flag": "soldier_saved",
+		"options": [
+			{
+				"label": "Share your bread",
+				"needs_item": "bread",
+				"consume": true,
+				"effects": {
+					"xp": 6,
+					"flag": "soldier_saved"
+				},
+				"text": "He eats like a wolf and promises to remember your face."
+			},
+			{
+				"label": "Carry him to the next village",
+				"check": {
+					"attr": "CON",
+					"dc": 12
+				},
+				"success": {
+					"effects": {
+						"xp": 8,
+						"moves": -2,
+						"flag": "soldier_saved"
+					},
+					"text": "Heavy going. He doesn't stop thanking you."
+				},
+				"fail": {
+					"effects": {
+						"moves": -2,
+						"hp": -2
+					},
+					"text": "You make it halfway before your back gives out. Others take him from there."
+				}
+			},
+			{
+				"label": "Leave him",
+				"effects": {},
+				"text": "You don't look back. It takes effort."
+			}
+		]
+	},
+	"soldier_returns": {
+		"title": "A familiar limp",
+		"art": "knight",
+		"text": "The soldier you helped, walking straight now, with a sack over his shoulder.",
+		"terrain": [
+			"plains",
+			"forest",
+			"hills"
+		],
+		"band": 0,
+		"weight": 6,
+		"requires_flag": "soldier_saved",
+		"after_flag_days": 4,
+		"once": true,
+		"options": [
+			{
+				"label": "'You remembered.'",
+				"effects": {
+					"item": [
+						"rations",
+						"rations",
+						"smoke_bomb"
+					],
+					"xp": 4
+				},
+				"text": "'Couldn't forget.' Supplies, and a trick he learned in the war."
+			},
+			{
+				"label": "Ask him to settle in your capital",
+				"effects": {
+					"pop": 1,
+					"xp": 4
+				},
+				"text": "He'll go. One more pair of hands at home."
+			}
+		]
+	},
+	"smuggler": {
+		"title": "A man with too many pockets",
+		"art": "pirates",
+		"text": "He stands where the trees are thickest and smiles too quickly.",
+		"terrain": [
+			"forest",
+			"hills"
+		],
+		"band": 1,
+		"weight": 2,
+		"options": [
+			{
+				"label": "Buy a smoke bomb (12 gold)",
+				"cost": {
+					"gold": 12
+				},
+				"effects": {
+					"gold": -12,
+					"item": "smoke_bomb"
+				},
+				"text": "'For leaving parties early.'"
+			},
+			{
+				"label": "Threaten to report him",
+				"check": {
+					"attr": "CHA",
+					"dc": 13
+				},
+				"success": {
+					"effects": {
+						"gold": 10,
+						"relation": {
+							"merchant": 2
+						}
+					},
+					"text": "He pays for your silence and the merchants hear of your honesty anyway."
+				},
+				"fail": {
+					"effects": {},
+					"text": "He whistles. Friends step out of the trees.",
+					"then": "combat:bandits"
+				}
+			},
+			{
+				"label": "Look away",
+				"effects": {
+					"gold": 5
+				},
+				"text": "He presses a coin into your hand. You feel a little smaller."
+			}
+		]
+	},
+	"pilgrims": {
+		"title": "Pilgrims at the well",
+		"art": "pilgrim",
+		"text": "Grey robes, bare feet, and a very old song.",
+		"terrain": [
+			"plains"
+		],
+		"band": 0,
+		"weight": 2,
+		"options": [
+			{
+				"label": "Offer them wine",
+				"needs_item": "wine",
+				"consume": true,
+				"effects": {
+					"xp": 6,
+					"item": "hermit_charm"
+				},
+				"text": "The eldest ties a charm of bark and string around your wrist."
+			},
+			{
+				"label": "Walk a stretch with them",
+				"effects": {
+					"moves": -1,
+					"hp": 4
+				},
+				"text": "Slow going, but your feet and heart feel lighter."
+			},
+			{
+				"label": "Nod and pass",
+				"effects": {},
+				"text": ""
+			}
+		]
+	},
+	"toll_bridge": {
+		"title": "A toll on the old bridge",
+		"art": "knight",
+		"text": "Three men and a rope across the bridge. 'Five gold to cross, friend.'",
+		"terrain": [
+			"plains",
+			"forest"
+		],
+		"band": 1,
+		"weight": 2,
+		"options": [
+			{
+				"label": "Pay (5 gold)",
+				"cost": {
+					"gold": 5
+				},
+				"effects": {
+					"gold": -5
+				},
+				"text": "They lift the rope with a bow."
+			},
+			{
+				"label": "Talk your way across",
+				"check": {
+					"attr": "CHA",
+					"dc": 13
+				},
+				"success": {
+					"effects": {
+						"xp": 5
+					},
+					"text": "By the end they're paying YOU a toll. Well, nearly."
+				},
+				"fail": {
+					"effects": {
+						"moves": -2
+					},
+					"text": "They don't budge. You go the long way round."
+				}
+			},
+			{
+				"label": "Cut the rope",
+				"combat": "bandits"
+			}
+		]
+	},
+	"beehive": {
+		"title": "A humming oak",
+		"art": "berries",
+		"text": "The whole tree buzzes. There's honey in there, a lot of it.",
+		"terrain": [
+			"forest"
+		],
+		"band": 0,
+		"weight": 3,
+		"options": [
+			{
+				"label": "Smoke them out with a torch",
+				"needs_item": "torch",
+				"consume": true,
+				"effects": {
+					"item": [
+						"honey",
+						"honey"
+					]
+				},
+				"text": "The bees grumble off. Two good combs."
+			},
+			{
+				"label": "Just reach in",
+				"check": {
+					"attr": "DEX",
+					"dc": 13
+				},
+				"success": {
+					"effects": {
+						"item": "honey"
+					},
+					"text": "Quick hands! One comb, no stings."
+				},
+				"fail": {
+					"effects": {
+						"hp": -3
+					},
+					"text": "Stung, stung and stung again."
+				}
+			},
+			{
+				"label": "Leave the bees be",
+				"effects": {},
+				"text": ""
+			}
+		]
+	},
+	"lost_sheep": {
+		"title": "A sheep with no shepherd",
+		"art": "sheep",
+		"text": "It bleats at you as if this were your fault.",
+		"terrain": [
+			"plains",
+			"hills"
+		],
+		"band": 0,
+		"weight": 3,
+		"options": [
+			{
+				"label": "Take it home",
+				"effects": {
+					"food": 6,
+					"moves": -1
+				},
+				"text": "It complains the whole way. +6 food in the cargo."
+			},
+			{
+				"label": "Find the owner",
+				"check": {
+					"attr": "CHA",
+					"dc": 10
+				},
+				"success": {
+					"effects": {
+						"gold": 6,
+						"xp": 3
+					},
+					"text": "A grateful farmer pays you in coins and gossip."
+				},
+				"fail": {
+					"effects": {},
+					"text": "Nobody claims it. You let it graze."
+				}
+			},
+			{
+				"label": "Leave it",
+				"effects": {},
+				"text": ""
+			}
+		]
+	},
+	"wolf_tracks": {
+		"title": "Fresh tracks",
+		"art": "wolves",
+		"text": "Big paws, and something dragged.",
+		"terrain": [
+			"forest"
+		],
+		"band": 1,
+		"weight": 3,
+		"options": [
+			{
+				"label": "Follow them",
+				"check": {
+					"attr": "WIS",
+					"dc": 12
+				},
+				"success": {
+					"effects": {
+						"item": "wolf_tooth",
+						"xp": 6
+					},
+					"text": "An old kill, long abandoned. You take a tooth for luck."
+				},
+				"fail": {
+					"effects": {},
+					"text": "The tracks double back. So do the wolves.",
+					"then": "combat:wolves"
+				}
+			},
+			{
+				"label": "Go around",
+				"effects": {
+					"moves": -1
+				},
+				"text": "Safer, slower."
+			}
+		]
+	},
+	"meteor": {
+		"title": "A smoking crater",
+		"art": "rocks",
+		"text": "Last night's falling star landed here. The ground is still warm.",
+		"terrain": [
+			"hills",
+			"plains"
+		],
+		"band": 2,
+		"weight": 2,
+		"once": true,
+		"options": [
+			{
+				"label": "Dig out the stone",
+				"check": {
+					"attr": "STR",
+					"dc": 12
+				},
+				"success": {
+					"effects": {
+						"item": "meteor_shard",
+						"xp": 10
+					},
+					"text": "A shard of black metal, heavy as sin. A smith would weep."
+				},
+				"fail": {
+					"effects": {
+						"hp": -4,
+						"item": "meteor_shard"
+					},
+					"text": "It burns your hands, but you get it out."
+				}
+			},
+			{
+				"label": "Leave it to the sky",
+				"effects": {
+					"xp": 3
+				},
+				"text": "Some things aren't meant for pockets."
+			}
+		]
+	},
+	"old_trap": {
+		"title": "A fox in a snare",
+		"art": "chest",
+		"text": "An old hunter's trap, and a fox that is very tired of it.",
+		"terrain": [
+			"forest",
+			"plains"
+		],
+		"band": 1,
+		"weight": 2,
+		"options": [
+			{
+				"label": "Free the fox",
+				"check": {
+					"attr": "DEX",
+					"dc": 11
+				},
+				"success": {
+					"effects": {
+						"xp": 6,
+						"item": "lucky_coin"
+					},
+					"text": "It bolts — and leaves behind a coin it was lying on. Lucky."
+				},
+				"fail": {
+					"effects": {
+						"hp": -2
+					},
+					"text": "It bites you on the way out. Ungrateful."
+				}
+			},
+			{
+				"label": "Take the trap for the iron",
+				"effects": {
+					"wood": 3
+				},
+				"text": "Mostly wood, really. +3 wood."
+			}
+		]
+	},
+	"whispering_stone": {
+		"title": "The whispering stone",
+		"art": "ruins",
+		"text": "A standing stone. When the wind moves, it almost says your name.",
+		"terrain": [
+			"hills"
+		],
+		"band": 2,
+		"weight": 2,
+		"once": true,
+		"options": [
+			{
+				"label": "Listen",
+				"check": {
+					"attr": "WIS",
+					"dc": 13
+				},
+				"success": {
+					"effects": {
+						"item": "hermit_charm",
+						"xp": 8
+					},
+					"text": "It tells you where the hermit buried his spare charm. Of course it does."
+				},
+				"fail": {
+					"effects": {
+						"hp": -2
+					},
+					"text": "Just wind. And a headache."
+				}
+			},
+			{
+				"label": "Walk on quickly",
+				"effects": {},
+				"text": ""
+			}
+		]
+	},
+	"night_lights": {
+		"title": "Lights between the trees",
+		"art": "fog",
+		"text": "Small and blue, moving like they're looking for something.",
+		"terrain": [
+			"forest",
+			"plains"
+		],
+		"band": 2,
+		"weight": 2,
+		"options": [
+			{
+				"label": "Follow them with a torch",
+				"needs_item": "torch",
+				"consume": true,
+				"effects": {
+					"item": "relic",
+					"xp": 10
+				},
+				"text": "They lead you to a mossy altar. Something old was left on it."
+			},
+			{
+				"label": "Follow them in the dark",
+				"check": {
+					"attr": "WIS",
+					"dc": 14
+				},
+				"success": {
+					"effects": {
+						"item": "relic",
+						"xp": 10
+					},
+					"text": "Your eyes adjust. The altar, the relic, the silence."
+				},
+				"fail": {
+					"effects": {
+						"end_day": true
+					},
+					"text": "You wake at dawn in a ditch with no idea how."
+				}
+			},
+			{
+				"label": "Stay on the road",
+				"effects": {},
+				"text": ""
+			}
+		]
+	},
+	"abandoned_camp": {
+		"title": "A cold camp",
+		"art": "camp",
+		"text": "Bedrolls, a pot, ashes. Whoever was here left in a hurry.",
+		"terrain": [
+			"forest",
+			"hills"
+		],
+		"band": 1,
+		"weight": 3,
+		"options": [
+			{
+				"label": "Take what's useful",
+				"effects": {
+					"item": [
+						"rations",
+						"torch"
+					]
+				},
+				"text": "Trail rations and a torch."
+			},
+			{
+				"label": "Search properly",
+				"check": {
+					"attr": "INT",
+					"dc": 12
+				},
+				"success": {
+					"effects": {
+						"item": [
+							"rations",
+							"old_map"
+						]
+					},
+					"text": "Under a stone: a scrap of map, carefully hidden."
+				},
+				"fail": {
+					"effects": {},
+					"text": "Nothing but crumbs. Something has eaten the rations."
+				}
+			},
+			{
+				"label": "Leave it alone",
+				"effects": {},
+				"text": ""
+			}
+		]
+	},
+	"grave_robbers": {
+		"title": "Shovels at the barrow",
+		"art": "skeletons",
+		"text": "Two men, a hole, and something wrapped in cloth.",
+		"terrain": [
+			"plains",
+			"hills"
+		],
+		"band": 2,
+		"weight": 2,
+		"options": [
+			{
+				"label": "Chase them off",
+				"combat": "bandits"
+			},
+			{
+				"label": "Buy what they found (25 gold)",
+				"cost": {
+					"gold": 25
+				},
+				"effects": {
+					"gold": -25,
+					"item": "relic"
+				},
+				"text": "They're happy to be rid of it. That's never a good sign."
+			},
+			{
+				"label": "Shame them",
+				"check": {
+					"attr": "CHA",
+					"dc": 13
+				},
+				"success": {
+					"effects": {
+						"item": "relic",
+						"xp": 6
+					},
+					"text": "They drop it and run. You'll return it to a shrine — or not."
+				},
+				"fail": {
+					"effects": {},
+					"text": "They laugh and keep digging."
+				}
+			}
+		]
+	},
+	"petition": {
+		"title": "A farmer's petition",
+		"art": "home",
+		"text": "'My lord, the frost took the seed. Spare a sack, and I'll farm for your town.'",
+		"terrain": [
+			"plains"
+		],
+		"band": 0,
+		"weight": 2,
+		"options": [
+			{
+				"label": "Give 10 food",
+				"cost": {
+					"food": 10
+				},
+				"effects": {
+					"food": -10,
+					"pop": 1,
+					"xp": 3
+				},
+				"text": "One more family settles near your walls."
+			},
+			{
+				"label": "Not this year",
+				"effects": {},
+				"text": "He nods. He's heard it before."
+			}
+		]
+	},
+	"foreign_scouts": {
+		"title": "Scouts in {rival} colours",
+		"art": "archers",
+		"text": "They're mapping the road. They weren't expecting you.",
+		"terrain": [
+			"plains",
+			"hills"
+		],
+		"band": 1,
+		"weight": 2,
+		"options": [
+			{
+				"label": "Share wine by the fire",
+				"needs_item": "wine",
+				"consume": true,
+				"effects": {
+					"relation": {
+						"rival": 4
+					},
+					"xp": 4
+				},
+				"text": "By the second cup they're telling you about their captain."
+			},
+			{
+				"label": "Order them off your land",
+				"check": {
+					"attr": "STR",
+					"dc": 12
+				},
+				"success": {
+					"effects": {
+						"relation": {
+							"rival": -2
+						},
+						"xp": 6
+					},
+					"text": "They go. They'll remember your face."
+				},
+				"fail": {
+					"effects": {},
+					"text": "They don't scare easily.",
+					"then": "combat:raiders"
+				}
+			},
+			{
+				"label": "Let them be",
+				"effects": {},
+				"text": ""
+			}
+		]
+	},
+	"starving_village": {
+		"title": "A hungry village",
+		"art": "home",
+		"text": "Thin children, empty granary. The headman doesn't ask, he just looks.",
+		"terrain": [
+			"plains"
+		],
+		"band": 1,
+		"weight": 2,
+		"once": true,
+		"options": [
+			{
+				"label": "Give 20 food",
+				"cost": {
+					"food": 20
+				},
+				"effects": {
+					"food": -20,
+					"relation": {
+						"merchant": 5
+					},
+					"flag": "fed_village",
+					"xp": 8
+				},
+				"text": "They will remember this for a generation."
+			},
+			{
+				"label": "You can't spare it",
+				"effects": {},
+				"text": "You ride on. The silence follows you."
+			}
+		]
+	},
+	"village_thanks": {
+		"title": "A gift from the village",
+		"art": "home",
+		"text": "A cart arrives with the village you fed — and their thanks.",
+		"terrain": [
+			"plains",
+			"forest",
+			"hills"
+		],
+		"band": 0,
+		"weight": 8,
+		"requires_flag": "fed_village",
+		"after_flag_days": 5,
+		"once": true,
+		"options": [
+			{
+				"label": "Accept it",
+				"effects": {
+					"gold": 20,
+					"item": "lucky_coin",
+					"xp": 4
+				},
+				"text": "Coins, a lucky charm, and a song they made about you."
+			}
+		]
+	},
+	"herbalist_hut": {
+		"title": "A hut full of drying herbs",
+		"art": "monk",
+		"text": "An old woman with green fingers squints at you.",
+		"terrain": [
+			"forest"
+		],
+		"band": 0,
+		"weight": 2,
+		"options": [
+			{
+				"label": "Buy tea (5 gold)",
+				"cost": {
+					"gold": 5
+				},
+				"effects": {
+					"gold": -5,
+					"item": [
+						"tea",
+						"tea"
+					]
+				},
+				"text": "Two pouches. 'For the bleeding kind of days.'"
+			},
+			{
+				"label": "Ask her to teach you",
+				"check": {
+					"attr": "INT",
+					"dc": 11
+				},
+				"success": {
+					"effects": {
+						"item": [
+							"salve",
+							"salve"
+						],
+						"xp": 4
+					},
+					"text": "You leave with two salves you made yourself."
+				},
+				"fail": {
+					"effects": {},
+					"text": "She sighs and sends you off with a list of words you didn't catch."
+				}
+			},
+			{
+				"label": "Leave",
+				"effects": {},
+				"text": ""
+			}
+		]
+	},
+	"fisher": {
+		"title": "A fisher mending nets",
+		"art": "cove",
+		"text": "A good catch drying on the rocks.",
+		"terrain": [
+			"plains",
+			"forest"
+		],
+		"band": 0,
+		"weight": 2,
+		"options": [
+			{
+				"label": "Buy fish (3 gold)",
+				"cost": {
+					"gold": 3
+				},
+				"effects": {
+					"gold": -3,
+					"food": 8
+				},
+				"text": "+8 food in the cargo."
+			},
+			{
+				"label": "Help pull the net",
+				"check": {
+					"attr": "STR",
+					"dc": 10
+				},
+				"success": {
+					"effects": {
+						"food": 10,
+						"xp": 3
+					},
+					"text": "A heavy haul. Half of it is yours."
+				},
+				"fail": {
+					"effects": {
+						"hp": -1
+					},
+					"text": "You fall in. Everyone enjoys that except you."
+				}
+			}
+		]
+	},
+	"courier": {
+		"title": "A courier, searching",
+		"art": "merchant",
+		"text": "'A sealed letter — lost on this road. Have you seen it?'",
+		"terrain": [
+			"plains",
+			"forest",
+			"hills"
+		],
+		"band": 0,
+		"weight": 6,
+		"needs_item": "sealed_letter",
+		"options": [
+			{
+				"label": "Hand it over",
+				"needs_item": "sealed_letter",
+				"consume": true,
+				"effects": {
+					"gold": 20,
+					"relation": {
+						"merchant": 4
+					}
+				},
+				"text": "He pays you twice over and swears you to secrecy."
+			},
+			{
+				"label": "Say nothing",
+				"effects": {},
+				"text": "He walks on, worried."
+			}
+		]
+	},
+	"buried_chest": {
+		"title": "X marks the spot",
+		"art": "chest",
+		"text": "The map scrap matches this hillside exactly.",
+		"terrain": [
+			"hills",
+			"forest"
+		],
+		"band": 1,
+		"weight": 6,
+		"needs_item": "old_map",
+		"options": [
+			{
+				"label": "Dig where the map says",
+				"needs_item": "old_map",
+				"consume": true,
+				"effects": {
+					"gold": 30,
+					"item": "gem",
+					"xp": 8
+				},
+				"text": "A rotted chest: coins and an uncut stone."
+			},
+			{
+				"label": "Keep the map for later",
+				"effects": {},
+				"text": ""
+			}
+		]
+	},
+	"bard": {
+		"title": "A travelling bard",
+		"art": "traveler",
+		"text": "She tunes a lute and asks what your story is.",
+		"terrain": [
+			"plains"
+		],
+		"band": 0,
+		"weight": 2,
+		"options": [
+			{
+				"label": "Pay for a song (5 gold)",
+				"cost": {
+					"gold": 5
+				},
+				"effects": {
+					"gold": -5,
+					"xp": 6,
+					"moves": 1
+				},
+				"text": "A marching song. Your feet want to keep going."
+			},
+			{
+				"label": "Sing along",
+				"check": {
+					"attr": "CHA",
+					"dc": 11
+				},
+				"success": {
+					"effects": {
+						"gold": 6,
+						"xp": 4
+					},
+					"text": "Passers-by throw coins. She splits them with you."
+				},
+				"fail": {
+					"effects": {},
+					"text": "She politely suggests you don't."
+				}
+			},
+			{
+				"label": "No time",
+				"effects": {},
+				"text": ""
+			}
+		]
+	},
+	"goblin_ambush": {
+		"title": "Goblins in the ditch",
+		"art": "goblins",
+		"text": "Three goblins pop out of a ditch, giggling, waving rusty knives. 'Toll! Toll!'",
+		"terrain": [
+			"forest",
+			"plains"
+		],
+		"band": 1,
+		"weight": 4,
+		"options": [
+			{
+				"label": "Pay the 'toll'",
+				"cost": {
+					"gold": 8
+				},
+				"effects": {
+					"gold": -8
+				},
+				"text": "They count the coins three times and wave you through."
+			},
+			{
+				"label": "Scare them off",
+				"check": {
+					"attr": "STR",
+					"dc": 12
+				},
+				"success": {
+					"effects": {
+						"xp": 6
+					},
+					"text": "You roar. They scatter into the bushes, still giggling."
+				},
+				"fail": {
+					"effects": {},
+					"text": "They are not impressed.",
+					"then": "combat:bandits"
+				}
+			},
+			{
+				"label": "Fight",
+				"combat": "bandits"
+			}
+		]
+	},
+	"cave_mouth": {
+		"title": "A cold draught",
+		"art": "cave",
+		"text": "Air pours out of a crack in the hillside. Deep inside something glitters — and something squeaks.",
+		"terrain": [
+			"hills"
+		],
+		"band": 1,
+		"weight": 3,
+		"options": [
+			{
+				"label": "Squeeze in with a torch",
+				"check": {
+					"attr": "DEX",
+					"dc": 12
+				},
+				"success": {
+					"effects": {
+						"gold": 15,
+						"xp": 8
+					},
+					"text": "A seam of fool's gold and a forgotten purse. +15 gold."
+				},
+				"fail": {
+					"effects": {
+						"hp": -2
+					},
+					"text": "Bats! You back out, scratched.",
+					"then": "combat:cave_bats"
+				}
+			},
+			{
+				"label": "Mark it on the map and go",
+				"effects": {
+					"xp": 2
+				},
+				"text": "Somebody else's adventure."
+			}
+		]
+	},
+	"slime_puddle": {
+		"title": "The puddle moved",
+		"art": "slime",
+		"text": "The puddle on the path wobbles. Then it blinks.",
+		"terrain": [
+			"forest",
+			"plains"
+		],
+		"band": 1,
+		"weight": 2,
+		"options": [
+			{
+				"label": "Poke it",
+				"combat": "cave_slimes"
+			},
+			{
+				"label": "Step around it carefully",
+				"check": {
+					"attr": "DEX",
+					"dc": 10
+				},
+				"success": {
+					"effects": {
+						"xp": 4
+					},
+					"text": "It gurgles sadly as you pass."
+				},
+				"fail": {
+					"effects": {
+						"hp": -2,
+						"end_day": true
+					},
+					"text": "It grabs your boot. You spend the afternoon getting it back."
+				}
+			}
+		]
+	},
+	"shipwreck": {
+		"title": "Wreck on the shore",
+		"art": "crabs",
+		"text": "A broken hull on the rocks. Crabs the size of shields guard it jealously.",
+		"terrain": [
+			"plains",
+			"forest",
+			"hills"
+		],
+		"band": 1,
+		"weight": 2,
+		"options": [
+			{
+				"label": "Clear them off",
+				"combat": "crab_crew"
+			},
+			{
+				"label": "Sneak in at low tide",
+				"check": {
+					"attr": "DEX",
+					"dc": 13
+				},
+				"success": {
+					"effects": {
+						"gold": 20,
+						"item": "pearl"
+					},
+					"text": "A sea chest: gold and a pearl."
+				},
+				"fail": {
+					"effects": {
+						"hp": -3
+					},
+					"text": "A claw closes on your ankle. You limp away empty-handed."
+				}
+			}
+		]
+	},
+	"pirate_camp": {
+		"title": "Smoke on the beach",
+		"art": "pirates",
+		"text": "Pirates around a fire, arguing over a map. One of them spots you.",
+		"terrain": [
+			"plains",
+			"forest"
+		],
+		"band": 2,
+		"weight": 2,
+		"options": [
+			{
+				"label": "Bluff: 'I'm with the captain'",
+				"check": {
+					"attr": "CHA",
+					"dc": 13
+				},
+				"success": {
+					"effects": {
+						"item": "old_map",
+						"xp": 8
+					},
+					"text": "They hand you the map to 'take to the captain'."
+				},
+				"fail": {
+					"effects": {},
+					"text": "'We ARE the captain.'",
+					"then": "combat:pirates"
+				}
+			},
+			{
+				"label": "Attack first",
+				"combat": "pirates"
+			},
+			{
+				"label": "Back away slowly",
+				"effects": {
+					"moves": -2
+				},
+				"text": "You take the long way round."
+			}
+		]
+	},
+	"restless_grave": {
+		"title": "Fresh earth at midnight",
+		"art": "skeletons",
+		"text": "A grave on the roadside. The earth is moving — from the inside.",
+		"terrain": [
+			"plains",
+			"hills",
+			"forest"
+		],
+		"band": 2,
+		"weight": 2,
+		"options": [
+			{
+				"label": "Stand your ground",
+				"combat": "skeletons"
+			},
+			{
+				"label": "Say the old prayer",
+				"check": {
+					"attr": "WIS",
+					"dc": 12
+				},
+				"success": {
+					"effects": {
+						"xp": 10
+					},
+					"text": "The earth goes still. Whoever it was rests again."
+				},
+				"fail": {
+					"effects": {
+						"hp": -2
+					},
+					"text": "The prayer is wrong. Bony fingers grab at you.",
+					"then": "combat:skeletons"
+				}
+			}
+		]
+	},
+	"kobold_traders": {
+		"title": "Kobold traders",
+		"art": "kobolds",
+		"text": "Two kobolds with a sack of shiny rocks. They want to trade. They really want your buttons.",
+		"terrain": [
+			"hills"
+		],
+		"band": 1,
+		"weight": 3,
+		"options": [
+			{
+				"label": "Trade food for rocks",
+				"cost": {
+					"food": 8
+				},
+				"effects": {
+					"food": -8,
+					"iron": 6
+				},
+				"text": "The 'shiny rocks' are iron ore. +6 iron."
+			},
+			{
+				"label": "Talk shop",
+				"check": {
+					"attr": "INT",
+					"dc": 11
+				},
+				"success": {
+					"effects": {
+						"reveal": 5,
+						"xp": 6
+					},
+					"text": "They draw you a map of the tunnels in the dirt."
+				},
+				"fail": {
+					"effects": {},
+					"text": "Lots of squeaking. You understand none of it."
+				}
+			},
+			{
+				"label": "Walk on",
+				"effects": {},
+				"text": ""
+			}
+		]
+	},
+	"sheep_herder": {
+		"title": "Too many sheep",
+		"art": "sheep",
+		"text": "A shepherd boy with far too many sheep for one boy. 'Will you buy one? Please?'",
+		"terrain": [
+			"plains",
+			"hills"
+		],
+		"band": 0,
+		"weight": 3,
+		"options": [
+			{
+				"label": "Buy a few (10 gold)",
+				"cost": {
+					"gold": 10
+				},
+				"effects": {
+					"gold": -10,
+					"food": 20
+				},
+				"text": "Mutton for the capital. +20 food."
+			},
+			{
+				"label": "Help him herd them home",
+				"effects": {
+					"moves": -2,
+					"xp": 6,
+					"pop": 1
+				},
+				"text": "His family settles in your capital. +1 person."
+			}
+		]
+	},
+	"knight_errant": {
+		"title": "A knight errant",
+		"art": "knight",
+		"text": "A knight in dented armour blocks the bridge. 'None shall pass without a friendly bout!'",
+		"terrain": [
+			"plains",
+			"forest"
+		],
+		"band": 0,
+		"weight": 3,
+		"options": [
+			{
+				"label": "Accept the bout",
+				"check": {
+					"attr": "STR",
+					"dc": 13
+				},
+				"success": {
+					"effects": {
+						"xp": 12,
+						"item": "padded_vest"
+					},
+					"text": "You knock him on his backside. He gives you his spare vest, laughing."
+				},
+				"fail": {
+					"effects": {
+						"hp": -4,
+						"xp": 4
+					},
+					"text": "He wins, then helps you up."
+				}
+			},
+			{
+				"label": "Flatter him into letting you pass",
+				"check": {
+					"attr": "CHA",
+					"dc": 11
+				},
+				"success": {
+					"effects": {
+						"xp": 6
+					},
+					"text": "He blushes and steps aside."
+				},
+				"fail": {
+					"effects": {
+						"moves": -2
+					},
+					"text": "He insists on telling you his life story."
+				}
+			}
+		]
+	},
+	"rival_archers": {
+		"title": "Archers on the ridge",
+		"art": "archers",
+		"text": "Foreign archers drill on a ridge — inside what you thought was nobody's land.",
+		"terrain": [
+			"hills",
+			"plains"
+		],
+		"band": 1,
+		"weight": 2,
+		"options": [
+			{
+				"label": "Demand they leave",
+				"effects": {
+					"relation": {
+						"rival": -4
+					},
+					"xp": 4
+				},
+				"text": "They leave, glaring. Word will travel."
+			},
+			{
+				"label": "Ask to watch and learn",
+				"effects": {
+					"relation": {
+						"rival": 2
+					},
+					"xp": 8
+				},
+				"text": "They show you a trick with the wind."
+			}
+		]
+	},
+	"monk_blessing": {
+		"title": "A wandering monk",
+		"art": "monk",
+		"text": "A monk sits under a tree, perfectly still. He opens one eye. 'You are tired.'",
+		"terrain": [
+			"plains",
+			"forest",
+			"hills"
+		],
+		"band": 0,
+		"weight": 3,
+		"options": [
+			{
+				"label": "Sit with him a while",
+				"effects": {
+					"hp": 5,
+					"end_day": true
+				},
+				"text": "You wake at dusk, rested. The monk is gone."
+			},
+			{
+				"label": "Give him bread",
+				"cost": {
+					"food": 5
+				},
+				"effects": {
+					"food": -5,
+					"xp": 8,
+					"item": "tea"
+				},
+				"text": "He gives you a pouch of tea in return."
+			}
+		]
+	},
+	"merchant_caravan": {
+		"title": "A caravan in trouble",
+		"art": "merchant",
+		"text": "A merchant caravan with a broken axle. The drivers look nervously at the treeline.",
+		"terrain": [
+			"plains",
+			"forest"
+		],
+		"band": 1,
+		"weight": 3,
+		"options": [
+			{
+				"label": "Help fix the axle",
+				"cost": {
+					"wood": 5
+				},
+				"effects": {
+					"wood": -5,
+					"gold": 20,
+					"relation": {
+						"merchant": 3
+					}
+				},
+				"text": "They pay you well and promise to tell their guild."
+			},
+			{
+				"label": "Guard them until dark",
+				"effects": {
+					"end_day": true,
+					"gold": 30,
+					"relation": {
+						"merchant": 2
+					}
+				},
+				"text": "Nothing comes. They pay anyway."
+			}
+		]
+	},
+	"bat_swarm": {
+		"title": "The sky goes dark",
+		"art": "bats",
+		"text": "Bats pour out of a hillside — hundreds of them, then a few very big ones.",
+		"terrain": [
+			"hills",
+			"forest"
+		],
+		"band": 2,
+		"weight": 2,
+		"options": [
+			{
+				"label": "Fight the big ones",
+				"combat": "cave_bats"
+			},
+			{
+				"label": "Throw yourself flat",
+				"check": {
+					"attr": "DEX",
+					"dc": 11
+				},
+				"success": {
+					"effects": {
+						"xp": 4
+					},
+					"text": "They pass over you like a black wind."
+				},
+				"fail": {
+					"effects": {
+						"hp": -3
+					},
+					"text": "Tiny teeth, many of them."
+				}
+			}
+		]
+	},
+	"fallen_scout": {
+		"title": "A fallen scout",
+		"art": "dead",
+		"text": "A scout from a neighbouring kingdom lies in the grass. Long dead. His satchel is still sealed.",
+		"terrain": [
+			"plains",
+			"forest",
+			"hills"
+		],
+		"band": 1,
+		"weight": 2,
+		"options": [
+			{
+				"label": "Return the satchel to his kingdom",
+				"effects": {
+					"relation": {
+						"rival": 5
+					},
+					"xp": 6
+				},
+				"text": "They will remember this."
+			},
+			{
+				"label": "Read his letters",
+				"effects": {
+					"item": "sealed_letter",
+					"reveal": 4
+				},
+				"text": "His notes mark the land ahead."
+			}
+		]
+	},
+	"gold_vein": {
+		"title": "A glint in the stream",
+		"art": "outpost",
+		"text": "Something yellow glints in the streambed.",
+		"terrain": [
+			"hills",
+			"forest"
+		],
+		"band": 1,
+		"weight": 2,
+		"options": [
+			{
+				"label": "Pan for it all afternoon",
+				"check": {
+					"attr": "WIS",
+					"dc": 11
+				},
+				"success": {
+					"effects": {
+						"gold": 25,
+						"end_day": true
+					},
+					"text": "Real gold dust. +25 gold."
+				},
+				"fail": {
+					"effects": {
+						"end_day": true
+					},
+					"text": "Pyrite. A whole afternoon of pyrite."
+				}
+			},
+			{
+				"label": "Not worth the time",
+				"effects": {},
+				"text": ""
+			}
+		]
+	}
+}

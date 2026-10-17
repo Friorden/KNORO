@@ -1,0 +1,54 @@
+{
+	"_note": "slot: weapon | armor | trinket | consumable | valuable. bonus applies while equipped (hit/dmg for weapons, def, move, or an attribute like STR/DEX/CON/INT/WIS/CHA). use: effects when used from the bag (hp, moves, xp, cure, flee, reveal_secrets). shop: gold price at the Market (omit = not sold). value: gold when sold. craft: made in the capital at a building from resources (and optional item ingredients). rarity: common | uncommon | rare.",
+	"bag_slots": 8,
+	"items": {
+		"spear":        { "name": "Ash spear",        "slot": "weapon", "rarity": "common",   "icon": "spear",   "bonus": { "hit": 1, "dmg": 2 }, "shop": 25, "value": 10, "desc": "Long reach, honest wood." },
+		"sword":        { "name": "Iron sword",       "slot": "weapon", "rarity": "uncommon", "icon": "sword",   "bonus": { "hit": 2, "dmg": 3 }, "shop": 50, "needs_age": 2, "value": 22, "desc": "Town-forged. Balanced and sharp.", "craft": { "at": "blacksmith", "cost": { "gold": 20, "iron": 4 } } },
+		"hunter_bow":   { "name": "Hunter's bow",     "slot": "weapon", "rarity": "uncommon", "icon": "bow",     "bonus": { "hit": 3, "dmg": 1, "DEX": 1 }, "value": 18, "desc": "Light and quick. +1 DEX while carried." , "craft": { "at": "workshop", "cost": { "wood": 20, "gold": 10 } } },
+		"war_hammer":   { "name": "War hammer",       "slot": "weapon", "rarity": "uncommon", "icon": "hammer",  "bonus": { "hit": 0, "dmg": 4, "STR": 1 }, "value": 24, "desc": "Slow, heavy, convincing. +1 STR.", "craft": { "at": "blacksmith", "cost": { "gold": 15, "stone": 10, "iron": 3 } } },
+		"bandit_knife": { "name": "Bandit's knife",   "slot": "weapon", "rarity": "common",   "icon": "knife",   "bonus": { "hit": 2, "dmg": 1 }, "value": 6, "desc": "Taken from someone who won't need it." },
+		"chief_axe":    { "name": "Chieftain's axe",  "slot": "weapon", "rarity": "rare",     "icon": "axe",     "bonus": { "hit": 1, "dmg": 5 }, "value": 40, "desc": "Notched from a hundred quarrels." },
+		"starsteel":    { "name": "Starsteel blade",  "slot": "weapon", "rarity": "rare",     "icon": "star_sword", "bonus": { "hit": 3, "dmg": 5, "WIS": 1 }, "value": 80, "desc": "Forged from a fallen star. It hums at night.", "craft": { "at": "blacksmith", "cost": { "gold": 40 }, "items": { "meteor_shard": 1 } } },
+
+		"padded_vest":  { "name": "Padded vest",      "slot": "armor", "rarity": "common",   "icon": "vest",    "bonus": { "def": 1 }, "shop": 20, "value": 8, "desc": "Quilted wool. Better than a shirt." },
+		"hide_cloak":   { "name": "Hide cloak",       "slot": "armor", "rarity": "common",   "icon": "cloak",   "bonus": { "def": 1, "CON": 1 }, "value": 10, "desc": "Keeps the rain off and the cold out. +1 CON." , "craft": { "at": "workshop", "cost": { "food": 10, "wood": 5 } } },
+		"chainmail":    { "name": "Chain shirt",      "slot": "armor", "rarity": "uncommon", "icon": "mail",    "bonus": { "def": 3, "move": -1 }, "value": 30, "desc": "+3 defence, but heavy: −1 move a day.", "craft": { "at": "blacksmith", "cost": { "gold": 20, "iron": 6 } } },
+		"wolf_pelt":    { "name": "Alpha's pelt",     "slot": "armor", "rarity": "rare",     "icon": "pelt",    "bonus": { "def": 2, "STR": 1 }, "value": 35, "desc": "Taken from the leader of the pack. +1 STR." },
+
+		"lucky_coin":   { "name": "Lucky coin",       "slot": "trinket", "rarity": "common",   "icon": "coin",    "bonus": { "CHA": 1 }, "value": 12, "desc": "Heads you win. +1 CHA." },
+		"boots":        { "name": "Traveller's boots","slot": "trinket", "rarity": "uncommon", "icon": "boots",   "bonus": { "move": 1 }, "shop": 45, "value": 20, "desc": "Broken in by someone else. +1 move a day." },
+		"wolf_tooth":   { "name": "Wolf-tooth cord",  "slot": "trinket", "rarity": "common",   "icon": "tooth",   "bonus": { "STR": 1 }, "value": 10, "desc": "+1 STR. Smells faintly of wolf." },
+		"hermit_charm": { "name": "Hermit's charm",   "slot": "trinket", "rarity": "uncommon", "icon": "charm",   "bonus": { "WIS": 1 }, "value": 16, "desc": "Bark, string and a quiet word. +1 WIS." },
+		"compass":      { "name": "Brass compass",    "slot": "trinket", "rarity": "uncommon", "icon": "compass", "bonus": { "INT": 1 }, "shop": 35, "value": 15, "desc": "+1 INT. You never get lost while carrying it." },
+		"river_stone":  { "name": "River stone",      "slot": "trinket", "rarity": "common",   "icon": "stone",   "bonus": { "CON": 1 }, "value": 6, "desc": "Smooth and warm in the hand. +1 CON." },
+		"merchant_seal":{ "name": "Merchant's seal",  "slot": "trinket", "rarity": "rare",     "icon": "seal",    "bonus": { "CHA": 2 }, "value": 45, "desc": "Opens doors and purses. +2 CHA." },
+
+		"salve":        { "name": "Healing salve",    "slot": "consumable", "rarity": "common",   "icon": "potion",  "use": { "hp": 8 }, "shop": 10, "value": 4, "desc": "Heals 8 HP. Usable in battle." , "craft": { "at": "apothecary", "cost": { "food": 6, "gold": 3 } } },
+		"bread":        { "name": "Bread loaf",       "slot": "consumable", "rarity": "common",   "icon": "bread",   "use": { "hp": 3 }, "shop": 3, "value": 1, "desc": "Heals 3 HP. Usable in battle." },
+		"honey":        { "name": "Wild honey",       "slot": "consumable", "rarity": "uncommon", "icon": "honey",   "use": { "hp": 5, "xp": 2 }, "value": 6, "desc": "Heals 5 HP and lifts the spirit (+2 XP). Usable in battle." },
+		"rations":      { "name": "Trail rations",    "slot": "consumable", "rarity": "common",   "icon": "rations", "use": { "moves": 2 }, "shop": 6, "value": 2, "desc": "+2 moves today." },
+		"tea":          { "name": "Herbal tea",       "slot": "consumable", "rarity": "common",   "icon": "tea",     "use": { "hp": 2, "cure": true }, "shop": 8, "value": 3, "desc": "Stops bleeding and stun, heals 2. Usable in battle.", "craft": { "at": "apothecary", "cost": { "food": 3, "gold": 2 } } },
+		"smoke_bomb":   { "name": "Smoke bomb",       "slot": "consumable", "rarity": "uncommon", "icon": "bomb",    "use": { "flee": true }, "shop": 15, "value": 6, "desc": "In battle: escape, guaranteed." , "craft": { "at": "workshop", "cost": { "wood": 4, "gold": 8 } } },
+		"torch":        { "name": "Torch",            "slot": "consumable", "rarity": "common",   "icon": "torch",   "shop": 4, "value": 1, "desc": "Some places are only safe with light." },
+		"wine":         { "name": "Jug of wine",      "slot": "consumable", "rarity": "common",   "icon": "wine",    "shop": 8, "value": 4, "desc": "A good gift. Strangers talk more easily over it." },
+
+		"iron_mace":    { "name": "Iron mace",        "slot": "weapon", "rarity": "uncommon", "icon": "hammer",  "bonus": { "hit": 1, "dmg": 4 }, "value": 20, "desc": "A plain lump of iron on a stick. Works every time.", "craft": { "at": "blacksmith", "cost": { "gold": 10, "wood": 5, "iron": 5 } } },
+		"steel_sword":  { "name": "Steel longsword",  "slot": "weapon", "rarity": "rare",     "icon": "sword",   "bonus": { "hit": 3, "dmg": 4, "STR": 1 }, "needs_age": 3, "value": 55, "desc": "City-forged steel. +1 STR.", "craft": { "at": "blacksmith", "cost": { "gold": 40, "iron": 12 } } },
+		"leather_jerkin":{ "name": "Leather jerkin",  "slot": "armor", "rarity": "common",   "icon": "vest",    "bonus": { "def": 2, "DEX": 1 }, "value": 14, "desc": "Supple and quiet. +1 DEX.", "craft": { "at": "tannery", "cost": { "gold": 6 }, "items": { "hide": 1 } } },
+		"fur_cloak":    { "name": "Fur cloak",        "slot": "armor", "rarity": "uncommon", "icon": "pelt",    "bonus": { "def": 2, "CON": 1, "CHA": 1 }, "value": 28, "desc": "Warm, heavy, impressive at court. +1 CON, +1 CHA.", "craft": { "at": "tannery", "cost": { "gold": 12 }, "items": { "hide": 2 } } },
+		"plate_cuirass":{ "name": "Plate cuirass",    "slot": "armor", "rarity": "rare",     "icon": "mail",    "bonus": { "def": 4, "move": -1 }, "needs_age": 3, "value": 50, "desc": "+4 defence. Heavy: −1 move a day.", "craft": { "at": "blacksmith", "cost": { "gold": 30, "iron": 14 } } },
+		"war_horn":     { "name": "War horn",         "slot": "trinket", "rarity": "uncommon", "icon": "horn",  "bonus": { "STR": 1, "CHA": 1 }, "value": 22, "desc": "One long note and your people stand straighter. +1 STR, +1 CHA.", "craft": { "at": "tannery", "cost": { "gold": 10, "iron": 1 }, "items": { "hide": 1 } } },
+		"pearl_pendant":{ "name": "Pearl pendant",    "slot": "trinket", "rarity": "rare",     "icon": "pearl",   "bonus": { "WIS": 1, "CHA": 1 }, "value": 40, "desc": "Sea-light on a silver chain. +1 WIS, +1 CHA.", "craft": { "at": "blacksmith", "cost": { "gold": 15, "iron": 1 }, "items": { "pearl": 1 } } },
+		"potion":       { "name": "Healing potion",   "slot": "consumable", "rarity": "uncommon", "icon": "potion",  "use": { "hp": 14 }, "shop": 28, "value": 10, "desc": "Heals 14 HP. Usable in battle.", "craft": { "at": "apothecary", "cost": { "food": 6, "gold": 8 }, "items": { "honey": 1 } } },
+		"fish_pie":     { "name": "Fish pie",         "slot": "consumable", "rarity": "common",   "icon": "bread",   "use": { "hp": 6, "moves": 1 }, "value": 3, "desc": "Heals 6 HP and +1 move today." },
+		"vigor_tonic":  { "name": "Vigour tonic",     "slot": "consumable", "rarity": "uncommon", "icon": "tea",     "use": { "moves": 3, "hp": 2 }, "value": 8, "desc": "+3 moves today. Tastes of nettles.", "craft": { "at": "apothecary", "cost": { "food": 4, "gold": 6 } } },
+		"hide":         { "name": "Animal hide",      "slot": "valuable", "rarity": "common",   "icon": "pelt",    "value": 4, "desc": "Raw hide from the hunters. A tannery turns it into gear." },
+		"pearl":        { "name": "Pearl",            "slot": "valuable", "rarity": "uncommon", "icon": "pearl",   "value": 20, "desc": "Brought up by the divers. A smith can set it." },
+
+		"old_map":      { "name": "Old map scrap",    "slot": "valuable", "rarity": "uncommon", "icon": "map",     "use": { "reveal_secrets": true, "xp": 4 }, "value": 15, "desc": "Read it to mark hidden places on your map." },
+		"sealed_letter":{ "name": "Sealed letter",    "slot": "valuable", "rarity": "uncommon", "icon": "letter",  "value": 10, "desc": "Addressed to someone at a foreign court." },
+		"relic":        { "name": "Old relic",        "slot": "valuable", "rarity": "rare",     "icon": "relic",   "value": 45, "desc": "Holy to someone. Sell it, or give it to a shrine." },
+		"meteor_shard": { "name": "Meteor shard",     "slot": "valuable", "rarity": "rare",     "icon": "shard",   "value": 30, "desc": "Still faintly warm. A smith could do something with this." },
+		"gem":          { "name": "Rough gem",        "slot": "valuable", "rarity": "uncommon", "icon": "gem",     "value": 25, "desc": "Uncut, but clearly worth something." }
+	}
+}

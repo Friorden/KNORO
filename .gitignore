@@ -1,0 +1,17 @@
+# ── Godot editor binary (173 MB, over GitHub's 100 MB file limit)
+# Team: download Godot 4.7.2 from godotengine.org and place it here.
+engine/
+
+# ── Export output (built from source, 111 MB)
+# Team: export locally from the Godot editor.
+build/
+
+# ── Godot import cache (regenerated on every project open)
+.godot/
+.import/
+
+# ── Temp / OS clutter
+*.tmp
+Thumbs.db
+desktop.ini
+.DS_Store

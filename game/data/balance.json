@@ -1,0 +1,218 @@
+{
+	"_note": "All tunable numbers live here. Change a value, restart the game. No code edits needed.",
+	"map": {
+		"width": 28,
+		"height": 20,
+		"hex_size": 46,
+		"start_reveal": 3,
+		"sight": 2
+	},
+	"champion": {
+		"attr_points": 18,
+		"attr_start_max": 5,
+		"attr_max": 20,
+		"hp_base": 10,
+		"hp_per_con": 2,
+		"_move_note": "Movement = 1D6 + DEX tier. dex_move_tiers[i] = minimum DEX for +i.",
+		"dex_move_tiers": [
+			0,
+			3,
+			5,
+			8,
+			11,
+			14,
+			17,
+			20
+		],
+		"defense_base": 10,
+		"defense_dex_divisor": 2,
+		"xp_levels": [
+			0,
+			40,
+			100,
+			180,
+			280,
+			400,
+			550,
+			720,
+			900
+		],
+		"level_hp_bonus": 2,
+		"camp_heal": 3,
+		"camp_scout_radius": 2,
+		"home_heal_per_day": 4,
+		"road_heal_per_day": 1
+	},
+	"start": {
+		"food": 20,
+		"wood": 20,
+		"stone": 10,
+		"gold": 20,
+		"pop": 5
+	},
+	"economy": {
+		"capital_build_discount": 0.2,
+		"builds_per_day": [
+			1,
+			2,
+			3
+		],
+		"food_per_pop": 0.5,
+		"growth_surplus_needed": 15,
+		"growth_pop": 2,
+		"starve_pop_loss": 1
+	},
+	"army": {
+		"slots": 5,
+		"_slots_note": "The Champion always takes one slot, so 4 recruited units.",
+		"upkeep_food_per_unit": 1,
+		"home_heal_per_day": 3,
+		"road_heal_per_day": 1
+	},
+	"terrain": {
+		"plains": {
+			"cost": 1,
+			"danger": 0,
+			"passable": true
+		},
+		"forest": {
+			"cost": 2,
+			"danger": 1,
+			"passable": true
+		},
+		"hills": {
+			"cost": 2,
+			"danger": 1,
+			"passable": true
+		},
+		"mountain": {
+			"cost": 99,
+			"danger": 2,
+			"passable": false
+		},
+		"water": {
+			"cost": 99,
+			"danger": 0,
+			"passable": false
+		},
+		"road_cost": 1,
+		"river_extra": 1
+	},
+	"danger": {
+		"band_names": [
+			"safe",
+			"uncertain",
+			"wild"
+		],
+		"event_chance": [
+			0.06,
+			0.2,
+			0.36
+		],
+		"wild_distance": 6
+	},
+	"patrols": {
+		"count": 4,
+		"move_per_day": 2,
+		"chase_range": 4
+	},
+	"outpost": {
+		"cost": {
+			"wood": 10
+		},
+		"rival_relation": -10
+	},
+	"heir": {
+		"days_lost": 2
+	},
+	"rain_extra_cost": 1,
+	"shop": {
+		"salve": {
+			"name": "Healing salve",
+			"gold": 10,
+			"heal": 8,
+			"kind": "consumable"
+		},
+		"spear": {
+			"name": "Ash spear",
+			"gold": 25,
+			"hit": 1,
+			"dmg": 2,
+			"kind": "weapon"
+		},
+		"sword": {
+			"name": "Iron sword",
+			"gold": 50,
+			"hit": 2,
+			"dmg": 3,
+			"kind": "weapon",
+			"needs_age": 2
+		}
+	},
+	"city": {
+		"expand": [
+			{
+				"radius": 3,
+				"cost": {
+					"wood": 30,
+					"stone": 30,
+					"gold": 40
+				},
+				"age": 1
+			},
+			{
+				"radius": 4,
+				"cost": {
+					"wood": 60,
+					"stone": 60,
+					"gold": 80
+				},
+				"age": 2
+			},
+			{
+				"radius": 5,
+				"cost": {
+					"wood": 100,
+					"stone": 100,
+					"gold": 150,
+					"iron": 20
+				},
+				"age": 3
+			}
+		],
+		"level_mult": [
+			1.0,
+			1.5,
+			2.0
+		],
+		"clear": {
+			"forest": {
+				"name": "Clear the woods",
+				"cost": {
+					"gold": 10
+				},
+				"gain": {
+					"wood": 15
+				}
+			},
+			"hills": {
+				"name": "Level the hill",
+				"cost": {
+					"gold": 25
+				},
+				"gain": {
+					"stone": 10
+				}
+			},
+			"water": {
+				"name": "Fill the pond",
+				"cost": {
+					"gold": 30,
+					"stone": 20
+				},
+				"gain": {},
+				"age": 2
+			}
+		}
+	}
+}

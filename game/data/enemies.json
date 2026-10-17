@@ -1,0 +1,1312 @@
+{
+	"_note": "foes: enemy unit types (same skill format as units.json). groups: who you meet, front rank first, and what they drop into your cargo.",
+	"foes": {
+		"boar": {
+			"name": "Wild hog",
+			"art": "boar_big",
+			"hp": 8,
+			"spd": 3,
+			"def": 10,
+			"acc": 2,
+			"skills": [
+				{
+					"id": "gore",
+					"name": "Gore",
+					"from": [
+						1,
+						2
+					],
+					"target": "enemy",
+					"to": [
+						1,
+						2
+					],
+					"dmg": [
+						2,
+						4
+					]
+				}
+			]
+		},
+		"piglet": {
+			"name": "Hogling",
+			"art": "boar_small",
+			"hp": 5,
+			"spd": 5,
+			"def": 9,
+			"acc": 1,
+			"skills": [
+				{
+					"id": "nip",
+					"name": "Nip",
+					"from": [
+						1,
+						2,
+						3
+					],
+					"target": "enemy",
+					"to": [
+						1,
+						2
+					],
+					"dmg": [
+						1,
+						3
+					]
+				}
+			]
+		},
+		"wolf": {
+			"name": "Grey wolf",
+			"art": "wolf",
+			"hp": 6,
+			"spd": 6,
+			"def": 11,
+			"acc": 3,
+			"skills": [
+				{
+					"id": "bite",
+					"name": "Bite",
+					"from": [
+						1,
+						2
+					],
+					"target": "enemy",
+					"to": [
+						1,
+						2
+					],
+					"dmg": [
+						1,
+						4
+					],
+					"bleed": [
+						1,
+						2
+					]
+				},
+				{
+					"id": "lunge",
+					"name": "Lunge",
+					"from": [
+						3,
+						4
+					],
+					"target": "enemy",
+					"to": [
+						1,
+						2,
+						3
+					],
+					"dmg": [
+						2,
+						3
+					]
+				}
+			]
+		},
+		"alpha": {
+			"name": "Alpha wolf",
+			"art": "alpha",
+			"hp": 13,
+			"spd": 5,
+			"def": 12,
+			"acc": 3,
+			"skills": [
+				{
+					"id": "maul",
+					"name": "Maul",
+					"from": [
+						1,
+						2
+					],
+					"target": "enemy",
+					"to": [
+						1,
+						2
+					],
+					"dmg": [
+						3,
+						5
+					]
+				},
+				{
+					"id": "howl",
+					"name": "Howl",
+					"from": [
+						1,
+						2,
+						3,
+						4
+					],
+					"target": "allies",
+					"buff": {
+						"dmg": 1,
+						"turns": 2
+					}
+				}
+			]
+		},
+		"thug": {
+			"name": "Thug",
+			"art": "thug",
+			"hp": 10,
+			"spd": 3,
+			"def": 11,
+			"acc": 2,
+			"skills": [
+				{
+					"id": "club",
+					"name": "Club",
+					"from": [
+						1,
+						2
+					],
+					"target": "enemy",
+					"to": [
+						1,
+						2
+					],
+					"dmg": [
+						2,
+						4
+					],
+					"stun": 25
+				}
+			]
+		},
+		"cutthroat": {
+			"name": "Cutthroat",
+			"art": "cutthroat",
+			"hp": 7,
+			"spd": 6,
+			"def": 12,
+			"acc": 3,
+			"skills": [
+				{
+					"id": "shank",
+					"name": "Shank",
+					"from": [
+						1,
+						2,
+						3
+					],
+					"target": "enemy",
+					"to": [
+						1,
+						2,
+						3
+					],
+					"dmg": [
+						1,
+						4
+					],
+					"bleed": [
+						2,
+						2
+					]
+				}
+			]
+		},
+		"bandit_archer": {
+			"name": "Bandit archer",
+			"art": "bandit_archer",
+			"hp": 6,
+			"spd": 4,
+			"def": 10,
+			"acc": 3,
+			"skills": [
+				{
+					"id": "shoot",
+					"name": "Shoot",
+					"from": [
+						3,
+						4,
+						5
+					],
+					"target": "enemy",
+					"to": [
+						1,
+						2,
+						3,
+						4,
+						5
+					],
+					"dmg": [
+						2,
+						4
+					]
+				},
+				{
+					"id": "scramble",
+					"name": "Scramble",
+					"from": [
+						1,
+						2
+					],
+					"target": "self",
+					"move": 1
+				}
+			]
+		},
+		"brute": {
+			"name": "Brute",
+			"art": "brute",
+			"hp": 14,
+			"spd": 1,
+			"def": 10,
+			"acc": 2,
+			"skills": [
+				{
+					"id": "smash",
+					"name": "Smash",
+					"from": [
+						1
+					],
+					"target": "enemy",
+					"to": [
+						1,
+						2
+					],
+					"dmg": [
+						3,
+						6
+					]
+				}
+			]
+		},
+		"chief": {
+			"name": "Bandit chief",
+			"art": "chief",
+			"hp": 12,
+			"spd": 4,
+			"def": 12,
+			"acc": 3,
+			"skills": [
+				{
+					"id": "cleave",
+					"name": "Cleave",
+					"from": [
+						1,
+						2,
+						3
+					],
+					"target": "enemy",
+					"to": [
+						1,
+						2
+					],
+					"aoe": true,
+					"dmg": [
+						1,
+						3
+					]
+				},
+				{
+					"id": "orders",
+					"name": "Orders",
+					"from": [
+						1,
+						2,
+						3,
+						4,
+						5
+					],
+					"target": "allies",
+					"buff": {
+						"dmg": 1,
+						"turns": 2
+					}
+				}
+			]
+		},
+		"raider": {
+			"name": "Raider",
+			"art": "raider",
+			"hp": 10,
+			"spd": 4,
+			"def": 12,
+			"acc": 3,
+			"skills": [
+				{
+					"id": "axe",
+					"name": "Axe",
+					"from": [
+						1,
+						2
+					],
+					"target": "enemy",
+					"to": [
+						1,
+						2
+					],
+					"dmg": [
+						2,
+						5
+					]
+				}
+			]
+		},
+		"bat": {
+			"name": "Cave bat",
+			"art": "bat",
+			"hp": 4,
+			"spd": 7,
+			"def": 12,
+			"acc": 2,
+			"skills": [
+				{
+					"id": "swoop",
+					"name": "Swoop",
+					"from": [
+						1,
+						2,
+						3,
+						4
+					],
+					"target": "enemy",
+					"to": [
+						1,
+						2,
+						3
+					],
+					"dmg": [
+						1,
+						3
+					]
+				}
+			]
+		},
+		"rat": {
+			"name": "Giant rat",
+			"art": "rat",
+			"hp": 5,
+			"spd": 5,
+			"def": 10,
+			"acc": 1,
+			"skills": [
+				{
+					"id": "gnaw",
+					"name": "Gnaw",
+					"from": [
+						1,
+						2
+					],
+					"target": "enemy",
+					"to": [
+						1,
+						2
+					],
+					"dmg": [
+						1,
+						3
+					],
+					"bleed": [
+						1,
+						2
+					]
+				}
+			]
+		},
+		"slime": {
+			"name": "Cave slime",
+			"art": "slime",
+			"hp": 9,
+			"spd": 1,
+			"def": 8,
+			"acc": 1,
+			"skills": [
+				{
+					"id": "engulf",
+					"name": "Engulf",
+					"from": [
+						1,
+						2
+					],
+					"target": "enemy",
+					"to": [
+						1
+					],
+					"dmg": [
+						2,
+						4
+					],
+					"stun": 20
+				}
+			]
+		},
+		"skeleton": {
+			"name": "Skeleton",
+			"art": "skeleton",
+			"hp": 9,
+			"spd": 3,
+			"def": 12,
+			"acc": 2,
+			"skills": [
+				{
+					"id": "rusty",
+					"name": "Rusty blade",
+					"from": [
+						1,
+						2
+					],
+					"target": "enemy",
+					"to": [
+						1,
+						2
+					],
+					"dmg": [
+						2,
+						4
+					]
+				},
+				{
+					"id": "bonethrow",
+					"name": "Bone throw",
+					"from": [
+						3,
+						4
+					],
+					"target": "enemy",
+					"to": [
+						1,
+						2,
+						3,
+						4
+					],
+					"dmg": [
+						1,
+						3
+					]
+				}
+			]
+		},
+		"zombie": {
+			"name": "Zombie",
+			"art": "zombie",
+			"hp": 12,
+			"spd": 1,
+			"def": 9,
+			"acc": 1,
+			"skills": [
+				{
+					"id": "claw",
+					"name": "Rotten claw",
+					"from": [
+						1,
+						2
+					],
+					"target": "enemy",
+					"to": [
+						1,
+						2
+					],
+					"dmg": [
+						2,
+						4
+					],
+					"bleed": [
+						1,
+						3
+					]
+				}
+			]
+		},
+		"kobold": {
+			"name": "Kobold",
+			"art": "kobold",
+			"hp": 7,
+			"spd": 5,
+			"def": 11,
+			"acc": 2,
+			"skills": [
+				{
+					"id": "spear_jab",
+					"name": "Spear jab",
+					"from": [
+						1,
+						2,
+						3
+					],
+					"target": "enemy",
+					"to": [
+						1,
+						2,
+						3
+					],
+					"dmg": [
+						1,
+						4
+					]
+				}
+			]
+		},
+		"kobold_chief": {
+			"name": "Kobold chief",
+			"art": "kobold",
+			"hp": 16,
+			"spd": 4,
+			"def": 12,
+			"acc": 3,
+			"skills": [
+				{
+					"id": "chief_jab",
+					"name": "Twin jab",
+					"from": [
+						1,
+						2,
+						3
+					],
+					"target": "enemy",
+					"to": [
+						1,
+						2
+					],
+					"dmg": [
+						2,
+						5
+					]
+				},
+				{
+					"id": "rally_k",
+					"name": "Shrill cry",
+					"from": [
+						1,
+						2,
+						3,
+						4
+					],
+					"target": "allies",
+					"buff": {
+						"dmg": 1,
+						"turns": 2
+					}
+				}
+			]
+		},
+		"cave_goblin": {
+			"name": "Cave goblin",
+			"art": "goblin",
+			"hp": 7,
+			"spd": 6,
+			"def": 11,
+			"acc": 2,
+			"skills": [
+				{
+					"id": "stab",
+					"name": "Stab",
+					"from": [
+						1,
+						2
+					],
+					"target": "enemy",
+					"to": [
+						1,
+						2
+					],
+					"dmg": [
+						1,
+						4
+					],
+					"bleed": [
+						1,
+						2
+					]
+				}
+			]
+		},
+		"gnoll": {
+			"name": "Gnoll",
+			"art": "gnoll",
+			"hp": 13,
+			"spd": 4,
+			"def": 12,
+			"acc": 3,
+			"skills": [
+				{
+					"id": "flail",
+					"name": "Flail",
+					"from": [
+						1,
+						2
+					],
+					"target": "enemy",
+					"to": [
+						1,
+						2
+					],
+					"dmg": [
+						2,
+						5
+					]
+				},
+				{
+					"id": "howl_g",
+					"name": "Cackle",
+					"from": [
+						3,
+						4
+					],
+					"target": "enemy",
+					"to": [
+						1,
+						2,
+						3
+					],
+					"dmg": [
+						1,
+						2
+					],
+					"stun": 20
+				}
+			]
+		},
+		"troll": {
+			"name": "Troll king",
+			"art": "troll",
+			"hp": 34,
+			"spd": 2,
+			"def": 13,
+			"acc": 3,
+			"skills": [
+				{
+					"id": "crush",
+					"name": "Crush",
+					"from": [
+						1,
+						2
+					],
+					"target": "enemy",
+					"to": [
+						1,
+						2
+					],
+					"dmg": [
+						4,
+						8
+					],
+					"stun": 30
+				},
+				{
+					"id": "sweep",
+					"name": "Sweep",
+					"from": [
+						1,
+						2
+					],
+					"target": "enemy",
+					"to": [
+						1,
+						2,
+						3
+					],
+					"dmg": [
+						2,
+						4
+					],
+					"aoe": true
+				}
+			]
+		},
+		"crypt_lord": {
+			"name": "Crypt lord",
+			"art": "skeleton",
+			"hp": 20,
+			"spd": 4,
+			"def": 13,
+			"acc": 3,
+			"skills": [
+				{
+					"id": "grave_cut",
+					"name": "Grave cut",
+					"from": [
+						1,
+						2
+					],
+					"target": "enemy",
+					"to": [
+						1,
+						2
+					],
+					"dmg": [
+						3,
+						6
+					],
+					"bleed": [
+						2,
+						2
+					]
+				},
+				{
+					"id": "raise",
+					"name": "Raise the dead",
+					"from": [
+						1,
+						2,
+						3,
+						4
+					],
+					"target": "allies",
+					"buff": {
+						"dmg": 1,
+						"turns": 3
+					}
+				}
+			]
+		},
+		"crabby": {
+			"name": "Crabby",
+			"art": "crabby",
+			"hp": 10,
+			"spd": 3,
+			"def": 13,
+			"acc": 2,
+			"skills": [
+				{
+					"id": "pinch",
+					"name": "Pinch",
+					"from": [
+						1,
+						2
+					],
+					"target": "enemy",
+					"to": [
+						1,
+						2
+					],
+					"dmg": [
+						2,
+						4
+					]
+				}
+			]
+		},
+		"fiercetooth": {
+			"name": "Fierce Tooth",
+			"art": "fiercetooth",
+			"hp": 9,
+			"spd": 6,
+			"def": 11,
+			"acc": 3,
+			"skills": [
+				{
+					"id": "bite_ft",
+					"name": "Snap",
+					"from": [
+						1,
+						2
+					],
+					"target": "enemy",
+					"to": [
+						1,
+						2
+					],
+					"dmg": [
+						2,
+						4
+					],
+					"bleed": [
+						1,
+						2
+					]
+				}
+			]
+		},
+		"pinkstar": {
+			"name": "Pink Star",
+			"art": "pinkstar",
+			"hp": 7,
+			"spd": 7,
+			"def": 12,
+			"acc": 3,
+			"skills": [
+				{
+					"id": "spin",
+					"name": "Spin",
+					"from": [
+						1,
+						2,
+						3
+					],
+					"target": "enemy",
+					"to": [
+						1,
+						2,
+						3
+					],
+					"dmg": [
+						1,
+						3
+					]
+				}
+			]
+		},
+		"baldpirate": {
+			"name": "Deckhand",
+			"art": "baldpirate",
+			"hp": 10,
+			"spd": 4,
+			"def": 11,
+			"acc": 2,
+			"skills": [
+				{
+					"id": "kick",
+					"name": "Kick",
+					"from": [
+						1,
+						2
+					],
+					"target": "enemy",
+					"to": [
+						1,
+						2
+					],
+					"dmg": [
+						2,
+						4
+					],
+					"stun": 20
+				}
+			]
+		},
+		"captain": {
+			"name": "Pirate captain",
+			"art": "captain",
+			"hp": 18,
+			"spd": 5,
+			"def": 13,
+			"acc": 3,
+			"skills": [
+				{
+					"id": "cutlass",
+					"name": "Cutlass",
+					"from": [
+						1,
+						2,
+						3
+					],
+					"target": "enemy",
+					"to": [
+						1,
+						2
+					],
+					"dmg": [
+						3,
+						5
+					]
+				},
+				{
+					"id": "orders_p",
+					"name": "All hands!",
+					"from": [
+						1,
+						2,
+						3,
+						4,
+						5
+					],
+					"target": "allies",
+					"buff": {
+						"dmg": 1,
+						"turns": 2
+					}
+				}
+			]
+		}
+	},
+	"groups": {
+		"boars": {
+			"title": "Wild hogs",
+			"scene": "dusk_hills",
+			"foes": [
+				"boar",
+				"piglet"
+			],
+			"loot": {
+				"food": 10
+			},
+			"xp": 15,
+			"drops": [
+				[
+					"bread",
+					0.5
+				],
+				[
+					"honey",
+					0.15
+				]
+			]
+		},
+		"wolves": {
+			"title": "Wolves",
+			"scene": "night_forest",
+			"foes": [
+				"wolf",
+				"wolf"
+			],
+			"loot": {
+				"food": 6
+			},
+			"xp": 18,
+			"drops": [
+				[
+					"wolf_tooth",
+					0.3
+				]
+			]
+		},
+		"bandits": {
+			"title": "Bandits",
+			"scene": "road_dusk",
+			"foes": [
+				"thug",
+				"cutthroat"
+			],
+			"loot": {
+				"gold": 15
+			},
+			"xp": 22,
+			"drops": [
+				[
+					"bandit_knife",
+					0.35
+				],
+				[
+					"salve",
+					0.3
+				],
+				[
+					"lucky_coin",
+					0.1
+				]
+			]
+		},
+		"raiders": {
+			"title": "Raiders",
+			"scene": "road_dusk",
+			"foes": [
+				"raider",
+				"raider",
+				"bandit_archer"
+			],
+			"loot": {
+				"gold": 20,
+				"wood": 10
+			},
+			"xp": 30,
+			"drops": [
+				[
+					"padded_vest",
+					0.3
+				],
+				[
+					"smoke_bomb",
+					0.25
+				],
+				[
+					"sealed_letter",
+					0.15
+				]
+			]
+		},
+		"bandit_camp": {
+			"title": "Bandit camp",
+			"scene": "camp_night",
+			"foes": [
+				"brute",
+				"thug",
+				"cutthroat",
+				"bandit_archer",
+				"chief"
+			],
+			"loot": {
+				"gold": 50,
+				"food": 20,
+				"wood": 15
+			},
+			"xp": 55,
+			"drops": [
+				[
+					"chief_axe",
+					0.5
+				],
+				[
+					"gem",
+					0.6
+				],
+				[
+					"merchant_seal",
+					0.2
+				],
+				[
+					"salve",
+					1.0
+				]
+			]
+		},
+		"wolf_den": {
+			"title": "Wolf den",
+			"scene": "night_forest",
+			"foes": [
+				"alpha",
+				"wolf",
+				"wolf",
+				"wolf"
+			],
+			"loot": {
+				"food": 25,
+				"gold": 15
+			},
+			"xp": 45,
+			"drops": [
+				[
+					"wolf_pelt",
+					0.6
+				],
+				[
+					"wolf_tooth",
+					0.5
+				]
+			]
+		},
+		"cave_bats": {
+			"title": "Bats",
+			"scene": "cave",
+			"foes": [
+				"bat",
+				"bat",
+				"rat"
+			],
+			"loot": {
+				"gold": 6
+			},
+			"xp": 12,
+			"drops": [
+				[
+					"salve",
+					0.2
+				]
+			]
+		},
+		"cave_rats": {
+			"title": "Giant rats",
+			"scene": "cave2",
+			"foes": [
+				"rat",
+				"rat",
+				"rat"
+			],
+			"loot": {
+				"food": 6
+			},
+			"xp": 12,
+			"drops": [
+				[
+					"bread",
+					0.3
+				]
+			]
+		},
+		"cave_slimes": {
+			"title": "Slimes",
+			"scene": "cave",
+			"foes": [
+				"slime",
+				"slime",
+				"bat"
+			],
+			"loot": {
+				"gold": 8
+			},
+			"xp": 15,
+			"drops": [
+				[
+					"tea",
+					0.3
+				],
+				[
+					"gem",
+					0.1
+				]
+			]
+		},
+		"kobold_den": {
+			"title": "Kobold chief",
+			"scene": "cave2",
+			"foes": [
+				"kobold",
+				"kobold_chief",
+				"cave_goblin",
+				"kobold"
+			],
+			"loot": {
+				"gold": 30,
+				"iron": 6
+			},
+			"xp": 40,
+			"drops": [
+				[
+					"meteor_shard",
+					1.0
+				],
+				[
+					"gem",
+					0.5
+				]
+			]
+		},
+		"skeletons": {
+			"title": "Skeletons",
+			"scene": "crypt",
+			"foes": [
+				"skeleton",
+				"skeleton",
+				"zombie"
+			],
+			"loot": {
+				"gold": 12
+			},
+			"xp": 20,
+			"drops": [
+				[
+					"relic",
+					0.1
+				],
+				[
+					"torch",
+					0.4
+				]
+			]
+		},
+		"zombies": {
+			"title": "The restless dead",
+			"scene": "crypt",
+			"foes": [
+				"zombie",
+				"zombie",
+				"skeleton",
+				"bat"
+			],
+			"loot": {
+				"gold": 14
+			},
+			"xp": 24,
+			"drops": [
+				[
+					"salve",
+					0.4
+				]
+			]
+		},
+		"crypt_lord": {
+			"title": "Crypt lord",
+			"scene": "crypt",
+			"foes": [
+				"skeleton",
+				"crypt_lord",
+				"zombie",
+				"skeleton"
+			],
+			"loot": {
+				"gold": 60
+			},
+			"xp": 55,
+			"drops": [
+				[
+					"relic",
+					1.0
+				],
+				[
+					"starsteel",
+					0.5
+				]
+			]
+		},
+		"gnoll_pack": {
+			"title": "Gnolls",
+			"scene": "cave4",
+			"foes": [
+				"gnoll",
+				"gnoll",
+				"kobold"
+			],
+			"loot": {
+				"gold": 18,
+				"iron": 4
+			},
+			"xp": 30,
+			"drops": [
+				[
+					"war_horn",
+					0.2
+				]
+			]
+		},
+		"crab_crew": {
+			"title": "The Crusty Crew",
+			"scene": "cave2",
+			"foes": [
+				"crabby",
+				"fiercetooth",
+				"pinkstar"
+			],
+			"loot": {
+				"gold": 20
+			},
+			"xp": 26,
+			"drops": [
+				[
+					"pearl",
+					0.5
+				]
+			]
+		},
+		"pirates": {
+			"title": "Sunken pirates",
+			"scene": "cave4",
+			"foes": [
+				"baldpirate",
+				"baldpirate",
+				"captain"
+			],
+			"loot": {
+				"gold": 35
+			},
+			"xp": 34,
+			"drops": [
+				[
+					"sealed_letter",
+					0.3
+				],
+				[
+					"smoke_bomb",
+					0.4
+				]
+			]
+		},
+		"troll_king": {
+			"title": "Troll king",
+			"scene": "cave4",
+			"foes": [
+				"troll",
+				"gnoll",
+				"gnoll"
+			],
+			"loot": {
+				"gold": 100,
+				"iron": 20
+			},
+			"xp": 80,
+			"drops": [
+				[
+					"plate_cuirass",
+					1.0
+				],
+				[
+					"steel_sword",
+					0.6
+				]
+			]
+		}
+	}
+}
